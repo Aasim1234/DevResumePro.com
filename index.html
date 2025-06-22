@@ -12,8 +12,8 @@
         /* Global styles for print */
         @media print {
             body {
-                margin: 0;
-                padding: 0;
+                margin: 0; /* Remove default body margins */
+                padding: 0; /* Remove default body padding */
                 -webkit-print-color-adjust: exact !important;
                 color-adjust: exact !important;
             }
@@ -61,6 +61,11 @@
             #resumeContent {
                 min-height: auto !important;
                 height: auto !important;
+                padding: 0.5in !important; /* Adjust padding for print, default is 1 inch like A4 margins */
+                max-width: 8.5in !important; /* Max width for letter/A4 based on typical print margins */
+                width: 100% !important; /* Ensure it takes full available width */
+                box-shadow: none !important; /* Remove shadow if not already */
+                margin: 0 auto !important; /* Center on the page if body has no margin */
             }
         }
     </style>
