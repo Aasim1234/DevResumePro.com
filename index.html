@@ -52,7 +52,15 @@
             }
             /* Adjust page breaks for sections */
             section {
-                page-break-inside: avoid;
+                page-break-inside: avoid; /* Keep entire section on one page if possible */
+            }
+            ul, li {
+                page-break-inside: avoid; /* Prevent lists from breaking across pages awkwardly */
+            }
+            /* Important: Allow the content to define the height, do not force A4 on the container for print */
+            #resumeContent {
+                min-height: auto !important;
+                height: auto !important;
             }
         }
     </style>
@@ -255,9 +263,37 @@
                         <!-- GitHub and Live Demo spans removed as per previous instructions -->
                     </div>
                     <ul contenteditable="true" class="list-disc list-inside text-gray-700 leading-relaxed space-y-1">
-                        <li>Played a central role in successfully moving our existing systems to the cloud, which helped lower operational spending and greatly increased our system's capacity to grow.</li>
+                        <li>Played a central role in successfully moving our existing systems to the cloud, which helped lower operational spending and greatly increased our system\'s capacity to grow.</li>
                         <li>Applied industry best practices throughout the migration process, leading to less system downtime and a noticeable improvement in overall system performance.</li>
                         <li>Partnered closely with various teams to guarantee a completely seamless cloud transition, ensuring no data was lost and business operations faced minimal disruption.</li>
+                    </ul>
+                </div>
+                <!-- New Project 1: Automated CI/CD Pipeline for Web Application -->
+                <div class="mb-4">
+                    <div class="flex flex-wrap items-baseline mb-1">
+                        <h3 contenteditable="true" class="text-xl font-semibold text-gray-800 rounded-md p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            Automated CI/CD Pipeline for Web Application
+                        </h3>
+                    </div>
+                    <ul contenteditable="true" class="list-disc list-inside text-gray-700 leading-relaxed space-y-1">
+                        <li>Designed and implemented a robust CI/CD pipeline using Jenkins and Docker for a simulated web application.</li>
+                        <li>Automated build, test, and deployment processes, reducing manual effort and deployment time.</li>
+                        <li>Integrated static code analysis and unit testing into the pipeline to ensure code quality before deployment.</li>
+                        <li>Configured webhook triggers for automated pipeline execution upon code commits to a Git repository.</li>
+                    </ul>
+                </div>
+                <!-- New Project 2: Cloud Infrastructure Automation with Terraform -->
+                <div class="mb-4">
+                    <div class="flex flex-wrap items-baseline mb-1">
+                        <h3 contenteditable="true" class="text-xl font-semibold text-gray-800 rounded-md p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            Cloud Infrastructure Automation
+                        </h3>
+                    </div>
+                    <ul contenteditable="true" class="list-disc list-inside text-gray-700 leading-relaxed space-y-1">
+                        <li>Developed and managed cloud infrastructure (VPCs, EC2 instances, S3 buckets) on AWS using Terraform (Infrastructure as Code).</li>
+                        <li>Implemented modular Terraform configurations to enable reusable and scalable infrastructure deployments.</li>
+                        <li>Automated environment provisioning, significantly speeding up the setup of development and staging environments.</li>
+                        <li>Ensured consistent and reproducible infrastructure deployments across different environments.</li>
                     </ul>
                 </div>
             </div>
@@ -352,6 +388,28 @@
                         'Played a central role in successfully moving our existing systems to the cloud, which helped lower operational spending and greatly increased our system\'s capacity to grow.',
                         'Applied industry best practices throughout the migration process, leading to less system downtime and a noticeable improvement in overall system performance.',
                         'Partnered closely with various teams to guarantee a completely seamless cloud transition, ensuring no data was lost and business operations faced minimal disruption.'
+                    ]
+                },
+                {
+                    name: 'Automated CI/CD Pipeline for Web Application',
+                    github: '',
+                    demo: '',
+                    description: [
+                        'Designed and implemented a robust CI/CD pipeline using Jenkins and Docker for a simulated web application.',
+                        'Automated build, test, and deployment processes, reducing manual effort and deployment time.',
+                        'Integrated static code analysis and unit testing into the pipeline to ensure code quality before deployment.',
+                        'Configured webhook triggers for automated pipeline execution upon code commits to a Git repository.'
+                    ]
+                },
+                {
+                    name: 'Cloud Infrastructure Automation',
+                    github: '',
+                    demo: '',
+                    description: [
+                        'Developed and managed cloud infrastructure (VPCs, EC2 instances, S3 buckets) on AWS using Terraform (Infrastructure as Code).',
+                        'Implemented modular Terraform configurations to enable reusable and scalable infrastructure deployments.',
+                        'Automated environment provisioning, significantly speeding up the setup of development and staging environments.',
+                        'Ensured consistent and reproducible infrastructure deployments across different environments.'
                     ]
                 }
             ],
