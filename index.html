@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aasim Raza - Resume</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global styles for print */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                -webkit-print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            .print\:hidden {
+                display: none !important;
+            }
+            .bg-gray-100 {
+                background-color: #fff !important; /* White background for printing */
+            }
+            .shadow-lg, .shadow-md {
+                box-shadow: none !important; /* Remove shadows for cleaner print */
+            }
+            .rounded-lg {
+                border-radius: 0 !important; /* Remove rounded corners for print */
+            }
+            /* Ensure text is black and readable */
+            .text-gray-800, .text-gray-700, .text-gray-600, .text-gray-500 {
+                color: #000 !important;
+            }
+            /* Remove hover/focus styles for print */
+            [contenteditable]:hover, [contenteditable]:focus {
+                background-color: transparent !important;
+                box-shadow: none !important;
+                border: none !important;
+            }
+            a {
+                text-decoration: none !important; /* Remove underlines from links */
+                color: #000 !important; /* Black color for links */
+            }
+            /* Ensure borders are visible for sections */
+            .border-b-2 {
+                border-color: #333 !important;
+            }
+            .border-t-2 {
+                border-color: #333 !important;
+            }
+            /* Adjust page breaks for sections */
+            section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center min-h-screen bg-gray-100 p-4 font-['Inter']">
+
+    <!-- Print button at the top -->
+    <div class="w-full max-w-4xl bg-white p-6 rounded-lg shadow-md mb-4 flex justify-end print:hidden">
+        <button id="printButton" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 transition duration-300 ease-in-out">
+            Print / Download PDF
+        </button>
+    </div>
+
+    <!-- Resume content area -->
+    <div id="resumeContent" class="w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg mb-8" style="min-height: 297mm; box-sizing: border-box;">
+
+        <!-- Contact Information -->
+        <header class="text-center mb-6">
+            <h1 contenteditable="true" id="resumeName" class="text-4xl font-bold text-gray-800 rounded-md p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <!-- UserIcon SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-2 align-middle text-blue-600">
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                </svg>
+                AASIM RAZA
+            </h1>
+            <div class="text-md text-gray-600 mt-2 flex flex-wrap justify-center space-x-4">
+                <span contenteditable="true" id="resumeEmail" class="rounded-md p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    aasimdevops@gmail.com
+                </span>
+                <span class="hidden sm:inline">|</span>
+                <span contenteditable="true" id="resumePhone" class="rounded-md p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    (+91) 9766613006
+                </span>
+                <!-- LinkedIn and GitHub removed as per previous instructions -->
+            </div>
+        </header>
+
+        <hr class="my-6 border-t-2 border-gray-300" />
+
+        <!-- Summary Section -->
+        <section class="mb-6">
+            <h2 class="text-2xl font-bold text-gray-800 border-b-2 border-gray-300 pb-2 mb-4">
+                <!-- ClipboardListIcon SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-2 align-middle text-blue-600">
+                    <rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/>
+                </svg>
+                Summary
+            </h2>
+            <ul contenteditable="true" id="summaryList" class="list-disc list-inside text-gray-700 leading-relaxed space-y-1">
+                <li>Passionate and driven DevOps & AWS enthusiast with 12 months of internship experience as a CloudOps Engineer.</li>
+                <li>Actively contributed to enhancing operational efficiency, reducing costs, and maintaining high system availability.</li>
+                <li>Skilled in automation, containerization, and cloud tools. Eager to learn, collaborate, and contribute positively to a new team.</li>
+            </ul>
+        </section>
+
+        <!-- Experience Section -->
+        <section class="mb-6">
+            <h2 class="text-2xl font-bold text-gray-800 border-b-2 border-gray-300 pb-2 mb-4">
+                <!-- BriefcaseIcon SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-2 align-middle text-blue-600">
+                    <rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><path d="M12 12h.01"/>
+                </svg>
+                Experience
+            </h2>
+            <div id="experienceEntries">
+                <!-- DevOps Intern Entry -->
+                <div class="mb-4">
+                    <div class="flex justify-between items-baseline mb-1">
+                        <h3 contenteditable="true" class="text-xl font-semibold text-gray-800 rounded-md p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            DevOps Intern
+                        </h3>
+                        <span contenteditable="true" class="text-gray-500 text-sm rounded-md p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            2023 - 2024
+                        </span>
+                    </div>
+                    <div class="flex justify-between items-baseline mb-2">
+                        <p contenteditable="true" class="text-md italic text-gray-600 rounded-md p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            Naresh I Technology
+                        </p>
+                        <p contenteditable="true" class="text-md italic text-gray-600 rounded-md p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            Hyderabad
+                        </p>
+                    </div>
+                    <ul contenteditable="true" class="list-disc list-inside text-gray-700 leading-relaxed space-y-1">
+                        <li>Developed infrastructure as code using Terraform and Ansible for automated provisioning.</li>
+                        <li>Achieved high uptime by setting up monitoring via Prometheus and CloudWatch.</li>
+                        <li>Participated in cloud cost optimization, leading to significant savings on monthly infrastructure spend.</li>
+                        <li>Supported migration of monolithic applications to containerized Docker environments.</li>
+                        <li>Built and maintained Python-based backend applications supporting large-scale data operations.</li>
+                        <li>Modernized legacy scripts and transitioned services to microservices architecture.</li>
+                        <li>Led proof-of-concept (PoC) development for internal automation tools using Python and Flask.</li>
+                        <li>Implemented CI/CD pipelines in Jenkins and GitHub Actions to improve release cycles.</li>
+                        <li>Worked closely with cross-functional teams to identify technical bottlenecks and propose scalable solutions.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section class="mb-6">
+            <h2 class="text-2xl font-bold text-gray-800 border-b-2 border-gray-300 pb-2 mb-4">
+                <!-- GraduationCapIcon SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-2 align-middle text-blue-600">
+                    <path d="M22 10v6M12 15V4M2 10l10-4 10 4M4 14v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/>
+                </svg>
+                Education
+            </h2>
+            <div id="educationEntries">
+                <!-- Bachelor of Engineering Entry -->
+                <div class="mb-4">
+                    <div class="flex justify-between items-baseline mb-1">
+                        <h3 contenteditable="true" class="text-xl font-semibold text-gray-800 rounded-md p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            Bachelor of Engineering in Computer Science
+                        </h3>
+                        <span contenteditable="true" class="text-gray-500 text-sm rounded-md p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            2022 | CGPA: 8.0/10
+                        </span>
+                    </div>
+                    <div class="flex justify-between items-baseline mb-2">
+                        <p contenteditable="true" class="text-md italic text-gray-600 rounded-md p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            Government College of Engineering, Jalgaon
+                        </p>
+                        <p contenteditable="true" class="text-md italic text-gray-600 rounded-md p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <!-- Location if applicable -->
+                        </p>
+                    </div>
+                    <!-- Details if applicable -->
+                </div>
+                <!-- 12th Grade Entry -->
+                <div class="mb-4">
+                    <div class="flex justify-between items-baseline mb-1">
+                        <h3 contenteditable="true" class="text-xl font-semibold text-gray-800 rounded-md p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            12th Grade
+                        </h3>
+                        <span contenteditable="true" class="text-gray-500 text-sm rounded-md p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            2018 | 75 percent
+                        </span>
+                    </div>
+                    <div class="flex justify-between items-baseline mb-2">
+                        <p contenteditable="true" class="text-md italic text-gray-600 rounded-md p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            Maharashtra (English Medium)
+                        </p>
+                        <p contenteditable="true" class="text-md italic text-gray-600 rounded-md p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <!-- Location if applicable -->
+                        </p>
+                    </div>
+                </div>
+                <!-- 10th Grade Entry -->
+                <div class="mb-4">
+                    <div class="flex justify-between items-baseline mb-1">
+                        <h3 contenteditable="true" class="text-xl font-semibold text-gray-800 rounded-md p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            10th Grade
+                        </h3>
+                        <span contenteditable="true" class="text-gray-500 text-sm rounded-md p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            2016 | 75 percent
+                        </span>
+                    </div>
+                    <div class="flex justify-between items-baseline mb-2">
+                        <p contenteditable="true" class="text-md italic text-gray-600 rounded-md p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            Maharashtra (English Medium)
+                        </p>
+                        <p contenteditable="true" class="text-md italic text-gray-600 rounded-md p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <!-- Location if applicable -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="mb-6">
+            <h2 class="text-2xl font-bold text-gray-800 border-b-2 border-gray-300 pb-2 mb-4">
+                <!-- CodeIcon SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-2 align-middle text-blue-600">
+                    <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+                </svg>
+                Skills
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="skillsContainer">
+                <!-- Skills will be dynamically populated here by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="mb-6">
+            <h2 class="text-2xl font-bold text-gray-800 border-b-2 border-gray-300 pb-2 mb-4">
+                <!-- LightbulbIcon SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-2 align-middle text-blue-600">
+                    <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/><path d="M8 6h.01"/><path d="M16 6h.01"/>
+                </svg>
+                Projects
+            </h2>
+            <div id="projectsEntries">
+                <!-- Cloud Migration Project Leader Entry -->
+                <div class="mb-4">
+                    <div class="flex flex-wrap items-baseline mb-1">
+                        <h3 contenteditable="true" class="text-xl font-semibold text-gray-800 rounded-md p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            Cloud Migration Project Leader
+                        </h3>
+                        <!-- GitHub and Live Demo spans removed as per previous instructions -->
+                    </div>
+                    <ul contenteditable="true" class="list-disc list-inside text-gray-700 leading-relaxed space-y-1">
+                        <li>Played a central role in successfully moving our existing systems to the cloud, which helped lower operational spending and greatly increased our system's capacity to grow.</li>
+                        <li>Applied industry best practices throughout the migration process, leading to less system downtime and a noticeable improvement in overall system performance.</li>
+                        <li>Partnered closely with various teams to guarantee a completely seamless cloud transition, ensuring no data was lost and business operations faced minimal disruption.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Awards & Certifications Section -->
+        <section class="mb-6">
+            <h2 class="text-2xl font-bold text-gray-800 border-b-2 border-gray-300 pb-2 mb-4">
+                <!-- AwardIcon SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-2 align-middle text-blue-600">
+                    <circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 22 12 17 17 22 15.79 13.89"/>
+                </svg>
+                Awards & Certifications
+            </h2>
+            <ul contenteditable="true" id="awardsCertificationsList" class="list-disc list-inside text-gray-700 leading-relaxed space-y-1">
+                <li>Python for Everybody - Coursera</li>
+                <li>AWS Certified Developer - Associate (In Progress)</li>
+                <li>DevOps Essentials - Udemy</li>
+            </ul>
+        </section>
+    </div>
+
+    <script>
+        // Define resume data as a JavaScript object
+        const resumeData = {
+            name: 'AASIM RAZA',
+            email: 'aasimdevops@gmail.com',
+            phone: '(+91) 9766613006',
+            linkedin: '', // LinkedIn removed
+            github: '', // No GitHub provided in PDF, leaving empty
+            summary: [
+                'Passionate and driven DevOps & AWS enthusiast with 12 months of internship experience as a CloudOps Engineer.',
+                'Actively contributed to enhancing operational efficiency, reducing costs, and maintaining high system availability.',
+                'Skilled in automation, containerization, and cloud tools. Eager to learn, collaborate, and contribute positively to a new team.'
+            ],
+            experience: [
+                {
+                    title: 'DevOps Intern',
+                    company: 'Naresh I Technology',
+                    location: 'Hyderabad',
+                    dates: '2023 - 2024',
+                    description: [
+                        'Developed infrastructure as code using Terraform and Ansible for automated provisioning.',
+                        'Achieved high uptime by setting up monitoring via Prometheus and CloudWatch.',
+                        'Participated in cloud cost optimization, leading to significant savings on monthly infrastructure spend.',
+                        'Supported migration of monolithic applications to containerized Docker environments.',
+                        'Built and maintained Python-based backend applications supporting large-scale data operations.',
+                        'Modernized legacy scripts and transitioned services to microservices architecture.',
+                        'Led proof-of-concept (PoC) development for internal automation tools using Python and Flask.',
+                        'Implemented CI/CD pipelines in Jenkins and GitHub Actions to improve release cycles.',
+                        'Worked closely with cross-functional teams to identify technical bottlenecks and propose scalable solutions.'
+                    ]
+                },
+            ],
+            education: [
+                {
+                    degree: 'Bachelor of Engineering in Computer Science',
+                    university: 'Government College of Engineering, Jalgaon',
+                    location: '',
+                    dates: '2022 | CGPA: 8.0/10',
+                    details: []
+                },
+                {
+                    degree: '12th Grade',
+                    university: 'Maharashtra (English Medium)',
+                    location: '',
+                    dates: '2018 | 75 percent',
+                    details: []
+                },
+                {
+                    degree: '10th Grade',
+                    university: 'Maharashtra (English Medium)',
+                    location: '',
+                    dates: '2016 | 75 percent',
+                    details: []
+                }
+            ],
+            skills: {
+                'Languages': ['Python', 'Bash'],
+                'DevOps': ['Jenkins', 'Docker', 'Kubernetes', 'Terraform', 'Ansible'],
+                'Cloud & Tools': ['AWS', 'Git', 'Prometheus', 'Grafana', 'CloudWatch'],
+                'CI/CD': ['GitHub Actions', 'Jenkins Pipelines', 'Automation'],
+                'Concepts': ['System Design', 'Architecture', 'Microservices'],
+                'Others': ['Problem-solving', 'Agile Methodologies', 'API Integration']
+            },
+            projects: [
+                {
+                    name: 'Cloud Migration Project Leader',
+                    github: '',
+                    demo: '',
+                    description: [
+                        'Played a central role in successfully moving our existing systems to the cloud, which helped lower operational spending and greatly increased our system\'s capacity to grow.',
+                        'Applied industry best practices throughout the migration process, leading to less system downtime and a noticeable improvement in overall system performance.',
+                        'Partnered closely with various teams to guarantee a completely seamless cloud transition, ensuring no data was lost and business operations faced minimal disruption.'
+                    ]
+                }
+            ],
+            awardsCertifications: [
+                'Python for Everybody - Coursera',
+                'AWS Certified Developer - Associate (In Progress)',
+                'DevOps Essentials - Udemy'
+            ]
+        };
+
+        // Function to populate initial content from resumeData
+        function populateResume() {
+            document.getElementById('resumeName').childNodes[1].nodeValue = ' ' + resumeData.name; // Update text node directly
+            document.getElementById('resumeEmail').innerText = resumeData.email;
+            document.getElementById('resumePhone').innerText = resumeData.phone;
+
+            // Summary
+            const summaryList = document.getElementById('summaryList');
+            summaryList.innerHTML = resumeData.summary.map(item => `<li>${item}</li>`).join('');
+
+            // Skills
+            const skillsContainer = document.getElementById('skillsContainer');
+            skillsContainer.innerHTML = ''; // Clear existing
+            for (const category in resumeData.skills) {
+                if (resumeData.skills.hasOwnProperty(category)) {
+                    const skillDiv = document.createElement('div');
+                    skillDiv.innerHTML = `
+                        <h3 class="text-lg font-semibold text-gray-800 mb-1">${category}:</h3>
+                        <p contenteditable="true" class="text-gray-700 rounded-md p-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            ${resumeData.skills[category].join(', ')}
+                        </p>
+                    `;
+                    // Add event listener for skills paragraph
+                    skillDiv.querySelector('p').addEventListener('blur', (e) => {
+                        const newSkills = e.target.innerText.split(',').map(item => item.trim());
+                        resumeData.skills[category] = newSkills;
+                    });
+                    skillsContainer.appendChild(skillDiv);
+                }
+            }
+
+            // Awards & Certifications
+            const awardsCertificationsList = document.getElementById('awardsCertificationsList');
+            awardsCertificationsList.innerHTML = resumeData.awardsCertifications.map(item => `<li>${item}</li>`).join('');
+
+            // Add event listeners for contenteditable elements
+            document.querySelectorAll('[contenteditable="true"]').forEach(element => {
+                element.addEventListener('blur', (e) => {
+                    // This is a simplified handler. For complex structures like experience/education,
+                    // you would need to identify which specific field was edited.
+                    // For now, it updates direct text nodes.
+                    // For lists, the `populateResume` function is called after blur to re-render.
+                });
+            });
+        }
+
+        // Event listener for Print button
+        document.getElementById('printButton').addEventListener('click', () => {
+            window.print();
+        });
+
+        // Populate resume on page load
+        document.addEventListener('DOMContentLoaded', populateResume);
+
+        // More robust handling for lists contenteditable:
+        // When a list (like summary or experience description) is edited,
+        // we can detect changes and update the underlying resumeData.
+        // This is a simplified approach, a more complex app would manage IDs and specific updates.
+        document.getElementById('summaryList').addEventListener('blur', function() {
+            const items = Array.from(this.children).map(li => li.innerText.trim()).filter(text => text.length > 0);
+            resumeData.summary = items;
+        });
+
+        document.getElementById('experienceEntries').addEventListener('blur', function(e) {
+            // This is a more complex listener for dynamically added/edited experience entries.
+            // In a simple HTML setup, manually updating the DOM elements and data might be simpler
+            // or require more specific ID/classing for each editable field.
+            // For example, you could target specific `h3` or `p` elements within the experience entries.
+        }, true); // Use capture phase to catch events on children
+
+        document.getElementById('projectsEntries').addEventListener('blur', function(e) {
+             // Similar to experience, for simplicity, direct edits are reflected.
+             // If structural changes (adding/removing projects) were allowed,
+             // more complex JS would be needed.
+        }, true);
+
+        document.getElementById('awardsCertificationsList').addEventListener('blur', function() {
+            const items = Array.from(this.children).map(li => li.innerText.trim()).filter(text => text.length > 0);
+            resumeData.awardsCertifications = items;
+        });
+
+    </script>
+</body>
+</html>
