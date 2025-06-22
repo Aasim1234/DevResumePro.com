@@ -33,6 +33,20 @@
             .text-gray-800, .text-gray-700, .text-gray-600, .text-gray-500 {
                 color: #000 !important;
             }
+            /* Reduce font sizes for print */
+            body, p, li, span {
+                font-size: 10pt !important; /* Smaller base font size */
+                line-height: 1.3 !important; /* Tighter line spacing */
+            }
+            h1 {
+                font-size: 24pt !important; /* Smaller heading for print */
+            }
+            h2 {
+                font-size: 18pt !important; /* Smaller sub-heading for print */
+            }
+            h3 {
+                font-size: 12pt !important; /* Smaller third-level heading for print */
+            }
             /* Remove hover/focus styles for print */
             [contenteditable]:hover, [contenteditable]:focus {
                 background-color: transparent !important;
@@ -53,20 +67,38 @@
             /* Adjust page breaks for sections */
             section {
                 page-break-inside: avoid; /* Keep entire section on one page if possible */
+                margin-bottom: 0.5em !important; /* Reduce margin between sections */
             }
             ul, li {
                 page-break-inside: avoid; /* Prevent lists from breaking across pages awkwardly */
+                margin-bottom: 0 !important; /* Remove extra margin from list items */
+                padding-bottom: 0 !important;
             }
             /* Important: Allow the content to define the height, do not force A4 on the container for print */
             #resumeContent {
                 min-height: auto !important;
                 height: auto !important;
-                padding: 0.5in !important; /* Adjust padding for print, default is 1 inch like A4 margins */
+                padding: 0.4in !important; /* Further reduce padding for print margins */
                 max-width: 8.5in !important; /* Max width for letter/A4 based on typical print margins */
                 width: 100% !important; /* Ensure it takes full available width */
                 box-shadow: none !important; /* Remove shadow if not already */
                 margin: 0 auto !important; /* Center on the page if body has no margin */
             }
+            /* Adjust specific element spacing */
+            .mb-6 { margin-bottom: 0.5em !important; }
+            .mb-4 { margin-bottom: 0.4em !important; }
+            .mb-2 { margin-bottom: 0.2em !important; }
+            .mb-1 { margin-bottom: 0.1em !important; }
+            .mt-2 { margin-top: 0.2em !important; }
+            .space-x-4 > :not([hidden]) ~ :not([hidden]) {
+                margin-right: calc(0.5rem * var(--tw-space-x-reverse)) !important; /* Reduce horizontal spacing */
+                margin-left: calc(0.5rem * (1 - var(--tw-space-x-reverse))) !important;
+            }
+            .py-3 { padding-top: 0.2em !important; padding-bottom: 0.2em !important;}
+            .px-6 { padding-left: 0.5em !important; padding-right: 0.5em !important;}
+            .my-6 { margin-top: 0.5em !important; margin-bottom: 0.5em !important;}
+            .pb-2 { padding-bottom: 0.2em !important;}
+            .pl-2 { padding-left: 0.4em !important;}
         }
     </style>
 </head>
