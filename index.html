@@ -261,7 +261,7 @@
         <!-- Header Section -->
         <header class="header-section">
             <h1>AAASIM RAZA</h1>
-            <p>DevOps & AWS Engineer | CloudOps Engineer Intern</p>
+            <p>DevOps & AWS Engineer | CloudOps Engineer</p>
             <div class="contact-info">
                 <div>
                     <!-- Email icon (inline SVG for simplicity) -->
@@ -287,7 +287,7 @@
             <div class="mb-8">
                 <h2 class="section-title">Summary</h2>
                 <p class="summary-text">
-                    Highly driven <strong>CloudOps Engineer Intern</strong> with 1 year of hands-on experience in <strong>DevOps</strong> and <strong>AWS Cloud Architecture</strong> environments, focusing on <strong>Site Reliability Engineering (SRE)</strong> principles. Proven expertise in designing, implementing, and managing robust <strong>CI/CD pipelines</strong>, automating <strong>cloud infrastructure (IaC)</strong> with <strong>Terraform</strong> and <strong>Ansible</strong>, and optimizing system performance and costs. Adept at ensuring <strong>high system availability, scalability, and security</strong>, with a strong focus on <strong>monitoring, troubleshooting</strong>, and <strong>incident management</strong> in dynamic production environments. Seeking to contribute to complex platform engineering challenges and improve software delivery speed and system reliability.
+                    Highly driven <strong>CloudOps Engineer</strong> with 1 year of hands-on experience in <strong>DevOps</strong> and <strong>AWS Cloud Architecture</strong> environments, focusing on <strong>Site Reliability Engineering (SRE)</strong> principles. Proven expertise in designing, implementing, and managing robust <strong>CI/CD pipelines</strong>, automating <strong>cloud infrastructure (IaC)</strong> with <strong>Terraform</strong> and <strong>Ansible</strong>, and optimizing system performance and costs. Adept at ensuring <strong>high system availability, scalability, and security</strong>, with a strong focus on <strong>monitoring, troubleshooting</strong>, and <strong>incident management</strong> in dynamic production environments. Seeking to contribute to complex platform engineering challenges and improve software delivery speed and system reliability.
                 </p>
             </div>
 
@@ -295,7 +295,7 @@
             <div class="mb-8">
                 <h2 class="section-title">Experience</h2>
                 <div class="mb-6">
-                    <h3 class="job-title">DevOps Intern</h3>
+                    <h3 class="job-title">DevOps Engineer</h3>
                     <p class="company-name">Naresh I Technology</p>
                     <p class="duration">Hyderabad | 2023 - 2024</p>
                     <div class="description">
@@ -445,59 +445,73 @@
 
     <script>
         document.getElementById('downloadPdfButton').addEventListener('click', async () => {
-            const element = document.getElementById('resumeContent');
-            const downloadButton = document.getElementById('downloadPdfButton');
-            const downloadSection = downloadButton.closest('.download-section');
-            const resumeContainer = document.querySelector('.resume-container');
+            const resumeContent = document.getElementById('resumeContent');
+            const downloadSection = document.getElementById('downloadPdfButton').closest('.download-section');
 
-            // Temporarily adjust styles for better PDF rendering
-            downloadSection.style.display = 'none'; // Hide the download button itself
-            
+            // Temporarily hide the download button for capture
+            downloadSection.style.display = 'none';
+
             // Store original styles to restore them later
-            const originalBoxShadow = resumeContainer.style.boxShadow;
-            const originalBorderRadius = resumeContainer.style.borderRadius;
-            const originalPadding = resumeContainer.style.padding;
-            
-            resumeContainer.style.boxShadow = 'none';
-            resumeContainer.style.borderRadius = '0';
-            resumeContainer.style.padding = '0'; // Remove padding for full content capture in PDF
+            const originalResumeContainerStyle = resumeContent.style.cssText;
+            resumeContent.style.boxShadow = 'none';
+            resumeContent.style.borderRadius = '0';
+            resumeContent.style.padding = '0';
+            resumeContent.style.maxWidth = 'none'; // Allow it to expand for capture
 
             const { jsPDF } = window.jspdf;
-
-            // Capture the content with html2canvas. Use a higher scale for better PDF quality.
-            const canvas = await html2canvas(element, { 
-                scale: 2, // Increase resolution for clarity
-                useCORS: true // Important for handling images from external sources if any (though none here)
-            });
-            const imgData = canvas.toDataURL('image/png');
-
-            const imgWidth = 210; // A4 width in mm
-            const pageHeight = 297; // A4 height in mm
-            const imgHeight = canvas.height * imgWidth / canvas.width;
-            let heightLeft = imgHeight;
-
             const doc = new jsPDF('p', 'mm', 'a4');
-            let position = 0;
+            const margin = 10; // mm for left/right/top/bottom margins in PDF
+            const contentWidth = doc.internal.pageSize.getWidth() - 2 * margin; // Usable width
+            let yOffset = margin; // Current Y position on the PDF page
 
-            // Add first page
-            doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-            heightLeft -= pageHeight;
+            // Get all major sections by their common parent or class
+            const sections = Array.from(resumeContent.querySelectorAll('.header-section, .main-content > div')); 
 
-            // Add subsequent pages if content overflows
-            while (heightLeft >= 0) {
-                position = heightLeft - imgHeight;
-                doc.addPage();
-                doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-                heightLeft -= pageHeight;
+            for (const section of sections) {
+                if (!section) continue; 
+
+                // Temporarily clone the section to avoid affecting the live DOM display
+                const tempSection = section.cloneNode(true);
+                tempSection.style.position = 'absolute'; // Position off-screen
+                tempSection.style.left = '-9999px';
+                tempSection.style.top = '-9999px';
+                tempSection.style.width = `${resumeContent.offsetWidth}px`; // Match container width for consistent capture
+                tempSection.style.padding = '30px'; // Re-add main-content padding for consistent internal spacing
+                tempSection.style.boxSizing = 'border-box';
+                document.body.appendChild(tempSection);
+
+                const canvas = await html2canvas(tempSection, {
+                    scale: 2, // Higher scale for better quality
+                    useCORS: true,
+                    // Use the temporary section's actual rendered size for capture
+                    width: tempSection.offsetWidth,
+                    height: tempSection.offsetHeight
+                });
+
+                document.body.removeChild(tempSection); // Remove the temporary clone
+
+                const imgData = canvas.toDataURL('image/png');
+                const imgHeight = canvas.height * contentWidth / canvas.width;
+
+                const sectionSpacing = 10; // 10mm buffer between sections
+
+                // Check if the current section will fit on the remaining page space
+                // If not, add a new page. Only add a new page if it's not the very first section.
+                if (yOffset + imgHeight + sectionSpacing > doc.internal.pageSize.getHeight() - margin && sections.indexOf(section) !== 0) {
+                    doc.addPage();
+                    yOffset = margin; // Reset yOffset for new page
+                }
+
+                // Add image of the section to the PDF
+                doc.addImage(imgData, 'PNG', margin, yOffset, contentWidth, imgHeight);
+                yOffset += imgHeight + sectionSpacing; // Update yOffset for next section, including spacing
             }
 
             doc.save('Aasim_Raza_Resume.pdf');
 
             // Restore original styles and visibility
             downloadSection.style.display = 'block';
-            resumeContainer.style.boxShadow = originalBoxShadow;
-            resumeContainer.style.borderRadius = originalBorderRadius;
-            resumeContainer.style.padding = originalPadding; // Restore original padding
+            resumeContent.style.cssText = originalResumeContainerStyle; // Restore using the original style string
         });
     </script>
 </body>
