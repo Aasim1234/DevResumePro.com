@@ -4,15 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aasim Raza - DevOps & AWS Engineer</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- jsPDF and html2canvas CDNs for client-side PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f4f7f6;
             display: flex;
+            flex-direction: column; /* Allow content to stack */
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
             min-height: 100vh;
             margin: 0;
             padding: 30px 20px;
@@ -27,6 +34,9 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            /* Added for PDF export to ensure content flows within bounds */
+            box-sizing: border-box;
+            position: relative; /* Needed for html2canvas */
         }
         .header-section {
             background-color: #2c3e50;
@@ -73,6 +83,8 @@
             flex-direction: row;
             padding: 30px;
             gap: 30px;
+            /* Ensure content inside doesn't overflow for PDF capture */
+            overflow: visible;
         }
         .column {
             flex: 1; /* Make both columns take equal width */
@@ -158,6 +170,9 @@
             border-bottom-left-radius: 12px;
             border-bottom-right-radius: 12px;
             margin-top: 20px;
+            width: 100%;
+            max-width: 950px; /* Match resume container width */
+            box-sizing: border-box;
         }
         .download-button {
             background-color: #3498db;
@@ -171,6 +186,7 @@
             align-items: center;
             gap: 10px;
             box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+            cursor: pointer; /* Indicate it's clickable */
         }
         .download-button:hover {
             background-color: #2980b9;
@@ -220,6 +236,7 @@
             }
         }
 
+        /* Print media query - IMPORTANT for browser's print dialog */
         @media print {
             body {
                 background-color: #ffffff;
@@ -230,6 +247,8 @@
                 box-shadow: none;
                 border-radius: 0;
                 max-width: 100%;
+                /* Remove fixed width for print to allow content to flow naturally */
+                width: auto;
             }
             .header-section {
                 padding: 30px;
@@ -237,6 +256,13 @@
             }
             .main-content {
                 padding: 20px;
+                /* Ensure columns are responsive for print, might go single column */
+                flex-direction: row; /* Default for larger screens */
+                display: flex;
+            }
+            .column {
+                flex: 1; /* Make both columns take equal width */
+                padding: 0 15px; /* Add some internal padding */
             }
             .column:first-child {
                 border-right: 1px solid #e0e0e0; /* Re-add for print */
@@ -256,11 +282,21 @@
             p, ul, ol {
                 page-break-inside: avoid;
             }
+            /* Specific print control for page breaks within multi-column layout */
+            section {
+                page-break-inside: avoid;
+            }
+            /* For the 2-column layout to render well on print, ensure content fits page */
+            /* This might require manual fine-tuning or more advanced print CSS */
+            @page {
+                size: A4;
+                margin: 1cm;
+            }
         }
     </style>
 </head>
 <body class="antialiased">
-    <div class="resume-container rounded-xl">
+    <div class="resume-container rounded-xl" id="resumeContent">
         <!-- Header Section -->
         <header class="header-section">
             <h1>AAASIM RAZA</h1>
@@ -450,12 +486,69 @@
 
         <!-- Download Section -->
         <section class="download-section">
-            <a href="javascript:window.print()" class="download-button">
+            <button id="downloadPdfButton" class="download-button">
                 <!-- Download icon (inline SVG) -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                 Download Resume (PDF)
-            </a>
+            </button>
         </section>
     </div>
+
+    <script>
+        document.getElementById('downloadPdfButton').addEventListener('click', async () => {
+            const element = document.getElementById('resumeContent');
+            const downloadButton = document.getElementById('downloadPdfButton');
+            const downloadSection = downloadButton.closest('.download-section');
+            const resumeContainer = document.querySelector('.resume-container');
+
+            // Temporarily adjust styles for better PDF rendering
+            // Hide the download button itself and its section
+            downloadSection.style.display = 'none';
+
+            // Temporarily remove shadow and border-radius for cleaner capture, if needed
+            const originalBoxShadow = resumeContainer.style.boxShadow;
+            const originalBorderRadius = resumeContainer.style.borderRadius;
+            resumeContainer.style.boxShadow = 'none';
+            resumeContainer.style.borderRadius = '0';
+            resumeContainer.style.padding = '0'; // Remove padding for full content capture
+
+
+            // Use the global jsPDF object which is available via the UMD bundle
+            const { jsPDF } = window.jspdf;
+
+            // Capture the content with html2canvas
+            // Use scale to improve image quality in PDF, but it increases processing time
+            const canvas = await html2canvas(element, { scale: 2 });
+            const imgData = canvas.toDataURL('image/png');
+
+            const imgWidth = 210; // A4 width in mm
+            const pageHeight = 297; // A4 height in mm
+            const imgHeight = canvas.height * imgWidth / canvas.width;
+            let heightLeft = imgHeight;
+
+            const doc = new jsPDF('p', 'mm', 'a4');
+            let position = 0;
+
+            // Add first page
+            doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+
+            // Add subsequent pages if content overflows
+            while (heightLeft >= 0) {
+                position = heightLeft - imgHeight;
+                doc.addPage();
+                doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+            }
+
+            doc.save('Aasim_Raza_Resume.pdf');
+
+            // Restore original styles and visibility
+            downloadSection.style.display = 'block';
+            resumeContainer.style.boxShadow = originalBoxShadow;
+            resumeContainer.style.borderRadius = originalBorderRadius;
+            resumeContainer.style.padding = '40px'; // Restore original padding
+        });
+    </script>
 </body>
 </html>
