@@ -29,12 +29,11 @@
             background-color: #ffffff;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            max-width: 950px; /* Slightly wider to accommodate balance */
+            max-width: 780px; /* Adjusted for a single-column, standard resume width */
             width: 100%;
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            /* Added for PDF export to ensure content flows within bounds */
             box-sizing: border-box;
             position: relative; /* Needed for html2canvas */
         }
@@ -80,23 +79,12 @@
         }
         .main-content {
             display: flex;
-            flex-direction: row;
+            flex-direction: column; /* Changed to column for single page */
             padding: 30px;
             gap: 30px;
-            /* Ensure content inside doesn't overflow for PDF capture */
             overflow: visible;
         }
-        .column {
-            flex: 1; /* Make both columns take equal width */
-            padding: 0 15px; /* Add some internal padding */
-        }
-        .column:first-child {
-            border-right: 1px solid #e0e0e0; /* Separator */
-            padding-right: 30px;
-        }
-        .column:last-child {
-            padding-left: 30px;
-        }
+        /* Removed .column styles as content is now single-column stacked */
 
         .section-title {
             font-size: 1.6rem;
@@ -171,7 +159,7 @@
             border-bottom-right-radius: 12px;
             margin-top: 20px;
             width: 100%;
-            max-width: 950px; /* Match resume container width */
+            max-width: 780px; /* Match resume container width */
             box-sizing: border-box;
         }
         .download-button {
@@ -197,18 +185,8 @@
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .main-content {
-                flex-direction: column;
                 padding: 20px;
                 gap: 20px;
-            }
-            .column:first-child {
-                border-right: none;
-                padding-right: 0;
-                border-bottom: 1px solid #e0e0e0; /* Add separator for mobile */
-                padding-bottom: 20px;
-            }
-            .column:last-child {
-                padding-left: 0;
             }
             .header-section {
                 padding: 30px 20px;
@@ -247,7 +225,6 @@
                 box-shadow: none;
                 border-radius: 0;
                 max-width: 100%;
-                /* Remove fixed width for print to allow content to flow naturally */
                 width: auto;
             }
             .header-section {
@@ -256,23 +233,10 @@
             }
             .main-content {
                 padding: 20px;
-                /* Ensure columns are responsive for print, might go single column */
-                flex-direction: row; /* Default for larger screens */
+                flex-direction: column; /* Ensure single column for print */
                 display: flex;
             }
-            .column {
-                flex: 1; /* Make both columns take equal width */
-                padding: 0 15px; /* Add some internal padding */
-            }
-            .column:first-child {
-                border-right: 1px solid #e0e0e0; /* Re-add for print */
-                padding-right: 20px;
-                border-bottom: none; /* Remove for print */
-                padding-bottom: 0;
-            }
-            .column:last-child {
-                padding-left: 20px;
-            }
+            /* Remove column specific print styles as it's now a single column */
             .download-section {
                 display: none; /* Hide download button when printing */
             }
@@ -282,12 +246,9 @@
             p, ul, ol {
                 page-break-inside: avoid;
             }
-            /* Specific print control for page breaks within multi-column layout */
             section {
                 page-break-inside: avoid;
             }
-            /* For the 2-column layout to render well on print, ensure content fits page */
-            /* This might require manual fine-tuning or more advanced print CSS */
             @page {
                 size: A4;
                 margin: 1cm;
@@ -320,168 +281,156 @@
             </div>
         </header>
 
-        <!-- Main Content Section -->
+        <!-- Main Content Section - Now a single stacked column -->
         <main class="main-content">
-            <!-- Left Column -->
-            <section class="column">
-                <!-- Summary Section -->
-                <div class="mb-8">
-                    <h2 class="section-title">Summary</h2>
-                    <p class="summary-text">
-                        Highly driven <strong>CloudOps Engineer Intern</strong> with 1 year of hands-on experience in <strong>DevOps</strong> and <strong>AWS Cloud Architecture</strong> environments, focusing on <strong>Site Reliability Engineering (SRE)</strong> principles. Proven expertise in designing, implementing, and managing robust <strong>CI/CD pipelines</strong>, automating <strong>cloud infrastructure (IaC)</strong> with <strong>Terraform</strong> and <strong>Ansible</strong>, and optimizing system performance and costs. Adept at ensuring <strong>high system availability, scalability, and security</strong>, with a strong focus on <strong>monitoring, troubleshooting</strong>, and <strong>incident management</strong> in dynamic production environments. Seeking to contribute to complex platform engineering challenges and improve software delivery speed and system reliability.
-                    </p>
-                </div>
+            <!-- Summary Section -->
+            <div class="mb-8">
+                <h2 class="section-title">Summary</h2>
+                <p class="summary-text">
+                    Highly driven <strong>CloudOps Engineer Intern</strong> with 1 year of hands-on experience in <strong>DevOps</strong> and <strong>AWS Cloud Architecture</strong> environments, focusing on <strong>Site Reliability Engineering (SRE)</strong> principles. Proven expertise in designing, implementing, and managing robust <strong>CI/CD pipelines</strong>, automating <strong>cloud infrastructure (IaC)</strong> with <strong>Terraform</strong> and <strong>Ansible</strong>, and optimizing system performance and costs. Adept at ensuring <strong>high system availability, scalability, and security</strong>, with a strong focus on <strong>monitoring, troubleshooting</strong>, and <strong>incident management</strong> in dynamic production environments. Seeking to contribute to complex platform engineering challenges and improve software delivery speed and system reliability.
+                </p>
+            </div>
 
-                <!-- Experience Section -->
-                <div class="mb-8">
-                    <h2 class="section-title">Experience</h2>
-                    <div class="mb-6">
-                        <h3 class="job-title">DevOps Intern</h3>
-                        <p class="company-name">Naresh I Technology</p>
-                        <p class="duration">Hyderabad | 2023 - 2024</p>
-                        <div class="description">
-                            <ul>
-                                <li><strong>Engineered</strong> and <strong>automated cloud infrastructure provisioning</strong> by developing <strong>Infrastructure as Code (IaC)</strong> using <strong>Terraform</strong> and <strong>Ansible</strong>, streamlining deployment processes and ensuring <strong>reproducible infrastructure</strong>.</li>
-                                <li><strong>Implemented</strong> and maintained comprehensive <strong>monitoring and alerting solutions</strong> with <strong>Prometheus</strong> and <strong>CloudWatch</strong> to ensure <strong>high system uptime</strong>, <strong>performance visibility</strong>, and proactive <strong>incident detection</strong>.</li>
-                                <li><strong>Optimized AWS cloud expenditures</strong>, leading to <strong>demonstrable cost savings</strong> on monthly infrastructure spend through proactive resource management and <strong>cost optimization</strong> strategies.</li>
-                                <li><strong>Facilitated</strong> the <strong>migration</strong> of monolithic applications to <strong>scalable, containerized environments</strong> leveraging <strong>Docker</strong> and exploring <strong>Kubernetes</strong> concepts, enhancing deployment flexibility and resource utilization.</li>
-                                <li><strong>Developed</strong> and <strong>maintained</strong> <strong>Python-based backend applications</strong>, supporting large-scale data operations and enhancing application performance.</li>
-                                <li><strong>Modernized</strong> legacy systems by <strong>transitioning services to a microservices architecture</strong>, improving system agility and <strong>scalability</strong>.</li>
-                                <li><strong>Pioneered</strong> <strong>Proof-of-Concept (PoC)</strong> development for internal <strong>automation tools</strong> utilizing <strong>Python</strong> and <strong>Flask</strong>, resulting in improved operational workflows.</li>
-                                <li><strong>Designed</strong>, <strong>engineered</strong>, and <strong>deployed robust CI/CD pipelines</strong> using <strong>Jenkins</strong> and <strong>GitHub Actions</strong>, significantly <strong>reducing release cycles</strong> and <strong>improving deployment frequency</strong> for continuous software delivery.</li>
-                                <li><strong>Collaborated</strong> with cross-functional development teams on <strong>system design</strong> to identify and resolve technical bottlenecks, proposing and implementing <strong>scalable and resilient solutions</strong>.</li>
-                            </ul>
-                        </div>
+            <!-- Experience Section -->
+            <div class="mb-8">
+                <h2 class="section-title">Experience</h2>
+                <div class="mb-6">
+                    <h3 class="job-title">DevOps Intern</h3>
+                    <p class="company-name">Naresh I Technology</p>
+                    <p class="duration">Hyderabad | 2023 - 2024</p>
+                    <div class="description">
+                        <ul>
+                            <li><strong>Engineered</strong> and <strong>automated cloud infrastructure provisioning</strong> by developing <strong>Infrastructure as Code (IaC)</strong> using <strong>Terraform</strong> and <strong>Ansible</strong>, streamlining deployment processes and ensuring <strong>reproducible infrastructure</strong>.</li>
+                            <li><strong>Implemented</strong> and maintained comprehensive <strong>monitoring and alerting solutions</strong> with <strong>Prometheus</strong> and <strong>CloudWatch</strong> to ensure <strong>high system uptime</strong>, <strong>performance visibility</strong>, and proactive <strong>incident detection</strong>.</li>
+                            <li><strong>Optimized AWS cloud expenditures</strong>, leading to <strong>demonstrable cost savings</strong> on monthly infrastructure spend through proactive resource management and <strong>cost optimization</strong> strategies.</li>
+                            <li><strong>Facilitated</strong> the <strong>migration</strong> of monolithic applications to <strong>scalable, containerized environments</strong> leveraging <strong>Docker</strong> and exploring <strong>Kubernetes</strong> concepts, enhancing deployment flexibility and resource utilization.</li>
+                            <li><strong>Developed</strong> and <strong>maintained</strong> <strong>Python-based backend applications</strong>, supporting large-scale data operations and enhancing application performance.</li>
+                            <li><strong>Modernized</strong> legacy systems by <strong>transitioning services to a microservices architecture</strong>, improving system agility and <strong>scalability</strong>.</li>
+                            <li><strong>Pioneered</strong> <strong>Proof-of-Concept (PoC)</strong> development for internal <strong>automation tools</strong> utilizing <strong>Python</strong> and <strong>Flask</strong>, resulting in improved operational workflows.</li>
+                            <li><strong>Designed</strong>, <strong>engineered</strong>, and <strong>deployed robust CI/CD pipelines</strong> using <strong>Jenkins</strong> and <strong>GitHub Actions</strong>, significantly <strong>reducing release cycles</strong> and <strong>improving deployment frequency</strong> for continuous software delivery.</li>
+                            <li><strong>Collaborated</strong> with cross-functional development teams on <strong>system design</strong> to identify and resolve technical bottlenecks, proposing and implementing <strong>scalable and resilient solutions</strong>.</li>
+                        </ul>
                     </div>
                 </div>
+            </div>
 
-                <!-- Projects Section (left column) -->
-                <div class="mb-8">
-                    <h2 class="section-title">Projects</h2>
-                    <!-- Project 1: Cloud Migration Project Leader -->
-                    <div class="mb-6">
-                        <h3 class="job-title">Cloud Migration & Scalability Project Leader</h3>
-                        <div class="description">
-                            <ul>
-                                <li><strong>Led</strong> a successful <strong>multi-tier application</strong> <strong>cloud migration project</strong> to AWS, resulting in reduced operational spending and significantly enhanced system <strong>scalability</strong> and <strong>fault-tolerance</strong>.</li>
-                                <li><strong>Implemented</strong> industry best practices for <strong>disaster recovery</strong> and <strong>high availability</strong> throughout the migration process, minimizing system downtime and improving overall system performance.</li>
-                                <li><strong>Coordinated</strong> with cross-functional development and operations teams to ensure a seamless cloud transition, achieving <strong>zero data loss</strong> and minimal business disruption.</li>
-                            </ul>
-                        </div>
+            <!-- Projects Section - All projects now in a single column flow -->
+            <div class="mb-8">
+                <h2 class="section-title">Projects</h2>
+                <!-- Project 1: Cloud Migration Project Leader -->
+                <div class="mb-6">
+                    <h3 class="job-title">Cloud Migration & Scalability Project Leader</h3>
+                    <div class="description">
+                        <ul>
+                            <li><strong>Led</strong> a successful <strong>multi-tier application</strong> <strong>cloud migration project</strong> to AWS, resulting in reduced operational spending and significantly enhanced system <strong>scalability</strong> and <strong>fault-tolerance</strong>.</li>
+                            <li><strong>Implemented</strong> industry best practices for <strong>disaster recovery</strong> and <strong>high availability</strong> throughout the migration process, minimizing system downtime and improving overall system performance.</li>
+                            <li><strong>Coordinated</strong> with cross-functional development and operations teams to ensure a seamless cloud transition, achieving <strong>zero data loss</strong> and minimal business disruption.</li>
+                        </ul>
                     </div>
-                    <!-- Project 2: Automated CI/CD Pipeline for Web Application -->
-                    <div class="mb-6">
-                        <h3 class="job-title">Automated CI/CD & Deployment Platform for Web Application</h3>
-                        <div class="description">
-                            <ul>
-                                <li><strong>Architected</strong> and <strong>implemented</strong> an automated <strong>CI/CD pipeline</strong> for a web application utilizing <strong>Jenkins</strong> and <strong>Docker</strong>, enabling robust <strong>continuous integration, delivery, and deployment (CI/CD)</strong>.</li>
-                                <li><strong>Streamlined</strong> build, test, and deployment workflows, reducing manual effort and accelerating <strong>software delivery speed</strong> and time-to-market.</li>
-                                <li><strong>Integrated</strong> static code analysis and unit testing into the pipeline to enforce high <strong>code quality</strong> and <strong>system reliability</strong> standards.</li>
-                                <li><strong>Configured webhook triggers</strong> for event-driven pipeline execution upon <strong>Git commits</strong>, facilitating rapid feedback loops and automated updates/fixes.</li>
-                            </ul>
-                        </div>
+                </div>
+                <!-- Project 2: Automated CI/CD Pipeline for Web Application -->
+                <div class="mb-6">
+                    <h3 class="job-title">Automated CI/CD & Deployment Platform for Web Application</h3>
+                    <div class="description">
+                        <ul>
+                            <li><strong>Architected</strong> and <strong>implemented</strong> an automated <strong>CI/CD pipeline</strong> for a web application utilizing <strong>Jenkins</strong> and <strong>Docker</strong>, enabling robust <strong>continuous integration, delivery, and deployment (CI/CD)</strong>.</li>
+                            <li><strong>Streamlined</strong> build, test, and deployment workflows, reducing manual effort and accelerating <strong>software delivery speed</strong> and time-to-market.</li>
+                            <li><strong>Integrated</strong> static code analysis and unit testing into the pipeline to enforce high <strong>code quality</strong> and <strong>system reliability</strong> standards.</li>
+                            <li><strong>Configured webhook triggers</strong> for event-driven pipeline execution upon <strong>Git commits</strong>, facilitating rapid feedback loops and automated updates/fixes.</li>
+                        </ul>
                     </div>
-                     <!-- NEW PROJECT 4: Serverless Application Deployment & Monitoring Platform -->
-                    <div class="mb-6">
-                        <h3 class="job-title">Serverless Application Deployment & Monitoring Platform</h3>
-                        <div class="description">
-                            <ul>
-                                <li><strong>Designed</strong> and <strong>deployed</strong> a highly scalable serverless application architecture on <strong>AWS</strong> using <strong>Lambda</strong>, <strong>API Gateway</strong>, and <strong>DynamoDB</strong>, demonstrating expertise in modern cloud patterns.</li>
-                                <li><strong>Automated</strong> the deployment process for serverless components using <strong>CloudFormation</strong> templates, ensuring repeatable and efficient rollouts.</li>
-                                <li><strong>Implemented</strong> comprehensive monitoring and logging for the serverless application using <strong>CloudWatch</strong>, enabling real-time performance insights and proactive issue detection.</li>
-                                <li><strong>Optimized</strong> the serverless solution for <strong>cost efficiency</strong> and <strong>operational efficiency</strong>, aligning with Platform Engineering best practices.</li>
+                </div>
+                 <!-- Project 3: Cloud Infrastructure Automation & Observability with AWS -->
+                <div class="mb-6">
+                    <h3 class="job-title">Cloud Infrastructure Automation & Observability with AWS</h3>
+                    <div class="description">
+                        <ul>
+                            <li><strong>Managed</strong> and <strong>provisioned scalable AWS cloud infrastructure</strong> components, including <strong>VPCs, EC2 instances, S3 buckets, RDS</strong>, and <strong>Auto Scaling Groups</strong>, through <strong>Terraform (Infrastructure as Code - IaC)</strong>.</li>
+                            <li><strong>Developed modular Terraform configurations</strong> enabling reusable and <strong>reproducible infrastructure deployments</strong> across various environments, ensuring <strong>consistency</strong> and <strong>compliance</strong>.</li>
+                            <li><strong>Automated environment provisioning</strong> and <strong>configuration management</strong>, significantly reducing setup time for development and staging environments and minimizing errors.</li>
+                            <li><strong>Implemented robust monitoring</strong> and <strong>alerting systems</strong> using <strong>CloudWatch</strong> and integrating with <strong>Prometheus/Grafana</strong> for comprehensive <strong>performance monitoring</strong>, <strong>capacity planning</strong>, and <strong>troubleshooting</strong> production environments.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Project 4: Serverless Application Deployment & Monitoring Platform -->
+                <div class="mb-6">
+                    <h3 class="job-title">Serverless Application Deployment & Monitoring Platform</h3>
+                    <div class="description">
+                        <ul>
+                            <li><strong>Designed</strong> and <strong>deployed</strong> a highly scalable serverless application architecture on <strong>AWS</strong> using <strong>Lambda</strong>, <strong>API Gateway</strong>, and <strong>DynamoDB</strong>, demonstrating expertise in modern cloud patterns.</li>
+                            <li><strong>Automated</strong> the deployment process for serverless components using <strong>CloudFormation</strong> templates, ensuring repeatable and efficient rollouts.</li>
+                            <li><strong>Implemented</strong> comprehensive monitoring and logging for the serverless application using <strong>CloudWatch</strong>, enabling real-time performance insights and proactive issue detection.</li>
+                            <li><strong>Optimized</strong> the serverless solution for <strong>cost efficiency</strong> and <strong>operational efficiency</strong>, aligning with Platform Engineering best practices.</li>
                             <li><strong>Developed L2 support</strong> documentation and procedures for serverless operations.</li>
-                            </ul>
-                        </div>
+                        </ul>
                     </div>
                 </div>
-            </section>
-
-            <!-- Right Column -->
-            <section class="column">
-                <!-- Remaining Projects Section -->
-                <div class="mb-8">
-                    <h2 class="section-title">Projects</h2>
-                    <!-- Project 3: Cloud Infrastructure Automation & Observability with AWS (Remaining in Right) -->
-                    <div class="mb-6">
-                        <h3 class="job-title">Cloud Infrastructure Automation & Observability with AWS</h3>
-                        <div class="description">
-                            <ul>
-                                <li><strong>Managed</strong> and <strong>provisioned scalable AWS cloud infrastructure</strong> components, including <strong>VPCs, EC2 instances, S3 buckets, RDS</strong>, and <strong>Auto Scaling Groups</strong>, through <strong>Terraform (Infrastructure as Code - IaC)</strong>.</li>
-                                <li><strong>Developed modular Terraform configurations</strong> enabling reusable and <strong>reproducible infrastructure deployments</strong> across various environments, ensuring <strong>consistency</strong> and <strong>compliance</strong>.</li>
-                                <li><strong>Automated environment provisioning</strong> and <strong>configuration management</strong>, significantly reducing setup time for development and staging environments and minimizing errors.</li>
-                                <li><strong>Implemented robust monitoring</strong> and <strong>alerting systems</strong> using <strong>CloudWatch</strong> and integrating with <strong>Prometheus/Grafana</strong> for comprehensive <strong>performance monitoring</strong>, <strong>capacity planning</strong>, and <strong>troubleshooting</strong> production environments.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Project 5: Automated Incident Response & Remediation System (SRE Focus) (Remaining in Right) -->
-                    <div class="mb-6">
-                        <h3 class="job-title">Automated Incident Response & Remediation System</h3>
-                        <div class="description">
-                            <ul>
-                                <li><strong>Developed</strong> and <strong>implemented automated scripts</strong> (Python) for <strong>incident detection</strong> and <strong>self-healing remediation</strong> of common system issues, significantly reducing manual intervention and improving <strong>MTTR (Mean Time To Recovery)</strong>.</li>
-                                <li><strong>Integrated</strong> <strong>CloudWatch Alarms</strong> with custom <strong>AWS Lambda</strong> functions to trigger automated alerts and execute pre-defined remediation actions.</li>
-                                <li><strong>Created</strong> and maintained <strong>Grafana dashboards</strong> for visualizing system health metrics and <strong>alerts</strong>, facilitating rapid <strong>troubleshooting</strong> and <strong>root cause analysis</strong>.</li>
-                                <li><strong>Participated</strong> in <strong>on-call support</strong> rotations and <strong>post-mortems</strong> to continuously refine automated responses and enhance overall system <strong>reliability</strong> and <strong>resilience</strong>.</li>
-                            </ul>
-                        </div>
+                <!-- Project 5: Automated Incident Response & Remediation System (SRE Focus) -->
+                <div class="mb-6">
+                    <h3 class="job-title">Automated Incident Response & Remediation System</h3>
+                    <div class="description">
+                        <ul>
+                            <li><strong>Developed</strong> and <strong>implemented automated scripts</strong> (Python) for <strong>incident detection</strong> and <strong>self-healing remediation</strong> of common system issues, significantly reducing manual intervention and improving <strong>MTTR (Mean Time To Recovery)</strong>.</li>
+                            <li><strong>Integrated</strong> <strong>CloudWatch Alarms</strong> with custom <strong>AWS Lambda</strong> functions to trigger automated alerts and execute pre-defined remediation actions.</li>
+                            <li><strong>Created</strong> and maintained <strong>Grafana dashboards</strong> for visualizing system health metrics and <strong>alerts</strong>, facilitating rapid <strong>troubleshooting</strong> and <strong>root cause analysis</strong>.</li>
+                            <li><strong>Participated</strong> in <strong>on-call support</strong> rotations and <strong>post-mortems</strong> to continuously refine automated responses and enhance overall system <strong>reliability</strong> and <strong>resilience</strong>.</li>
+                        </ul>
                     </div>
                 </div>
+            </div>
 
-                <!-- Skills Section -->
-                <div class="mb-8">
-                    <h2 class="section-title">Skills</h2>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-item">Cloud Platforms: <strong>AWS</strong> (EC2, S3, VPC, IAM, CloudWatch, CloudTrail, Auto Scaling, RDS, Route 53, <strong>Lambda</strong>, <strong>API Gateway</strong>, <strong>DynamoDB</strong>, Cost Optimization, Fault-Tolerance, Disaster Recovery)</span>
-                        <span class="skill-item">DevOps Tools & IaC: <strong>Terraform</strong>, <strong>Ansible</strong>, <strong>Docker</strong>, <strong>Kubernetes</strong>, <strong>Jenkins</strong>, <strong>GitHub Actions</strong>, <strong>Git</strong>, <strong>CloudFormation</strong>, AWS Systems Manager (SSM) Automation</span>
-                        <span class="skill-item">CI/CD & Automation: <strong>CI/CD Pipelines</strong>, Automated Deployments, Configuration Management, Scripting (<strong>Python</strong>, <strong>Bash</strong>), Webhook Triggers, Release Management, Automated Remediation</span>
-                        <span class="skill-item">Monitoring & Observability: <strong>Prometheus</strong>, <strong>Grafana</strong>, <strong>CloudWatch</strong>, Alerting, Performance Monitoring, Troubleshooting, Post-mortems, Incident Detection</span>
-                        <span class="skill-item">Architecture & Design: <strong>Microservices Architecture</strong>, <strong>System Design</strong>, <strong>Scalability</strong>, Fault Tolerance, Disaster Recovery, <strong>Security Best Practices</strong>, Networking, Distributed Storage, Backend Systems Integration, Serverless Architecture</span>
-                        <span class="skill-item">Programming Languages: <strong>Python</strong> (Flask), <strong>Bash</strong></span>
-                        <span class="skill-item">Methodologies: <strong>Agile</strong>, <strong>Incident Management</strong>, L2 Support, Root Cause Analysis, On-call Support</span>
-                    </div>
+            <!-- Skills Section -->
+            <div class="mb-8">
+                <h2 class="section-title">Skills</h2>
+                <div class="flex flex-wrap gap-2">
+                    <span class="skill-item">Cloud Platforms: <strong>AWS</strong> (EC2, S3, VPC, IAM, CloudWatch, CloudTrail, Auto Scaling, RDS, Route 53, <strong>Lambda</strong>, <strong>API Gateway</strong>, <strong>DynamoDB</strong>, Cost Optimization, Fault-Tolerance, Disaster Recovery)</span>
+                    <span class="skill-item">DevOps Tools & IaC: <strong>Terraform</strong>, <strong>Ansible</strong>, <strong>Docker</strong>, <strong>Kubernetes</strong>, <strong>Jenkins</strong>, <strong>GitHub Actions</strong>, <strong>Git</strong>, <strong>CloudFormation</strong>, AWS Systems Manager (SSM) Automation</span>
+                    <span class="skill-item">CI/CD & Automation: <strong>CI/CD Pipelines</strong>, Automated Deployments, Configuration Management, Scripting (<strong>Python</strong>, <strong>Bash</strong>), Webhook Triggers, Release Management, Automated Remediation</span>
+                    <span class="skill-item">Monitoring & Observability: <strong>Prometheus</strong>, <strong>Grafana</strong>, <strong>CloudWatch</strong>, Alerting, Performance Monitoring, Troubleshooting, Post-mortems, Incident Detection</span>
+                    <span class="skill-item">Architecture & Design: <strong>Microservices Architecture</strong>, <strong>System Design</strong>, <strong>Scalability</strong>, Fault Tolerance, Disaster Recovery, <strong>Security Best Practices</strong>, Networking, Distributed Storage, Backend Systems Integration, Serverless Architecture</span>
+                    <span class="skill-item">Programming Languages: <strong>Python</strong> (Flask), <strong>Bash</strong></span>
+                    <span class="skill-item">Methodologies: <strong>Agile</strong>, <strong>Incident Management</strong>, L2 Support, Root Cause Analysis, On-call Support</span>
                 </div>
+            </div>
 
-                <!-- Education Section -->
-                <div class="mb-8">
-                    <h2 class="section-title">Education</h2>
-                    <div class="mb-6">
-                        <h3 class="degree-title">Bachelor of Engineering</h3>
-                        <p class="university-name">Government College of Engineering, Jalgaon</p>
-                        <p class="duration">2022 | CGPA: 8.010/</p>
-                    </div>
-                    <div class="mb-6">
-                        <h3 class="degree-title">12th Grade</h3>
-                        <p class="university-name">Maharashtra (English Medium)</p>
-                        <p class="duration">2018 | 75 percent</p>
-                    </div>
-                    <div class="mb-6">
-                        <h3 class="degree-title">10th Grade</h3>
-                        <p class="university-name">Maharashtra (English Medium)</p>
-                        <p class="duration">2016 | 75 percent</p>
-                    </div>
+            <!-- Education Section -->
+            <div class="mb-8">
+                <h2 class="section-title">Education</h2>
+                <div class="mb-6">
+                    <h3 class="degree-title">Bachelor of Engineering</h3>
+                    <p class="university-name">Government College of Engineering, Jalgaon</p>
+                    <p class="duration">2022 | CGPA: 8.010/</p>
                 </div>
+                <div class="mb-6">
+                    <h3 class="degree-title">12th Grade</h3>
+                    <p class="university-name">Maharashtra (English Medium)</p>
+                    <p class="duration">2018 | 75 percent</p>
+                </div>
+                <div class="mb-6">
+                    <h3 class="degree-title">10th Grade</h3>
+                    <p class="university-name">Maharashtra (English Medium)</p>
+                    <p class="duration">2016 | 75 percent</p>
+                </div>
+            </div>
 
-                <!-- Awards & Certifications -->
-                <div class="mb-8">
-                    <h2 class="section-title">Awards & Certifications</h2>
-                    <ul>
-                        <li>Python for Everybody (Coursera)</li>
-                        <li>AWS Certified Developer - Associate (In Progress)</li>
-                        <li>DevOps Essentials (Udemy)</li>
-                    </ul>
-                </div>
+            <!-- Awards & Certifications -->
+            <div class="mb-8">
+                <h2 class="section-title">Awards & Certifications</h2>
+                <ul>
+                    <li>Python for Everybody (Coursera)</li>
+                    <li>AWS Certified Developer - Associate (In Progress)</li>
+                    <li>DevOps Essentials (Udemy)</li>
+                </ul>
+            </div>
 
-                <!-- Languages -->
-                <div>
-                    <h2 class="section-title">Languages</h2>
-                    <ul>
-                        <li>English: Fluent</li>
-                        <li>Hindi: Conversational</li>
-                    </ul>
-                </div>
-            </section>
+            <!-- Languages -->
+            <div>
+                <h2 class="section-title">Languages</h2>
+                <ul>
+                    <li>English: Fluent</li>
+                    <li>Hindi: Conversational</li>
+                </ul>
+            </div>
         </main>
 
         <!-- Download Section -->
@@ -502,23 +451,24 @@
             const resumeContainer = document.querySelector('.resume-container');
 
             // Temporarily adjust styles for better PDF rendering
-            // Hide the download button itself and its section
-            downloadSection.style.display = 'none';
-
-            // Temporarily remove shadow and border-radius for cleaner capture, if needed
+            downloadSection.style.display = 'none'; // Hide the download button itself
+            
+            // Store original styles to restore them later
             const originalBoxShadow = resumeContainer.style.boxShadow;
             const originalBorderRadius = resumeContainer.style.borderRadius;
+            const originalPadding = resumeContainer.style.padding;
+            
             resumeContainer.style.boxShadow = 'none';
             resumeContainer.style.borderRadius = '0';
-            resumeContainer.style.padding = '0'; // Remove padding for full content capture
+            resumeContainer.style.padding = '0'; // Remove padding for full content capture in PDF
 
-
-            // Use the global jsPDF object which is available via the UMD bundle
             const { jsPDF } = window.jspdf;
 
-            // Capture the content with html2canvas
-            // Use scale to improve image quality in PDF, but it increases processing time
-            const canvas = await html2canvas(element, { scale: 2 });
+            // Capture the content with html2canvas. Use a higher scale for better PDF quality.
+            const canvas = await html2canvas(element, { 
+                scale: 2, // Increase resolution for clarity
+                useCORS: true // Important for handling images from external sources if any (though none here)
+            });
             const imgData = canvas.toDataURL('image/png');
 
             const imgWidth = 210; // A4 width in mm
@@ -547,7 +497,7 @@
             downloadSection.style.display = 'block';
             resumeContainer.style.boxShadow = originalBoxShadow;
             resumeContainer.style.borderRadius = originalBorderRadius;
-            resumeContainer.style.padding = '40px'; // Restore original padding
+            resumeContainer.style.padding = originalPadding; // Restore original padding
         });
     </script>
 </body>
