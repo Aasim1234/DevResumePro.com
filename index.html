@@ -465,7 +465,7 @@
 
             // Capture the entire resume content as one large canvas
             const canvas = await html2canvas(resumeContent, {
-                scale: 2, // High scale for better image quality
+                scale: 3, // Increased scale for better image quality and larger text
                 useCORS: true,
                 windowWidth: resumeContent.scrollWidth, // Capture full scrollable width if any
                 windowHeight: resumeContent.scrollHeight // Capture full scrollable height
