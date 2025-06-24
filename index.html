@@ -8,10 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts for Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- jsPDF and html2canvas CDNs for client-side PDF generation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
+    
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -29,13 +26,13 @@
             background-color: #ffffff;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            max-width: 780px; /* Adjusted for a single-column, standard resume width */
+            max-width: 780px; /* Standard resume width for display */
             width: 100%;
             display: flex;
             flex-direction: column;
             overflow: hidden;
             box-sizing: border-box;
-            position: relative; /* Needed for html2canvas */
+            position: relative;
         }
         .header-section {
             background-color: #2c3e50;
@@ -79,12 +76,11 @@
         }
         .main-content {
             display: flex;
-            flex-direction: column; /* Changed to column for single page */
+            flex-direction: column; /* Single column layout for content */
             padding: 30px;
             gap: 30px;
             overflow: visible;
         }
-        /* Removed .column styles as content is now single-column stacked */
 
         .section-title {
             font-size: 1.6rem;
@@ -220,38 +216,107 @@
                 background-color: #ffffff;
                 padding: 0;
                 margin: 0;
+                /* Adjust font sizes slightly for print if needed, but rely on browser scaling mostly */
+                font-size: 11pt; /* A common standard for print */
             }
             .resume-container {
                 box-shadow: none;
                 border-radius: 0;
                 max-width: 100%;
-                width: auto;
+                width: 100%; /* Ensure full width for print layout */
             }
             .header-section {
-                padding: 30px;
+                padding: 20px 30px; /* Slightly reduced padding for print */
                 border-radius: 0;
             }
-            .main-content {
-                padding: 20px;
-                flex-direction: column; /* Ensure single column for print */
-                display: flex;
+            .header-section h1 {
+                font-size: 2rem; /* Adjust header font size for print */
             }
-            /* Remove column specific print styles as it's now a single column */
+            .header-section p {
+                font-size: 0.9rem; /* Adjust sub-header font size for print */
+            }
+            .contact-info {
+                gap: 15px; /* Adjust contact info spacing for print */
+            }
+            .contact-info div {
+                font-size: 0.85rem; /* Smaller font for contact details */
+            }
+            .main-content {
+                padding: 20px 30px; /* Standard print margins for content */
+                gap: 20px; /* Reduced gap between sections for print */
+                display: block; /* Ensure block layout for print flow */
+            }
+            .section-title {
+                font-size: 1.4rem; /* Adjusted section title size for print */
+                margin-bottom: 15px; /* Reduced margin for print */
+                padding-bottom: 6px; /* Adjusted padding for print */
+            }
+            .job-title, .degree-title {
+                font-size: 1.1rem; /* Adjusted job/degree title size */
+            }
+            .company-name, .university-name {
+                font-size: 1rem; /* Adjusted company/university name size */
+            }
+            .duration, .location {
+                font-size: 0.85rem; /* Adjusted duration/location size */
+                margin-bottom: 10px;
+            }
+            .description ul, .section-content ul {
+                margin-left: 15px; /* Adjusted list indent */
+            }
+            .description ul li, .section-content ul li {
+                font-size: 0.9rem; /* Adjusted list item font size */
+                line-height: 1.4; /* Adjusted line height */
+                margin-bottom: 6px; /* Reduced margin for print */
+            }
+            .skill-item {
+                font-size: 0.8rem; /* Smaller font for skills chips */
+                padding: 6px 12px;
+                margin-right: 8px;
+                margin-bottom: 8px;
+            }
+            .summary-text {
+                font-size: 0.9rem; /* Adjusted summary text size */
+                line-height: 1.5;
+                margin-bottom: 20px;
+            }
+            
+            /* Page Break Control */
+            .main-content > div { /* Apply to direct children of main-content (sections) */
+                page-break-inside: avoid; /* Prevent breaking inside a section */
+                margin-top: 15px; /* Consistent top margin for sections */
+                padding-top: 15px; /* Ensures a little space before section content if it's new page */
+            }
+            .header-section {
+                 page-break-after: avoid; /* Prevent page break right after header */
+            }
+
+            /* Force page break before specific major sections if they are long */
+            /* This can be fine-tuned. Forcing too many can create unnecessary blank pages. */
+            /* We let the browser decide more intelligently, but provide hints. */
+            .section-title {
+                page-break-after: avoid; /* Keep title with its content */
+            }
+            
+            /* Specific sections that *might* be better off on a new page if content is too long */
+            #resumeContent .main-content > div:nth-of-type(2), /* Experience section */
+            #resumeContent .main-content > div:nth-of-type(3), /* Projects section */
+            #resumeContent .main-content > div:nth-of-type(4) /* Skills section */
+            {
+                 /* This tries to keep the section together.
+                    If it overflows, the browser will break it gracefully.
+                    Avoid `page-break-before: always;` unless strictly necessary,
+                    as it creates many blank pages for short content. */
+            }
+            
             .download-section {
                 display: none; /* Hide download button when printing */
             }
-            h1, h2, h3, h4, h5, h6 {
-                page-break-after: avoid;
-            }
-            p, ul, ol {
-                page-break-inside: avoid;
-            }
-            section {
-                page-break-inside: avoid;
-            }
+            
+            /* Standard A4 margins for printing */
             @page {
                 size: A4;
-                margin: 1cm;
+                margin: 1.5cm; /* Slightly larger margins for a cleaner look */
             }
         }
     </style>
@@ -435,96 +500,12 @@
 
         <!-- Download Section -->
         <section class="download-section">
-            <button id="downloadPdfButton" class="download-button">
+            <button id="downloadPdfButton" class="download-button" onclick="window.print()">
                 <!-- Download icon (inline SVG) -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                 Download Resume (PDF)
             </button>
         </section>
     </div>
-
-    <script>
-        document.getElementById('downloadPdfButton').addEventListener('click', async () => {
-            const resumeContent = document.getElementById('resumeContent');
-            const downloadButton = document.getElementById('downloadPdfButton');
-            const downloadSection = downloadButton.closest('.download-section');
-
-            // Temporarily hide the download button and adjust container styles for clean capture
-            downloadSection.style.display = 'none';
-            const originalResumeContainerStyle = resumeContent.style.cssText;
-            resumeContent.style.boxShadow = 'none';
-            resumeContent.style.borderRadius = '0';
-            resumeContent.style.padding = '0';
-            resumeContent.style.maxWidth = 'none'; // Allow content to stretch to its full rendered width for accurate capture
-
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF('p', 'mm', 'a4');
-            const margin = 10; // mm for left/right/top/bottom margins in PDF
-            const pdfWidth = doc.internal.pageSize.getWidth(); // A4 width (210 mm)
-            const pdfHeight = doc.internal.pageSize.getHeight(); // A4 height (297 mm)
-
-            const contentWidthPdf = pdfWidth - 2 * margin; // Usable width for image on PDF (190 mm)
-            const contentHeightPdf = pdfHeight - 2 * margin; // Usable height for content area on PDF (277 mm)
-
-            // Capture the entire resume content as one large canvas
-            // Scale increased to 5 for even better quality and larger text in the PDF
-            const canvas = await html2canvas(resumeContent, {
-                scale: 5, // Increased scale for very high image quality and readable text
-                useCORS: true,
-                windowWidth: resumeContent.scrollWidth, // Capture full scrollable width if any
-                windowHeight: resumeContent.scrollHeight // Capture full scrollable height
-            });
-
-            const imgWidth = canvas.width;
-            const imgHeight = canvas.height;
-
-            // Calculate the height of the image *as it would appear on PDF* if scaled to contentWidthPdf
-            const imgRatio = imgWidth / contentWidthPdf; // Ratio of captured image width to PDF content width
-            const actualContentHeightInPx = imgHeight; // Total height of the captured content in pixels
-
-            let currentPdfY = 0; // Current Y position on the original image (in pixels) that corresponds to the top of the current PDF page
-            let pageNum = 1;
-
-            // Loop until all of the captured image content has been added to PDF
-            while (currentPdfY < actualContentHeightInPx) {
-                if (pageNum > 1) {
-                    doc.addPage();
-                }
-
-                // Calculate the height of the slice on the original image that fits one PDF page
-                let sliceHeightPx = contentHeightPdf * imgRatio; // Height in pixels from the original canvas
-
-                // If this is the last slice, adjust its height to prevent extra blank space
-                if (currentPdfY + sliceHeightPx > actualContentHeightInPx) {
-                    sliceHeightPx = actualContentHeightInPx - currentPdfY;
-                }
-                
-                // Create a temporary canvas to draw the slice
-                const tempCanvas = document.createElement('canvas');
-                tempCanvas.width = imgWidth; // Keep original width to maintain aspect ratio
-                tempCanvas.height = sliceHeightPx;
-                const tempCtx = tempCanvas.getContext('2d');
-                
-                // Draw the specific slice from the main canvas onto the tempCanvas
-                // drawImage(source_canvas, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
-                tempCtx.drawImage(canvas, 0, currentPdfY, imgWidth, sliceHeightPx, 0, 0, imgWidth, sliceHeightPx);
-
-                // Add the slice to the PDF. Use JPEG for potentially smaller file size and reasonable quality.
-                const sliceImgData = tempCanvas.toDataURL('image/jpeg', 0.95); // 0.95 quality for good balance
-
-                // Add the slice image to the current PDF page, fitting it within the margins
-                doc.addImage(sliceImgData, 'JPEG', margin, margin, contentWidthPdf, sliceHeightPx / imgRatio);
-
-                currentPdfY += sliceHeightPx; // Move to the next slice on the original image
-                pageNum++;
-            }
-            
-            doc.save('Aasim_Raza_Resume.pdf');
-
-            // Restore original styles and visibility
-            downloadSection.style.display = 'block';
-            resumeContent.style.cssText = originalResumeContainerStyle;
-        });
-    </script>
 </body>
 </html>
