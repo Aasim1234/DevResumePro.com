@@ -446,67 +446,49 @@
     <script>
         document.getElementById('downloadPdfButton').addEventListener('click', async () => {
             const resumeContent = document.getElementById('resumeContent');
-            const downloadSection = document.getElementById('downloadPdfButton').closest('.download-section');
+            const downloadButton = document.getElementById('downloadPdfButton');
+            const downloadSection = downloadButton.closest('.download-section');
 
-            // Temporarily hide the download button for capture
+            // Temporarily hide the download button and adjust container styles for clean capture
             downloadSection.style.display = 'none';
-
-            // Store original styles to restore them later
             const originalResumeContainerStyle = resumeContent.style.cssText;
             resumeContent.style.boxShadow = 'none';
             resumeContent.style.borderRadius = '0';
             resumeContent.style.padding = '0';
-            resumeContent.style.maxWidth = 'none'; // Allow it to expand for capture
+            resumeContent.style.maxWidth = 'none'; // Allow content to stretch to its full rendered width for accurate capture
 
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF('p', 'mm', 'a4');
             const margin = 10; // mm for left/right/top/bottom margins in PDF
-            const contentWidth = doc.internal.pageSize.getWidth() - 2 * margin; // Usable width
-            let yOffset = margin; // Current Y position on the PDF page
+            const contentWidth = doc.internal.pageSize.getWidth() - 2 * margin; // Usable width in mm
+            const pageHeight = doc.internal.pageSize.getHeight() - 2 * margin; // Usable height in mm for content
 
-            // Get all major sections by their common parent or class
-            const sections = Array.from(resumeContent.querySelectorAll('.header-section, .main-content > div')); 
+            // Capture the entire resume content as one large canvas
+            const canvas = await html2canvas(resumeContent, {
+                scale: 2, // High scale for better image quality
+                useCORS: true,
+                windowWidth: resumeContent.scrollWidth, // Capture full scrollable width if any
+                windowHeight: resumeContent.scrollHeight // Capture full scrollable height
+            });
 
-            for (const section of sections) {
-                if (!section) continue; 
+            const imgData = canvas.toDataURL('image/png');
+            const imgHeight = canvas.height * contentWidth / canvas.width; // Calculate image height to fit content width
+            let heightLeft = imgHeight; // Remaining height of the image to be placed
 
-                // Temporarily clone the section to avoid affecting the live DOM display
-                const tempSection = section.cloneNode(true);
-                tempSection.style.position = 'absolute'; // Position off-screen
-                tempSection.style.left = '-9999px';
-                tempSection.style.top = '-9999px';
-                tempSection.style.width = `${resumeContent.offsetWidth}px`; // Match container width for consistent capture
-                tempSection.style.padding = '30px'; // Re-add main-content padding for consistent internal spacing
-                tempSection.style.boxSizing = 'border-box';
-                document.body.appendChild(tempSection);
+            let position = 0; // Current Y position on the image being sliced
 
-                const canvas = await html2canvas(tempSection, {
-                    scale: 2, // Higher scale for better quality
-                    useCORS: true,
-                    // Use the temporary section's actual rendered size for capture
-                    width: tempSection.offsetWidth,
-                    height: tempSection.offsetHeight
-                });
+            // Add first page
+            doc.addImage(imgData, 'PNG', margin, margin, contentWidth, imgHeight); // Start at margins
+            heightLeft -= (pageHeight + margin); // Deduct the height of the first page content area + top margin
 
-                document.body.removeChild(tempSection); // Remove the temporary clone
-
-                const imgData = canvas.toDataURL('image/png');
-                const imgHeight = canvas.height * contentWidth / canvas.width;
-
-                const sectionSpacing = 10; // 10mm buffer between sections
-
-                // Check if the current section will fit on the remaining page space
-                // If not, add a new page. Only add a new page if it's not the very first section.
-                if (yOffset + imgHeight + sectionSpacing > doc.internal.pageSize.getHeight() - margin && sections.indexOf(section) !== 0) {
-                    doc.addPage();
-                    yOffset = margin; // Reset yOffset for new page
-                }
-
-                // Add image of the section to the PDF
-                doc.addImage(imgData, 'PNG', margin, yOffset, contentWidth, imgHeight);
-                yOffset += imgHeight + sectionSpacing; // Update yOffset for next section, including spacing
+            // Add subsequent pages if content overflows
+            while (heightLeft > -1 * (pageHeight + margin) ) { // Loop as long as there's content left to add to a new page
+                position -= (pageHeight + margin); // Move up the image for the next slice
+                doc.addPage();
+                doc.addImage(imgData, 'PNG', margin, position + margin, contentWidth, imgHeight); // Add image slice, offset by content margin
+                heightLeft -= (pageHeight + margin); // Deduct another page height
             }
-
+            
             doc.save('Aasim_Raza_Resume.pdf');
 
             // Restore original styles and visibility
