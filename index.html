@@ -460,40 +460,70 @@
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF('p', 'mm', 'a4');
             const margin = 10; // mm for left/right/top/bottom margins in PDF
-            const contentWidth = doc.internal.pageSize.getWidth() - 2 * margin; // Usable width in mm
-            const pageHeight = doc.internal.pageSize.getHeight() - 2 * margin; // Usable height in mm for content
+            const pdfWidth = doc.internal.pageSize.getWidth(); // A4 width (210 mm)
+            const pdfHeight = doc.internal.pageSize.getHeight(); // A4 height (297 mm)
+
+            const contentWidthPdf = pdfWidth - 2 * margin; // Usable width for image on PDF (190 mm)
+            const contentHeightPdf = pdfHeight - 2 * margin; // Usable height for content area on PDF (277 mm)
 
             // Capture the entire resume content as one large canvas
+            // Scale increased to 5 for even better quality and larger text in the PDF
             const canvas = await html2canvas(resumeContent, {
-                scale: 4, // Increased scale to 4 for even better image quality and larger, more readable text
+                scale: 5, // Increased scale for very high image quality and readable text
                 useCORS: true,
                 windowWidth: resumeContent.scrollWidth, // Capture full scrollable width if any
                 windowHeight: resumeContent.scrollHeight // Capture full scrollable height
             });
 
-            const imgData = canvas.toDataURL('image/png');
-            const imgHeight = canvas.height * contentWidth / canvas.width; // Calculate image height to fit content width
-            let heightLeft = imgHeight; // Remaining height of the image to be placed
+            const imgWidth = canvas.width;
+            const imgHeight = canvas.height;
 
-            let position = 0; // Current Y position on the image being sliced
+            // Calculate the height of the image *as it would appear on PDF* if scaled to contentWidthPdf
+            const imgRatio = imgWidth / contentWidthPdf; // Ratio of captured image width to PDF content width
+            const actualContentHeightInPx = imgHeight; // Total height of the captured content in pixels
 
-            // Add first page
-            doc.addImage(imgData, 'PNG', margin, margin, contentWidth, imgHeight); // Start at margins
-            heightLeft -= (pageHeight + margin); // Deduct the height of the first page content area + top margin
+            let currentPdfY = 0; // Current Y position on the original image (in pixels) that corresponds to the top of the current PDF page
+            let pageNum = 1;
 
-            // Add subsequent pages if content overflows
-            while (heightLeft > -1 * (pageHeight + margin) ) { // Loop as long as there's content left to add to a new page
-                position -= (pageHeight + margin); // Move up the image for the next slice
-                doc.addPage();
-                doc.addImage(imgData, 'PNG', margin, position + margin, contentWidth, imgHeight); // Add image slice, offset by content margin
-                heightLeft -= (pageHeight + margin); // Deduct another page height
+            // Loop until all of the captured image content has been added to PDF
+            while (currentPdfY < actualContentHeightInPx) {
+                if (pageNum > 1) {
+                    doc.addPage();
+                }
+
+                // Calculate the height of the slice on the original image that fits one PDF page
+                let sliceHeightPx = contentHeightPdf * imgRatio; // Height in pixels from the original canvas
+
+                // If this is the last slice, adjust its height to prevent extra blank space
+                if (currentPdfY + sliceHeightPx > actualContentHeightInPx) {
+                    sliceHeightPx = actualContentHeightInPx - currentPdfY;
+                }
+                
+                // Create a temporary canvas to draw the slice
+                const tempCanvas = document.createElement('canvas');
+                tempCanvas.width = imgWidth; // Keep original width to maintain aspect ratio
+                tempCanvas.height = sliceHeightPx;
+                const tempCtx = tempCanvas.getContext('2d');
+                
+                // Draw the specific slice from the main canvas onto the tempCanvas
+                // drawImage(source_canvas, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
+                tempCtx.drawImage(canvas, 0, currentPdfY, imgWidth, sliceHeightPx, 0, 0, imgWidth, sliceHeightPx);
+
+                // Add the slice to the PDF. Use JPEG for potentially smaller file size and reasonable quality.
+                const sliceImgData = tempCanvas.toDataURL('image/jpeg', 0.95); // 0.95 quality for good balance
+
+                // Add the slice image to the current PDF page, fitting it within the margins
+                doc.addImage(sliceImgData, 'JPEG', margin, margin, contentWidthPdf, sliceHeightPx / imgRatio);
+
+                currentPdfY += sliceHeightPx; // Move to the next slice on the original image
+                pageNum++;
             }
             
             doc.save('Aasim_Raza_Resume.pdf');
 
             // Restore original styles and visibility
             downloadSection.style.display = 'block';
-            resumeContent.style.cssText = originalResumeContainerStyle; // Restore using the original style string
+            resumeContent.style.cssText = originalResumeContainerStyle;
         });
     </script>
 </body>
