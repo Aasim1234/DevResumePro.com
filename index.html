@@ -216,8 +216,8 @@
                 background-color: #ffffff;
                 padding: 0;
                 margin: 0;
-                /* Adjust font sizes slightly for print if needed, but rely on browser scaling mostly */
-                font-size: 11pt; /* A common standard for print */
+                /* Increased base font size for print for better readability */
+                font-size: 12pt; 
             }
             .resume-container {
                 box-shadow: none;
@@ -226,87 +226,76 @@
                 width: 100%; /* Ensure full width for print layout */
             }
             .header-section {
-                padding: 20px 30px; /* Slightly reduced padding for print */
+                padding: 25px 30px; /* Slightly reduced padding for print */
                 border-radius: 0;
             }
             .header-section h1 {
-                font-size: 2rem; /* Adjust header font size for print */
+                font-size: 2.2rem; /* Adjusted header font size for print */
             }
             .header-section p {
-                font-size: 0.9rem; /* Adjust sub-header font size for print */
+                font-size: 1rem; /* Adjusted sub-header font size for print */
             }
             .contact-info {
-                gap: 15px; /* Adjust contact info spacing for print */
+                gap: 18px; /* Adjusted contact info spacing for print */
             }
             .contact-info div {
-                font-size: 0.85rem; /* Smaller font for contact details */
+                font-size: 0.95rem; /* Larger font for contact details for print */
             }
             .main-content {
-                padding: 20px 30px; /* Standard print margins for content */
-                gap: 20px; /* Reduced gap between sections for print */
+                padding: 20px 35px; /* Adjusted standard print margins for content */
+                gap: 25px; /* Adjusted gap between sections for print */
                 display: block; /* Ensure block layout for print flow */
             }
             .section-title {
-                font-size: 1.4rem; /* Adjusted section title size for print */
-                margin-bottom: 15px; /* Reduced margin for print */
-                padding-bottom: 6px; /* Adjusted padding for print */
+                font-size: 1.6rem; /* Adjusted section title size for print */
+                margin-bottom: 20px; /* Adjusted margin for print */
+                padding-bottom: 8px; /* Adjusted padding for print */
             }
             .job-title, .degree-title {
-                font-size: 1.1rem; /* Adjusted job/degree title size */
+                font-size: 1.25rem; /* Adjusted job/degree title size for print */
             }
             .company-name, .university-name {
-                font-size: 1rem; /* Adjusted company/university name size */
+                font-size: 1.1rem; /* Adjusted company/university name size for print */
             }
             .duration, .location {
-                font-size: 0.85rem; /* Adjusted duration/location size */
-                margin-bottom: 10px;
+                font-size: 0.95rem; /* Adjusted duration/location size for print */
+                margin-bottom: 12px;
             }
             .description ul, .section-content ul {
-                margin-left: 15px; /* Adjusted list indent */
+                margin-left: 20px; /* Adjusted list indent */
             }
             .description ul li, .section-content ul li {
-                font-size: 0.9rem; /* Adjusted list item font size */
-                line-height: 1.4; /* Adjusted line height */
-                margin-bottom: 6px; /* Reduced margin for print */
+                font-size: 1rem; /* Adjusted list item font size for print */
+                line-height: 1.5; /* Adjusted line height */
+                margin-bottom: 8px; /* Adjusted margin for print */
             }
             .skill-item {
-                font-size: 0.8rem; /* Smaller font for skills chips */
-                padding: 6px 12px;
-                margin-right: 8px;
-                margin-bottom: 8px;
+                font-size: 0.9rem; /* Adjusted font for skills chips for print */
+                padding: 8px 15px;
+                margin-right: 10px;
+                margin-bottom: 10px;
             }
             .summary-text {
-                font-size: 0.9rem; /* Adjusted summary text size */
-                line-height: 1.5;
-                margin-bottom: 20px;
+                font-size: 1rem; /* Adjusted summary text size for print */
+                line-height: 1.6;
+                margin-bottom: 25px;
             }
             
-            /* Page Break Control */
+            /* Page Break Control: Crucial for multi-page PDFs */
             .main-content > div { /* Apply to direct children of main-content (sections) */
                 page-break-inside: avoid; /* Prevent breaking inside a section */
-                margin-top: 15px; /* Consistent top margin for sections */
-                padding-top: 15px; /* Ensures a little space before section content if it's new page */
-            }
-            .header-section {
-                 page-break-after: avoid; /* Prevent page break right after header */
-            }
-
-            /* Force page break before specific major sections if they are long */
-            /* This can be fine-tuned. Forcing too many can create unnecessary blank pages. */
-            /* We let the browser decide more intelligently, but provide hints. */
-            .section-title {
-                page-break-after: avoid; /* Keep title with its content */
+                /* page-break-before: auto; /* Allow browser to decide if a new page is needed */
+                margin-top: 20px; /* Consistent top margin for sections */
             }
             
-            /* Specific sections that *might* be better off on a new page if content is too long */
-            #resumeContent .main-content > div:nth-of-type(2), /* Experience section */
-            #resumeContent .main-content > div:nth-of-type(3), /* Projects section */
-            #resumeContent .main-content > div:nth-of-type(4) /* Skills section */
-            {
-                 /* This tries to keep the section together.
-                    If it overflows, the browser will break it gracefully.
-                    Avoid `page-break-before: always;` unless strictly necessary,
-                    as it creates many blank pages for short content. */
+            /* Consider forcing a new page for major sections if they are long and usually start new pages */
+            /* This is a fine balance and depends on content length. */
+            /* If content pushes to 3 pages, these hints help prevent awkward breaks. */
+            #resumeContent .main-content > div:nth-of-type(2) { /* Experience section */
+                 /* page-break-before: always; Remove this for now to see if it flows naturally to 2-3 pages */
+            }
+            #resumeContent .main-content > div:nth-of-type(3) { /* Projects section */
+                 /* page-break-before: always; */
             }
             
             .download-section {
