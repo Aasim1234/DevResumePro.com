@@ -243,13 +243,14 @@
             }
             .main-content {
                 padding: 20px 35px; /* Adjusted standard print margins for content */
-                gap: 25px; /* Adjusted gap between sections for print */
+                /* Adjusted gap between sections for print - reduced for tighter packing */
+                gap: 15px; 
                 display: block; /* Ensure block layout for print flow */
             }
             .section-title {
                 font-size: 1.6rem; /* Adjusted section title size for print */
-                margin-bottom: 20px; /* Adjusted margin for print */
-                padding-bottom: 8px; /* Adjusted padding for print */
+                margin-bottom: 15px; /* Adjusted margin for print - reduced */
+                padding-bottom: 6px; /* Adjusted padding for print */
             }
             .job-title, .degree-title {
                 font-size: 1.25rem; /* Adjusted job/degree title size for print */
@@ -259,53 +260,39 @@
             }
             .duration, .location {
                 font-size: 0.95rem; /* Adjusted duration/location size for print */
-                margin-bottom: 12px;
+                margin-bottom: 8px; /* Reduced margin for tighter packing */
             }
             .description ul, .section-content ul {
                 margin-left: 20px; /* Adjusted list indent */
             }
             .description ul li, .section-content ul li {
                 font-size: 1rem; /* Adjusted list item font size for print */
-                line-height: 1.5; /* Adjusted line height */
-                margin-bottom: 8px; /* Adjusted margin for print */
+                line-height: 1.4; /* Adjusted line height - slightly tighter */
+                margin-bottom: 6px; /* Adjusted margin for print - reduced */
             }
             .skill-item {
                 font-size: 0.9rem; /* Adjusted font for skills chips for print */
-                padding: 8px 15px;
-                margin-right: 10px;
-                margin-bottom: 10px;
+                padding: 7px 12px; /* Adjusted padding for skills chips */
+                margin-right: 8px;
+                margin-bottom: 8px;
             }
             .summary-text {
                 font-size: 1rem; /* Adjusted summary text size for print */
-                line-height: 1.6;
-                margin-bottom: 25px;
+                line-height: 1.5; /* Adjusted line height */
+                margin-bottom: 20px; /* Reduced margin */
             }
             
             /* Page Break Control: Crucial for multi-page PDFs */
             .main-content > div { /* Apply to direct children of main-content (sections) */
                 page-break-inside: avoid; /* Prevent breaking inside a section */
-                /* page-break-before: auto; /* Allow browser to decide if a new page is needed */
-                margin-top: 20px; /* Consistent top margin for sections */
-            }
-            
-            /* Consider forcing a new page for major sections if they are long and usually start new pages */
-            /* This is a fine balance and depends on content length. */
-            /* If content pushes to 3 pages, these hints help prevent awkward breaks. */
-            #resumeContent .main-content > div:nth-of-type(2) { /* Experience section */
-                 /* page-break-before: always; Remove this for now to see if it flows naturally to 2-3 pages */
-            }
-            #resumeContent .main-content > div:nth-of-type(3) { /* Projects section */
-                 /* page-break-before: always; */
-            }
-            
-            .download-section {
-                display: none; /* Hide download button when printing */
+                /* Reduced top margin for sections for tighter packing */
+                margin-top: 15px; 
             }
             
             /* Standard A4 margins for printing */
             @page {
                 size: A4;
-                margin: 1.5cm; /* Slightly larger margins for a cleaner look */
+                margin: 1.2cm; /* Slightly smaller margins for maximum content space */
             }
         }
     </style>
