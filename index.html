@@ -243,14 +243,20 @@
             }
             .main-content {
                 padding: 20px 35px; /* Adjusted standard print margins for content */
-                /* Adjusted gap between sections for print - reduced for tighter packing */
-                gap: 15px; 
+                /* Removed 'gap' property for print, relying on section margins */
                 display: block; /* Ensure block layout for print flow */
             }
+            /* Each div within main-content is a section */
+            .main-content > div {
+                margin-bottom: 10px; /* Minimal space between sections */
+                page-break-inside: avoid; /* Prevent content from breaking inside a section */
+            }
+            /* Ensure section titles stay with their content */
             .section-title {
                 font-size: 1.6rem; /* Adjusted section title size for print */
-                margin-bottom: 15px; /* Adjusted margin for print - reduced */
-                padding-bottom: 6px; /* Adjusted padding for print */
+                margin-bottom: 10px; /* Reduced margin for tighter packing */
+                padding-bottom: 5px; /* Reduced padding for tighter packing */
+                page-break-after: avoid; /* Keep title with its content */
             }
             .job-title, .degree-title {
                 font-size: 1.25rem; /* Adjusted job/degree title size for print */
@@ -260,39 +266,36 @@
             }
             .duration, .location {
                 font-size: 0.95rem; /* Adjusted duration/location size for print */
-                margin-bottom: 8px; /* Reduced margin for tighter packing */
+                margin-bottom: 5px; /* Reduced margin for tighter packing */
             }
             .description ul, .section-content ul {
                 margin-left: 20px; /* Adjusted list indent */
             }
             .description ul li, .section-content ul li {
                 font-size: 1rem; /* Adjusted list item font size for print */
-                line-height: 1.4; /* Adjusted line height - slightly tighter */
-                margin-bottom: 6px; /* Adjusted margin for print - reduced */
+                line-height: 1.35; /* Adjusted line height - even tighter */
+                margin-bottom: 5px; /* Reduced margin for tighter packing */
             }
             .skill-item {
                 font-size: 0.9rem; /* Adjusted font for skills chips for print */
-                padding: 7px 12px; /* Adjusted padding for skills chips */
-                margin-right: 8px;
-                margin-bottom: 8px;
+                padding: 6px 10px; /* Adjusted padding for skills chips */
+                margin-right: 6px; /* Reduced right margin */
+                margin-bottom: 6px; /* Reduced bottom margin */
             }
             .summary-text {
                 font-size: 1rem; /* Adjusted summary text size for print */
                 line-height: 1.5; /* Adjusted line height */
-                margin-bottom: 20px; /* Reduced margin */
+                margin-bottom: 15px; /* Reduced margin */
             }
             
-            /* Page Break Control: Crucial for multi-page PDFs */
-            .main-content > div { /* Apply to direct children of main-content (sections) */
-                page-break-inside: avoid; /* Prevent breaking inside a section */
-                /* Reduced top margin for sections for tighter packing */
-                margin-top: 15px; 
+            .download-section {
+                display: none; /* Hide download button when printing */
             }
             
             /* Standard A4 margins for printing */
             @page {
                 size: A4;
-                margin: 1.2cm; /* Slightly smaller margins for maximum content space */
+                margin: 1cm; /* Further reduced margins for maximum content space */
             }
         }
     </style>
@@ -301,7 +304,7 @@
     <div class="resume-container rounded-xl" id="resumeContent">
         <!-- Header Section -->
         <header class="header-section">
-            <h1>AAASIM RAZA</h1>
+            <h1>AASIM RAZA</h1>
             <p>DevOps & AWS Engineer | CloudOps Engineer</p>
             <div class="contact-info">
                 <div>
