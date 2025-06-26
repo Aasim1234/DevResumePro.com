@@ -361,123 +361,155 @@
         /* Print media query - IMPORTANT for browser's print dialog */
         @media print {
             body {
-                background-color: #ffffff;
-                padding: 0;
-                margin: 0;
-                font-size: 11pt; /* Base font size for print */
+                background-color: #ffffff !important; /* Force white background for print */
+                padding: 0 !important;
+                margin: 0 !important;
+                font-size: 10pt !important; /* Slightly smaller base font size for print efficiency */
+                -webkit-print-color-adjust: exact !important; /* Crucial for Webkit browsers */
+                print-color-adjust: exact !important; /* Standard for other browsers */
             }
             .resume-container {
-                box-shadow: none;
-                border-radius: 0;
-                max-width: 100%;
-                width: 100%;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                max-width: 100% !important;
+                width: 100% !important;
+                flex-direction: column !important; /* Force single column for print */
+                min-height: unset !important; /* Remove min-height */
             }
             .header-content-wrapper {
-                flex-direction: column; /* Force single column for print */
-                min-height: unset; /* Remove min-height for print */
+                flex-direction: column !important; /* Force single column for print */
+                min-height: unset !important; /* Remove min-height for print */
             }
             .left-sidebar {
                 background-color: #1a4f6d !important; /* Ensure dark blue background prints */
                 color: #ffffff !important; /* Ensure white text prints */
-                padding: 20px 25px; /* Adjust sidebar padding for print */
-                border-bottom-left-radius: 0; 
-                border-top-right-radius: 0; 
-                print-color-adjust: exact; /* Crucial for background colors to print */
-                -webkit-print-color-adjust: exact; /* For Webkit browsers */
+                padding: 15px 20px !important; /* Adjust sidebar padding for print */
+                width: 100% !important; /* Take full width */
+                min-width: unset !important; /* Remove min-width */
+                border-bottom-left-radius: 0 !important; 
+                border-top-right-radius: 0 !important; 
             }
             .sidebar-title, .sidebar-section-title {
                  color: #ffffff !important; /* Ensure white text on dark background */
+                 border-bottom: 1px solid rgba(255, 255, 255, 0.4) !important; /* Clearer underline */
+                 padding-bottom: 5px !important;
+                 margin-top: 15px !important; /* Less margin at top of sections */
+                 margin-bottom: 10px !important; /* Less margin below sections */
+                 text-align: left !important; /* Align titles left for print consistency */
             }
+            .sidebar-text {
+                font-size: 0.85rem !important;
+                margin-bottom: 15px !important;
+                text-align: left !important; /* Align text left for print consistency */
+            }
+            .sidebar-list, .sidebar-skills-list {
+                width: 100% !important;
+                text-align: left !important; /* Ensure list items align left */
+            }
+            .sidebar-list li, .sidebar-skills-list-item {
+                font-size: 0.85rem !important;
+                margin-bottom: 4px !important;
+                line-height: 1.3 !important;
+                padding-left: 0 !important; /* Remove any padding that might push content */
+            }
+            .sidebar-skills-list-item svg {
+                stroke: #ffffff !important; /* Ensure white checkmark for print */
+            }
+
             .main-content-area {
-                padding: 15px 30px; /* Adjust main content padding for print */
+                padding: 15px 30px !important; /* Adjust main content padding for print */
+                width: 100% !important; /* Take full width */
             }
             .main-content-header {
-                margin-bottom: 15px; /* Reduced margin for print */
-                padding-bottom: 10px;
+                margin-bottom: 15px !important; /* Reduced margin for print */
+                padding-bottom: 10px !important;
             }
             .main-content-header h1 {
-                font-size: 2.8rem;
+                font-size: 2.2rem !important; /* Adjusted for print */
+                margin-bottom: 5px !important;
             }
             .main-content-header p {
-                font-size: 1.2rem;
+                font-size: 1rem !important; /* Adjusted for print */
+                margin-bottom: 10px !important;
             }
             .main-contact-info {
-                gap: 12px 20px;
-                font-size: 0.95rem;
+                gap: 8px 15px !important;
+                font-size: 0.85rem !important;
+                justify-content: flex-start !important; /* Align contact info to start */
+                margin-top: 5px !important; /* Reduce margin */
+            }
+            .main-contact-info div {
+                margin-bottom: 3px !important; /* Reduce space between contact items */
             }
             .main-contact-info svg {
+                width: 16px !important;
+                height: 16px !important;
                 stroke: #555 !important; /* Ensure icons print correctly */
             }
 
             .main-section-title {
-                font-size: 1.4rem;
-                padding: 8px 15px;
-                margin-top: 15px; /* Reduced margin for print */
-                margin-bottom: 15px;
+                font-size: 1.3rem !important; /* Adjusted for print */
+                padding: 8px 15px !important;
+                margin-top: 15px !important; /* Reduced margin for print */
+                margin-bottom: 15px !important;
                 background-color: #1a4f6d !important; /* Ensure single color prints */
                 color: #ffffff !important; /* Ensure white text prints */
-                print-color-adjust: exact; 
-                -webkit-print-color-adjust: exact; 
+                text-align: center !important; /* Keep main titles centered */
             }
             
             /* General section spacing and content details for print */
             .main-content-area > div, .left-sidebar > div {
-                margin-bottom: 15px; /* Consistent spacing between major divs/sections */
-                page-break-inside: avoid; /* Prevent breaking inside sections */
+                margin-bottom: 10px !important; /* Consistent spacing between major divs/sections */
+                page-break-inside: avoid !important; /* Prevent breaking inside sections */
             }
             .main-content-area .mb-6 { /* Specific entries like job/project */
-                margin-bottom: 10px;
-                page-break-inside: avoid;
+                margin-bottom: 8px !important; /* Reduced margin */
+                page-break-inside: avoid !important;
             }
 
             .job-title, .degree-title {
-                font-size: 1.15rem;
+                font-size: 1rem !important; /* Smaller for print */
+                margin-bottom: 3px !important;
             }
             .company-name, .university-name {
-                font-size: 1rem;
+                font-size: 0.9rem !important; /* Smaller for print */
+                margin-bottom: 3px !important;
             }
             .duration, .location {
-                font-size: 0.9rem;
-                margin-bottom: 4px;
+                font-size: 0.8rem !important; /* Smaller for print */
+                margin-bottom: 4px !important;
             }
-            .description ul, .main-content-area .description ul {
-                margin-left: 18px;
+            .description ul {
+                margin-left: 15px !important; /* Adjust list indent */
+                margin-top: 5px !important;
             }
-            .description ul li, .main-content-area .description ul li,
-            .awards-list li, .languages-list li {
-                font-size: 0.9rem;
-                line-height: 1.3;
-                margin-bottom: 4px;
-            }
-            .core-competency-item { /* Styles for core competencies in sidebar */
-                font-size: 0.9rem;
-                line-height: 1.3;
-                margin-bottom: 4px;
-            }
-            .core-competency-item svg {
-                width: 16px;
-                height: 16px;
-                stroke: #ffffff !important; /* Ensure white checkmark for print */
+            .description ul li {
+                font-size: 0.85rem !important; /* Smaller for print */
+                line-height: 1.2 !important; /* Tighter line height */
+                margin-bottom: 3px !important;
             }
             .skill-item {
-                font-size: 0.8rem;
-                padding: 4px 8px;
-                margin-right: 4px;
-                margin-bottom: 4px;
+                font-size: 0.75rem !important; /* Smaller for print */
+                padding: 3px 6px !important;
+                margin-right: 3px !important;
+                margin-bottom: 3px !important;
                 background-color: #e9ecef !important; /* Ensure tag background prints */
                 color: #34495e !important; /* Ensure tag text prints */
-                print-color-adjust: exact; 
-                -webkit-print-color-adjust: exact;
             }
             .summary-text {
-                font-size: 0.95rem;
-                line-height: 1.35;
-                margin-bottom: 12px;
+                font-size: 0.9rem !important;
+                line-height: 1.3 !important;
+                margin-bottom: 10px !important;
+                text-align: left !important; /* Align summary text left for print consistency */
+            }
+            
+            .download-section {
+                display: none !important; /* Hide download button when printing */
             }
             
             @page {
                 size: A4;
-                margin: 0.7cm; /* Reduced margins for maximum content space */
+                margin: 0.5cm !important; /* Even tighter margins for maximum content space */
             }
         }
     </style>
@@ -656,10 +688,10 @@
                         <h3 class="job-title">Automated Incident Response & Remediation System</h3>
                         <div class="description">
                             <ul>
-                                <li>Developed Python-based scripts for automated incident detection and self-healing</li>
-                                <li>Linked CloudWatch Alarms with Lambda functions for real-time remediation</li>
+                                <li>Developed Python-based scripts for automated incident detection and real-time remediation</li>
+                                <li>Linked CloudWatch Alarms with Lambda functions to trigger alerts and automated actions</li>
                                 <li>Built Grafana dashboards for system health and alert visibility</li>
-                                <li>Participated in on-call rotations and post-mortems, refining system reliability and response time</li>
+                                <li>Participated in on-call rotations and post-mortems to refine system reliability and response time</li>
                             </ul>
                         </div>
                     </div>
