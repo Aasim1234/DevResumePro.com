@@ -34,8 +34,8 @@
             box-sizing: border-box;
         }
         .header-section {
-            background-color: #004085; /* Deep blue color */
-            color: #ffffff;
+            background-color: #d1e7e4; /* Light teal color from the image */
+            color: #4a5568; /* Darker grey text for contrast */
             padding: 40px 30px;
             text-align: center;
             border-top-left-radius: 12px;
@@ -48,7 +48,7 @@
         }
         .header-section p {
             font-size: 1.2rem;
-            font-weight: 300;
+            font-weight: 400; /* Slightly bolder for readability */
             opacity: 0.9;
             margin-bottom: 20px;
         }
@@ -58,6 +58,7 @@
             flex-wrap: wrap;
             gap: 30px;
             font-size: 1rem;
+            color: #4a5568; /* Darker text color for icons/links */
         }
         .contact-info div {
             display: flex;
@@ -65,13 +66,17 @@
             gap: 10px;
         }
         .contact-info a {
-            color: #ffffff;
+            color: #4a5568; /* Darker text color for links */
             text-decoration: none;
             transition: color 0.3s ease;
         }
         .contact-info a:hover {
-            color: #d1e7ff; /* Lighter blue on hover */
+            color: #2c3e50; /* Even darker on hover */
             text-decoration: underline;
+        }
+        /* Adjust SVG colors for the new header background */
+        .contact-info svg {
+            stroke: #4a5568; /* Darker color for icons */
         }
 
         .main-content {
@@ -85,12 +90,14 @@
         .section-title {
             font-size: 1.8rem; /* Larger section titles */
             font-weight: 600;
-            color: #2c3e50; /* Darker text for titles */
-            border-bottom: 3px solid #3498db; /* Thicker, prominent blue line */
-            padding-bottom: 10px;
+            color: #ffffff; /* White text for section titles */
+            background-color: #a7d9d2; /* Light teal background for titles */
+            padding: 12px 20px; /* Increased padding */
             margin-bottom: 25px;
             text-transform: uppercase; /* Uppercase for a modern look */
-            letter-spacing: 0.05em;
+            letter-spacing: 0.08em; /* Slightly more letter spacing */
+            text-align: center; /* Centered as per image */
+            border-radius: 6px; /* Slightly rounded corners for title box */
         }
         .section-content ul {
             list-style: none;
@@ -122,14 +129,29 @@
             font-weight: 400;
         }
         .description ul {
-            list-style: disc;
-            margin-left: 25px; /* Indent bullet points */
-            margin-top: 10px;
+            list-style: none; /* Remove default bullets */
+            padding: 0;
+            margin: 0;
         }
         .description ul li {
             margin-bottom: 8px;
             color: #555;
+            display: flex; /* Use flex for alignment with custom bullet */
+            align-items: flex-start;
+            gap: 8px; /* Space between icon and text */
         }
+        /* Custom bullet icon - green checkmark */
+        .description ul li::before {
+            content: '';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2328a745' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+            background-size: cover;
+            flex-shrink: 0; /* Prevent icon from shrinking */
+            margin-top: 2px; /* Align icon better with text */
+        }
+
         .skill-item {
             display: inline-block;
             background-color: #e9ecef; /* Lighter background for tags */
@@ -155,6 +177,20 @@
             margin-bottom: 8px;
             font-size: 1rem;
             color: #444;
+        }
+        .core-competency-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            color: #555;
+        }
+        .core-competency-item svg {
+            stroke: #28a745; /* Green color for checkmark */
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
         }
 
         /* Download button styling */
@@ -211,6 +247,7 @@
             .section-title {
                 font-size: 1.5rem;
                 margin-bottom: 20px;
+                padding: 10px 15px;
             }
             .job-title, .degree-title {
                 font-size: 1.2rem;
@@ -224,7 +261,7 @@
             .description ul {
                 margin-left: 20px;
             }
-            .description ul li, .skill-item, .summary-text, .awards-list li, .languages-list li {
+            .description ul li, .skill-item, .summary-text, .awards-list li, .languages-list li, .core-competency-item {
                 font-size: 0.95rem;
             }
             .download-section {
@@ -267,15 +304,14 @@
                 font-size: 0.95rem;
             }
             .main-content {
-                /* Forcing single column layout for print ensures flow */
                 display: block; 
                 padding: 15px 30px; /* Reduced padding for print */
             }
             .section-title {
                 font-size: 1.5rem;
-                margin-bottom: 10px; /* Reduced margin */
-                padding-bottom: 5px;
-                page-break-after: avoid; /* Keep title with content */
+                margin-bottom: 10px; 
+                padding: 10px 15px;
+                page-break-after: avoid; 
             }
             .job-title, .degree-title {
                 font-size: 1.2rem;
@@ -290,7 +326,7 @@
             .description ul, .section-content ul {
                 margin-left: 20px;
             }
-            .description ul li, .awards-list li, .languages-list li {
+            .description ul li, .awards-list li, .languages-list li, .core-competency-item {
                 font-size: 0.95rem;
                 line-height: 1.35;
                 margin-bottom: 5px;
@@ -312,7 +348,6 @@
                 margin-bottom: 15px; /* Space between major sections */
                 page-break-inside: avoid; /* Prevent breaking inside a section */
             }
-            /* Specific handling for experience and project entries within their sections */
             .main-content .mb-6 { /* These are individual job/project entries */
                  page-break-inside: avoid; /* Prevent breaking inside a single job/project entry */
                  margin-bottom: 10px; /* Adjusted margin for print */
@@ -337,7 +372,7 @@
             <p>DevOps & AWS Engineer | CloudOps Engineer</p>
             <div class="contact-info">
                 <div>
-                    <!-- Email icon (inline SVG) -->
+                    <!-- Email icon (inline SVG for simplicity) -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                     <a href="mailto:aasimdevops@gmail.com">aasimdevops@gmail.com</a>
                 </div>
@@ -362,6 +397,45 @@
                 <p class="summary-text">
                     Highly driven <strong>CloudOps Engineer</strong> with 1 year of hands-on experience in <strong>DevOps</strong> and <strong>AWS Cloud Architecture</strong> environments, focusing on <strong>Site Reliability Engineering (SRE)</strong> principles. Proven expertise in designing, implementing, and managing robust <strong>CI/CD pipelines</strong>, automating <strong>cloud infrastructure (IaC)</strong> with <strong>Terraform</strong> and <strong>Ansible</strong>, and optimizing system performance and costs. Adept at ensuring <strong>high system availability, scalability, and security</strong>, with a strong focus on <strong>monitoring, troubleshooting</strong>, and <strong>incident management</strong> in dynamic production environments. Seeking to contribute to complex platform engineering challenges and improve software delivery speed and system reliability.
                 </p>
+            </div>
+
+            <!-- Core Competencies Section -->
+            <div>
+                <h2 class="section-title">Core Competencies</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                    <div class="core-competency-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Cloud Platforms (AWS, Azure, GCP)
+                    </div>
+                    <div class="core-competency-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        CI/CD Pipeline Automation
+                    </div>
+                    <div class="core-competency-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Infrastructure as Code (IaC)
+                    </div>
+                    <div class="core-competency-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Containerization (Docker, Kubernetes)
+                    </div>
+                    <div class="core-competency-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Monitoring & Logging (Prometheus, CloudWatch)
+                    </div>
+                    <div class="core-competency-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Scripting & Automation (Python, Bash)
+                    </div>
+                    <div class="core-competency-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Site Reliability Engineering (SRE)
+                    </div>
+                    <div class="core-competency-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Microservices Architecture
+                    </div>
+                </div>
             </div>
 
             <!-- Experience Section -->
@@ -448,7 +522,7 @@
             <!-- Skills Section -->
             <div>
                 <h2 class="section-title">Skills</h2>
-                <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap justify-center gap-2">
                     <span class="skill-item">Cloud Platforms: <strong>AWS</strong> (EC2, S3, VPC, IAM, CloudWatch, CloudTrail, Auto Scaling, RDS, Route 53, <strong>Lambda</strong>, <strong>API Gateway</strong>, <strong>DynamoDB</strong>, Cost Optimization, Fault-Tolerance, Disaster Recovery)</span>
                     <span class="skill-item">DevOps Tools & IaC: <strong>Terraform</strong>, <strong>Ansible</strong>, <strong>Docker</strong>, <strong>Kubernetes</strong>, <strong>Jenkins</strong>, <strong>GitHub Actions</strong>, <strong>Git</strong>, <strong>CloudFormation</strong>, AWS Systems Manager (SSM) Automation</span>
                     <span class="skill-item">CI/CD & Automation: <strong>CI/CD Pipelines</strong>, Automated Deployments, Configuration Management, Scripting (<strong>Python</strong>, <strong>Bash</strong>), Webhook Triggers, Release Management, Automated Remediation</span>
