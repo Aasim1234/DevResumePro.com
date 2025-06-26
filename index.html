@@ -26,135 +26,210 @@
             background-color: #ffffff;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            max-width: 800px; /* Wider for a single-column, professional look */
+            max-width: 980px; /* Wider for two-column layout */
             width: 100%;
             display: flex;
-            flex-direction: column;
+            flex-direction: column; /* Column for overall structure, then flex inside */
             overflow: hidden;
             box-sizing: border-box;
         }
-        .header-section {
-            background-color: #d1e7e4; /* Light teal color from the image */
-            color: #4a5568; /* Darker grey text for contrast */
-            padding: 40px 30px;
-            text-align: center;
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
-        }
-        .header-section h1 {
-            font-size: 3rem; /* Larger font for name */
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        .header-section p {
-            font-size: 1.2rem;
-            font-weight: 400; /* Slightly bolder for readability */
-            opacity: 0.9;
-            margin-bottom: 20px;
-        }
-        .contact-info {
+
+        .header-content-wrapper {
             display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 30px;
-            font-size: 1rem;
-            color: #4a5568; /* Darker text color for icons/links */
-        }
-        .contact-info div {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .contact-info a {
-            color: #4a5568; /* Darker text color for links */
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        .contact-info a:hover {
-            color: #2c3e50; /* Even darker on hover */
-            text-decoration: underline;
-        }
-        /* Adjust SVG colors for the new header background */
-        .contact-info svg {
-            stroke: #4a5568; /* Darker color for icons */
+            flex-direction: row; /* For desktop: header and main content side-by-side */
+            min-height: 700px; /* Minimum height for visual balance on desktop */
         }
 
-        .main-content {
-            padding: 30px 40px; /* Generous padding for content */
+        /* Left Column (Dark Blue Sidebar) */
+        .left-sidebar {
+            background-color: #1a4f6d; /* Dark blue */
+            color: #ffffff;
+            flex: 1; /* Takes 1 part of the flexible space */
+            padding: 40px 25px; /* Generous padding */
             display: flex;
             flex-direction: column;
-            gap: 35px; /* Space between major sections */
-            overflow: visible;
+            align-items: center; /* Center content in sidebar */
+            text-align: center;
+            min-width: 250px; /* Ensure it doesn't get too small */
         }
-
-        .section-title {
-            font-size: 1.8rem; /* Larger section titles */
+        .sidebar-title {
+            font-size: 1.5rem; /* For "Summary" or similar */
             font-weight: 600;
-            color: #ffffff; /* White text for section titles */
-            background-color: #a7d9d2; /* Light teal background for titles */
-            padding: 12px 20px; /* Increased padding */
-            margin-bottom: 25px;
-            text-transform: uppercase; /* Uppercase for a modern look */
-            letter-spacing: 0.08em; /* Slightly more letter spacing */
-            text-align: center; /* Centered as per image */
-            border-radius: 6px; /* Slightly rounded corners for title box */
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
-        .section-content ul {
+        .sidebar-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        .sidebar-section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Subtle white underline */
+            padding-bottom: 8px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .sidebar-list {
             list-style: none;
             padding: 0;
             margin: 0;
+            width: 100%;
+            text-align: left; /* Align list items to left within sidebar */
         }
-        .section-content ul li {
-            margin-bottom: 12px;
-            line-height: 1.6;
-            color: #444;
+        .sidebar-list li {
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+        .sidebar-list .degree-title, .sidebar-list .company-name {
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+        .sidebar-list .duration, .sidebar-list .location {
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        /* Skills/Core Competencies in Sidebar */
+        .sidebar-skills-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            text-align: left; /* Align skill items to left */
+        }
+        .sidebar-skills-list-item {
+            display: flex;
+            align-items: flex-start; /* Align icon to top of text */
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 0.95rem; 
+            line-height: 1.4;
+            color: #ffffff; 
+            opacity: 0.9;
+        }
+        .sidebar-skills-list-item svg {
+            stroke: #ffffff; /* White checkmark */
+            width: 16px; 
+            height: 16px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+
+        /* Right Column (Main Content) */
+        .main-content-area {
+            flex: 3; /* Takes 3 parts of the flexible space */
+            background-color: #ffffff;
+            padding: 40px 50px; /* Generous padding */
+            display: flex;
+            flex-direction: column;
+        }
+        .main-content-header {
+            margin-bottom: 25px; /* Reduced margin */
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0; /* Subtle divider */
+        }
+        .main-content-header h1 {
+            font-size: 3.5rem; /* Very large name */
+            font-weight: 700;
+            color: #34495e;
+            margin-bottom: 5px;
+        }
+        .main-content-header p {
+            font-size: 1.5rem; /* Larger profession text */
             font-weight: 400;
+            color: #555;
+            margin-bottom: 20px;
         }
-        .job-title, .degree-title {
-            font-size: 1.4rem;
+        .main-contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px 30px; /* Adjusted gap */
+            font-size: 1rem;
+            color: #555;
+        }
+        .main-contact-info div {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .main-contact-info svg {
+            stroke: #555; /* Dark grey for icons */
+            width: 18px;
+            height: 18px;
+        }
+        .main-contact-info a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .main-contact-info a:hover {
+            color: #2c3e50;
+            text-decoration: underline;
+        }
+
+        .main-section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #ffffff; /* White text for section titles */
+            background-color: #1a4f6d; /* Deep blue background for titles */
+            padding: 12px 25px; /* Increased padding */
+            margin-top: 25px; /* Reduced margin */
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            text-align: center;
+            border-radius: 6px;
+        }
+        .main-content-area .mb-6 {
+            margin-bottom: 20px; /* Space between job/project entries */
+        }
+        .main-content-area .job-title, .main-content-area .degree-title {
+            font-size: 1.3rem;
             font-weight: 600;
             color: #2c3e50;
             margin-bottom: 5px;
         }
-        .company-name, .university-name {
-            font-size: 1.2rem;
+        .main-content-area .company-name, .main-content-area .university-name {
+            font-size: 1.1rem;
             color: #34495e;
             font-weight: 500;
             margin-bottom: 5px;
         }
-        .duration, .location {
-            font-size: 1rem;
+        .main-content-area .duration, .main-content-area .location {
+            font-size: 0.95rem;
             color: #7f8c8d;
-            margin-bottom: 15px;
-            font-weight: 400;
+            margin-bottom: 12px;
         }
-        .description ul {
-            list-style: none; /* Remove default bullets */
-            padding: 0;
-            margin: 0;
+        .main-content-area .description ul {
+            list-style: disc; /* Standard disc bullets as per image */
+            margin-left: 25px;
+            margin-top: 10px;
         }
-        .description ul li {
-            margin-bottom: 8px;
+        .main-content-area .description ul li {
+            margin-bottom: 6px;
             color: #555;
-            display: flex; /* Use flex for alignment with custom bullet */
-            align-items: flex-start;
-            gap: 8px; /* Space between icon and text */
+            line-height: 1.5;
         }
-        /* Custom bullet icon - green checkmark */
-        .description ul li::before {
-            content: '';
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2328a745' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
-            background-size: cover;
-            flex-shrink: 0; /* Prevent icon from shrinking */
-            margin-top: 2px; /* Align icon better with text */
+        
+        /* Skills Section (using the style from the previous template for individual skills, as the image did not have a dedicated 'Skills' section beyond 'Core Competencies') */
+        .skills-section-wrapper {
+            margin-top: 35px;
+            margin-bottom: 20px; /* Space before next section if applicable */
         }
-
         .skill-item {
             display: inline-block;
-            background-color: #e9ecef; /* Lighter background for tags */
+            background-color: #e9ecef; /* Lighter background for tags (neutral) */
             color: #34495e;
             padding: 9px 18px; /* Larger padding for tags */
             border-radius: 20px; /* More rounded corners */
@@ -167,31 +242,7 @@
         .skill-item:hover {
             background-color: #dee2e6;
         }
-        .summary-text {
-            font-size: 1.1rem; /* Slightly larger summary text */
-            line-height: 1.7;
-            color: #333;
-            margin-bottom: 20px; /* Reduced to integrate better */
-        }
-        .awards-list li, .languages-list li {
-            margin-bottom: 8px;
-            font-size: 1rem;
-            color: #444;
-        }
-        .core-competency-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 8px;
-            font-size: 1rem;
-            color: #555;
-        }
-        .core-competency-item svg {
-            stroke: #28a745; /* Green color for checkmark */
-            width: 18px;
-            height: 18px;
-            flex-shrink: 0;
-        }
+
 
         /* Download button styling */
         .download-section {
@@ -202,11 +253,11 @@
             border-bottom-right-radius: 12px;
             margin-top: 20px;
             width: 100%;
-            max-width: 800px; /* Match resume container width */
+            max-width: 980px; /* Match resume container width */
             box-sizing: border-box;
         }
         .download-button {
-            background-color: #3498db;
+            background-color: #1a4f6d; /* Dark blue button */
             color: #ffffff;
             padding: 12px 28px;
             border-radius: 8px;
@@ -216,60 +267,94 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Adjusted shadow for new color */
             cursor: pointer;
         }
         .download-button:hover {
-            background-color: #2980b9;
-            box-shadow: 0 6px 16px rgba(52, 152, 219, 0.4);
+            background-color: #153e54; /* Slightly darker blue on hover */
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
             transform: translateY(-2px);
         }
 
         /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .main-content {
-                padding: 20px 25px;
-                gap: 25px;
+        @media (max-width: 900px) { /* Adjust breakpoint for two-column to single-column */
+            .header-content-wrapper {
+                flex-direction: column; /* Stack columns on smaller screens */
             }
-            .header-section {
+            .left-sidebar {
                 padding: 30px 20px;
+                min-width: unset; /* Remove min-width when stacked */
+                border-bottom-left-radius: 0; /* Remove radius to connect with main container */
+                border-top-right-radius: 12px; /* Add radius here for top section */
+            }
+            .main-content-area {
+                padding: 30px 30px; /* Adjust padding for stacked layout */
+            }
+            .main-content-header {
+                margin-bottom: 25px;
+            }
+            .main-content-header h1 {
+                font-size: 2.8rem;
+            }
+            .main-content-header p {
+                font-size: 1.3rem;
+            }
+            .main-contact-info {
+                gap: 15px 20px;
+            }
+            .main-section-title {
+                font-size: 1.6rem;
+                padding: 10px 20px;
+                margin-top: 25px;
+            }
+            .core-competency-grid {
+                grid-template-columns: 1fr; /* Single column for competencies on small screens */
+                gap: 10px;
+            }
+        }
+        @media (max-width: 600px) {
+            .header-section {
+                padding: 25px 15px;
             }
             .header-section h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
             }
             .header-section p {
-                font-size: 1.1rem;
-            }
-            .contact-info {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .section-title {
-                font-size: 1.5rem;
-                margin-bottom: 20px;
-                padding: 10px 15px;
-            }
-            .job-title, .degree-title {
-                font-size: 1.2rem;
-            }
-            .company-name, .university-name {
                 font-size: 1rem;
             }
-            .duration, .location {
-                font-size: 0.9rem;
+            .main-content-area {
+                padding: 20px 20px;
             }
-            .description ul {
-                margin-left: 20px;
+            .main-content-header h1 {
+                font-size: 2.5rem;
             }
-            .description ul li, .skill-item, .summary-text, .awards-list li, .languages-list li, .core-competency-item {
+            .main-content-header p {
+                font-size: 1.1rem;
+            }
+            .main-section-title {
+                font-size: 1.4rem;
+                padding: 8px 15px;
+            }
+            .job-title, .degree-title {
+                font-size: 1.1rem;
+            }
+            .company-name, .university-name {
                 font-size: 0.95rem;
             }
-            .download-section {
-                padding: 20px;
+            .duration, .location {
+                font-size: 0.85rem;
+            }
+            .description ul, .main-content-area .description ul {
+                margin-left: 15px;
+            }
+            .description ul li, .main-content-area .description ul li, 
+            .core-competency-item, .skill-item, .summary-text, 
+            .awards-list li, .languages-list li {
+                font-size: 0.9rem;
             }
             .download-button {
+                font-size: 0.85rem;
                 padding: 10px 20px;
-                font-size: 0.9rem;
             }
         }
 
@@ -279,7 +364,7 @@
                 background-color: #ffffff;
                 padding: 0;
                 margin: 0;
-                font-size: 12pt; /* Base font size for print */
+                font-size: 11pt; /* Base font size for print */
             }
             .resume-container {
                 box-shadow: none;
@@ -287,198 +372,272 @@
                 max-width: 100%;
                 width: 100%;
             }
-            .header-section {
-                padding: 20px 30px;
-                border-radius: 0;
+            .header-content-wrapper {
+                flex-direction: column; /* Force single column for print */
+                min-height: unset; /* Remove min-height for print */
             }
-            .header-section h1 {
-                font-size: 2.2rem;
+            .left-sidebar {
+                background-color: #1a4f6d !important; /* Ensure dark blue background prints */
+                color: #ffffff !important; /* Ensure white text prints */
+                padding: 20px 25px; /* Adjust sidebar padding for print */
+                border-bottom-left-radius: 0; 
+                border-top-right-radius: 0; 
+                print-color-adjust: exact; /* Crucial for background colors to print */
+                -webkit-print-color-adjust: exact; /* For Webkit browsers */
             }
-            .header-section p {
-                font-size: 1rem;
+            .sidebar-title, .sidebar-section-title {
+                 color: #ffffff !important; /* Ensure white text on dark background */
             }
-            .contact-info {
-                gap: 15px;
+            .main-content-area {
+                padding: 15px 30px; /* Adjust main content padding for print */
             }
-            .contact-info div {
+            .main-content-header {
+                margin-bottom: 15px; /* Reduced margin for print */
+                padding-bottom: 10px;
+            }
+            .main-content-header h1 {
+                font-size: 2.8rem;
+            }
+            .main-content-header p {
+                font-size: 1.2rem;
+            }
+            .main-contact-info {
+                gap: 12px 20px;
                 font-size: 0.95rem;
             }
-            .main-content {
-                display: block; 
-                padding: 15px 30px; /* Reduced padding for print */
+            .main-contact-info svg {
+                stroke: #555 !important; /* Ensure icons print correctly */
             }
-            .section-title {
-                font-size: 1.5rem;
-                margin-bottom: 10px; 
-                padding: 10px 15px;
-                page-break-after: avoid; 
+
+            .main-section-title {
+                font-size: 1.4rem;
+                padding: 8px 15px;
+                margin-top: 15px; /* Reduced margin for print */
+                margin-bottom: 15px;
+                background-color: #1a4f6d !important; /* Ensure single color prints */
+                color: #ffffff !important; /* Ensure white text prints */
+                print-color-adjust: exact; 
+                -webkit-print-color-adjust: exact; 
             }
+            
+            /* General section spacing and content details for print */
+            .main-content-area > div, .left-sidebar > div {
+                margin-bottom: 15px; /* Consistent spacing between major divs/sections */
+                page-break-inside: avoid; /* Prevent breaking inside sections */
+            }
+            .main-content-area .mb-6 { /* Specific entries like job/project */
+                margin-bottom: 10px;
+                page-break-inside: avoid;
+            }
+
             .job-title, .degree-title {
-                font-size: 1.2rem;
+                font-size: 1.15rem;
             }
             .company-name, .university-name {
                 font-size: 1rem;
             }
             .duration, .location {
                 font-size: 0.9rem;
-                margin-bottom: 5px;
+                margin-bottom: 4px;
             }
-            .description ul, .section-content ul {
-                margin-left: 20px;
+            .description ul, .main-content-area .description ul {
+                margin-left: 18px;
             }
-            .description ul li, .awards-list li, .languages-list li, .core-competency-item {
-                font-size: 0.95rem;
-                line-height: 1.35;
-                margin-bottom: 5px;
+            .description ul li, .main-content-area .description ul li,
+            .awards-list li, .languages-list li {
+                font-size: 0.9rem;
+                line-height: 1.3;
+                margin-bottom: 4px;
+            }
+            .core-competency-item { /* Styles for core competencies in sidebar */
+                font-size: 0.9rem;
+                line-height: 1.3;
+                margin-bottom: 4px;
+            }
+            .core-competency-item svg {
+                width: 16px;
+                height: 16px;
+                stroke: #ffffff !important; /* Ensure white checkmark for print */
             }
             .skill-item {
-                font-size: 0.85rem;
-                padding: 5px 10px;
-                margin-right: 5px;
-                margin-bottom: 5px;
+                font-size: 0.8rem;
+                padding: 4px 8px;
+                margin-right: 4px;
+                margin-bottom: 4px;
+                background-color: #e9ecef !important; /* Ensure tag background prints */
+                color: #34495e !important; /* Ensure tag text prints */
+                print-color-adjust: exact; 
+                -webkit-print-color-adjust: exact;
             }
             .summary-text {
-                font-size: 1rem;
-                line-height: 1.4;
-                margin-bottom: 15px;
-            }
-            
-            /* Page Break Control: Crucial for multi-page PDFs */
-            .main-content > div { /* Apply to direct children of main-content (sections) */
-                margin-bottom: 15px; /* Space between major sections */
-                page-break-inside: avoid; /* Prevent breaking inside a section */
-            }
-            .main-content .mb-6 { /* These are individual job/project entries */
-                 page-break-inside: avoid; /* Prevent breaking inside a single job/project entry */
-                 margin-bottom: 10px; /* Adjusted margin for print */
-            }
-
-            .download-section {
-                display: none; /* Hide download button when printing */
+                font-size: 0.95rem;
+                line-height: 1.35;
+                margin-bottom: 12px;
             }
             
             @page {
                 size: A4;
-                margin: 0.8cm; /* Reduced margins for maximum content space */
+                margin: 0.7cm; /* Reduced margins for maximum content space */
             }
         }
     </style>
 </head>
 <body class="antialiased">
     <div class="resume-container rounded-xl" id="resumeContent">
-        <!-- Header Section -->
-        <header class="header-section">
-            <h1>AASIM RAZA</h1>
-            <p>DevOps & AWS Engineer | CloudOps Engineer</p>
-            <div class="contact-info">
+        <!-- Header & Main Content Wrapper -->
+        <div class="header-content-wrapper">
+            <!-- Left Column (Dark Blue Sidebar) -->
+            <section class="left-sidebar">
+                <!-- Summary / Tagline Section -->
                 <div>
-                    <!-- Email icon (inline SVG for simplicity) -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                    <a href="mailto:aasimdevops@gmail.com">aasimdevops@gmail.com</a>
+                    <h2 class="sidebar-title">Summary</h2>
+                    <p class="sidebar-text">
+                        Highly driven <strong>CloudOps Engineer</strong> with 1 year of hands-on experience in <strong>DevOps</strong> and <strong>AWS Cloud Architecture</strong> environments, focusing on <strong>Site Reliability Engineering (SRE)</strong> principles. Eager to contribute to complex platform engineering challenges and improve software delivery speed and system reliability.
+                    </p>
                 </div>
+
+                <!-- Skills & Tools Section (New location for Core Competencies) -->
                 <div>
-                    <!-- Phone icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-3.67-3.67A19.79 19.79 0 0 1 2 6.18 2 2 0 0 1 4.11 4h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                    <span>+91 9766613006</span>
+                    <h2 class="sidebar-section-title">Skills & Tools</h2>
+                    <ul class="sidebar-skills-list">
+                        <li class="sidebar-skills-list-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            AWS Cloud Platforms & Services
+                        </li>
+                        <li class="sidebar-skills-list-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            CI/CD Pipeline Automation
+                        </li>
+                        <li class="sidebar-skills-list-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            Infrastructure as Code (Terraform, Ansible)
+                        </li>
+                        <li class="sidebar-skills-list-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            Containerization (Docker, Kubernetes)
+                        </li>
+                        <li class="sidebar-skills-list-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            Monitoring & Observability (Prometheus, CloudWatch)
+                        </li>
+                        <li class="sidebar-skills-list-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            Python & Bash Scripting
+                        </li>
+                        <li class="sidebar-skills-list-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            Microservices Architecture
+                        </li>
+                    </ul>
                 </div>
+
+                <!-- Education Section -->
                 <div>
-                    <!-- Location icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                    <span>Pune, India</span>
+                    <h2 class="sidebar-section-title">Education</h2>
+                    <ul class="sidebar-list">
+                        <li class="mb-4">
+                            <h3 class="degree-title">Bachelor of Engineering</h3>
+                            <p class="company-name">Government College of Engineering, Jalgaon</p>
+                            <p class="duration">2022 | CGPA: 8.010/</p>
+                        </li>
+                        <li class="mb-4">
+                            <h3 class="degree-title">12th Grade</h3>
+                            <p class="company-name">Maharashtra (English Medium)</p>
+                            <p class="duration">2018 | 75 percent</p>
+                        </li>
+                        <li class="mb-4">
+                            <h3 class="degree-title">10th Grade</h3>
+                            <p class="company-name">Maharashtra (English Medium)</p>
+                            <p class="duration">2016 | 75 percent</p>
+                        </li>
+                    </ul>
                 </div>
-            </div>
-        </header>
 
-        <!-- Main Content Section - Single Column -->
-        <main class="main-content">
-            <!-- Summary Section -->
-            <div>
-                <h2 class="section-title">Summary</h2>
-                <p class="summary-text">
-                    Highly driven <strong>CloudOps Engineer</strong> with 1 year of hands-on experience in <strong>DevOps</strong> and <strong>AWS Cloud Architecture</strong> environments, focusing on <strong>Site Reliability Engineering (SRE)</strong> principles. Proven expertise in designing, implementing, and managing robust <strong>CI/CD pipelines</strong>, automating <strong>cloud infrastructure (IaC)</strong> with <strong>Terraform</strong> and <strong>Ansible</strong>, and optimizing system performance and costs. Adept at ensuring <strong>high system availability, scalability, and security</strong>, with a strong focus on <strong>monitoring, troubleshooting</strong>, and <strong>incident management</strong> in dynamic production environments. Seeking to contribute to complex platform engineering challenges and improve software delivery speed and system reliability.
-                </p>
-            </div>
-
-            <!-- Core Competencies Section -->
-            <div>
-                <h2 class="section-title">Core Competencies</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
-                    <div class="core-competency-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        Cloud Platforms (AWS, Azure, GCP)
-                    </div>
-                    <div class="core-competency-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        CI/CD Pipeline Automation
-                    </div>
-                    <div class="core-competency-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        Infrastructure as Code (IaC)
-                    </div>
-                    <div class="core-competency-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        Containerization (Docker, Kubernetes)
-                    </div>
-                    <div class="core-competency-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        Monitoring & Logging (Prometheus, CloudWatch)
-                    </div>
-                    <div class="core-competency-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        Scripting & Automation (Python, Bash)
-                    </div>
-                    <div class="core-competency-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        Site Reliability Engineering (SRE)
-                    </div>
-                    <div class="core-competency-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        Microservices Architecture
-                    </div>
+                <!-- Awards & Certifications -->
+                <div>
+                    <h2 class="sidebar-section-title">Awards & Certifications</h2>
+                    <ul class="sidebar-list">
+                        <li>Python for Everybody (Coursera)</li>
+                        <li>AWS Certified Developer - Associate (In Progress)</li>
+                        <li>DevOps Essentials (Udemy)</li>
+                    </ul>
                 </div>
-            </div>
 
-            <!-- Experience Section -->
-            <div>
-                <h2 class="section-title">Experience</h2>
-                <div class="mb-6">
-                    <h3 class="job-title">DevOps Engineer</h3>
-                    <p class="company-name">Naresh I Technology</p>
-                    <p class="duration">Hyderabad | 2023 - 2024</p>
-                    <div class="description">
-                        <ul>
-                            <li><strong>Engineered</strong> and <strong>automated cloud infrastructure provisioning</strong> by developing <strong>Infrastructure as Code (IaC)</strong> using <strong>Terraform</strong> and <strong>Ansible</strong>, streamlining deployment processes and ensuring <strong>reproducible infrastructure</strong>.</li>
-                            <li><strong>Implemented</strong> and maintained comprehensive <strong>monitoring and alerting solutions</strong> with <strong>Prometheus</strong> and <strong>CloudWatch</strong> to ensure <strong>high system uptime</strong>, <strong>performance visibility</strong>, and proactive <strong>incident detection</strong>.</li>
-                            <li><strong>Optimized AWS cloud expenditures</strong>, leading to <strong>demonstrable cost savings</strong> on monthly infrastructure spend through proactive resource management and <strong>cost optimization</strong> strategies.</li>
-                            <li><strong>Facilitated</strong> the <strong>migration</strong> of monolithic applications to <strong>scalable, containerized environments</strong> leveraging <strong>Docker</strong> and exploring <strong>Kubernetes</strong> concepts, enhancing deployment flexibility and resource utilization.</li>
-                            <li><strong>Developed</strong> and <strong>maintained</strong> <strong>Python-based backend applications</strong>, supporting large-scale data operations and enhancing application performance.</li>
-                            <li><strong>Modernized</strong> legacy systems by <strong>transitioning services to a microservices architecture</strong>, improving system agility and <strong>scalability</strong>.</li>
-                            <li><strong>Pioneered</strong> <strong>Proof-of-Concept (PoC)</strong> development for internal <strong>automation tools</strong> utilizing <strong>Python</strong> and <strong>Flask</strong>, resulting in improved operational workflows.</li>
-                            <li><strong>Designed</strong>, <strong>engineered</strong>, and <strong>deployed robust CI/CD pipelines</strong> using <strong>Jenkins</strong> and <strong>GitHub Actions</strong>, significantly <strong>reducing release cycles</strong> and <strong>improving deployment frequency</strong> for continuous software delivery.</li>
-                            <li><strong>Collaborated</strong> with cross-functional development teams on <strong>system design</strong> to identify and resolve technical bottlenecks, proposing and implementing <strong>scalable and resilient solutions</strong>.</li>
-                        </ul>
+                <!-- Languages -->
+                <div>
+                    <h2 class="sidebar-section-title">Languages</h2>
+                    <ul class="sidebar-list">
+                        <li>English: Fluent</li>
+                        <li>Hindi: Conversational</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Right Column (Main Content Area) -->
+            <main class="main-content-area">
+                <div class="main-content-header">
+                    <h1>AASIM RAZA</h1>
+                    <p>DevOps & AWS Engineer | CloudOps Engineer</p>
+                    <div class="main-contact-info">
+                        <div>
+                            <!-- Email icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            <a href="mailto:aasimdevops@gmail.com">aasimdevops@gmail.com</a>
+                        </div>
+                        <div>
+                            <!-- Phone icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-3.67-3.67A19.79 19.79 0 0 1 2 6.18 2 2 0 0 1 4.11 4h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            <span>+91 9766613006</span>
+                        </div>
+                        <div>
+                            <!-- Location icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            <span>Pune, India</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Projects Section -->
-            <div>
-                <h2 class="section-title">Projects</h2>
-                <!-- Project 1: Cloud Migration Project Leader -->
-                <div class="mb-6">
-                    <h3 class="job-title">Cloud Migration & Scalability Project Leader</h3>
-                    <div class="description">
-                        <ul>
-                            <li><strong>Led</strong> a successful <strong>multi-tier application</strong> <strong>cloud migration project</strong> to AWS, resulting in reduced operational spending and significantly enhanced system <strong>scalability</strong> and <strong>fault-tolerance</strong>.</li>
-                            <li><strong>Implemented</strong> industry best practices for <strong>disaster recovery</strong> and <strong>high availability</strong> throughout the migration process, minimizing system downtime and improving overall system performance.</li>
-                            <li><strong>Coordinated</strong> with cross-functional development and operations teams to ensure a seamless cloud transition, achieving <strong>zero data loss</strong> and minimal business disruption.</li>
-                        </ul>
+                <!-- Professional Experience Section -->
+                <div>
+                    <h2 class="main-section-title">Professional Experience</h2>
+                    <div class="mb-6">
+                        <h3 class="job-title">DevOps Engineer</h3>
+                        <p class="company-name">Naresh I Technology</p>
+                        <p class="duration">Hyderabad | 2023 - 2024</p>
+                        <div class="description">
+                            <ul>
+                                <li><strong>Engineered</strong> and <strong>automated cloud infrastructure provisioning</strong> by developing <strong>Infrastructure as Code (IaC)</strong> using <strong>Terraform</strong> and <strong>Ansible</strong>, streamlining deployment processes and ensuring <strong>reproducible infrastructure</strong>.</li>
+                                <li><strong>Implemented</strong> and maintained comprehensive <strong>monitoring and alerting solutions</strong> with <strong>Prometheus</strong> and <strong>CloudWatch</strong> to ensure <strong>high system uptime</strong>, <strong>performance visibility</strong>, and proactive <strong>incident detection</strong>.</li>
+                                <li><strong>Optimized AWS cloud expenditures</strong>, leading to <strong>demonstrable cost savings</strong> on monthly infrastructure spend through proactive resource management and <strong>cost optimization</strong> strategies.</li>
+                                <li><strong>Facilitated</strong> the <strong>migration</strong> of monolithic applications to <strong>scalable, containerized environments</strong> leveraging <strong>Docker</strong> and exploring <strong>Kubernetes</strong> concepts, enhancing deployment flexibility and resource utilization.</li>
+                                <li><strong>Developed</strong> and <strong>maintained</strong> <strong>Python-based backend applications</strong>, supporting large-scale data operations and enhancing application performance.</li>
+                                <li><strong>Modernized</strong> legacy systems by <strong>transitioning services to a microservices architecture</strong>, improving system agility and <strong>scalability</strong>.</li>
+                                <li><strong>Pioneered</strong> <strong>Proof-of-Concept (PoC)</strong> development for internal <strong>automation tools</strong> utilizing <strong>Python</strong> and <strong>Flask</strong>, resulting in improved operational workflows.</li>
+                                <li><strong>Designed</strong>, <strong>engineered</strong>, and <strong>deployed robust CI/CD pipelines</strong> using <strong>Jenkins</strong> and <strong>GitHub Actions</strong>, significantly <strong>reducing release cycles</strong> and <strong>improving deployment frequency</strong> for continuous software delivery.</li>
+                                <li><strong>Collaborated</strong> with cross-functional development teams on <strong>system design</strong> to identify and resolve technical bottlenecks, proposing and implementing <strong>scalable and resilient solutions</strong>.</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <!-- Project 2: Automated CI/CD Pipeline for Web Application -->
-                <div class="mb-6">
-                    <h3 class="job-title">Automated CI/CD & Deployment Platform for Web Application</h3>
-                    <div class="description">
+
+                <!-- Projects Section (renamed to Relevant Projects) -->
+                <div>
+                    <h2 class="main-section-title">Relevant Projects</h2>
+                    <!-- Project 1: Cloud Migration Project Leader -->
+                    <div class="mb-6">
+                        <h3 class="job-title">Cloud Migration & Scalability Project Leader</h3>
+                        <div class="description">
+                            <ul>
+                                <li><strong>Led</strong> a successful <strong>multi-tier application</strong> <strong>cloud migration project</strong> to AWS, resulting in reduced operational spending and significantly enhanced system <strong>scalability</strong> and <strong>fault-tolerance</strong>.</li>
+                                <li><strong>Implemented</strong> industry best practices for <strong>disaster recovery</strong> and <strong>high availability</strong> throughout the migration process, minimizing system downtime and improving overall system performance.</li>
+                                <li><strong>Coordinated</strong> with cross-functional development and operations teams to ensure a seamless cloud transition, achieving <strong>zero data loss</strong> and minimal business disruption.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Project 2: Automated CI/CD Pipeline for Web Application -->
+                    <div class="mb-6">
+                        <h3 class="job-title">Automated CI/CD & Deployment Platform for Web Application</h3>
+                        <div class="description">
                         <ul>
                             <li><strong>Architected</strong> and <strong>implemented</strong> an automated <strong>CI/CD pipeline</strong> for a web application utilizing <strong>Jenkins</strong> and <strong>Docker</strong>, enabling robust <strong>continuous integration, delivery, and deployment (CI/CD)</strong>.</li>
                             <li><strong>Streamlined</strong> build, test, and deployment workflows, reducing manual effort and accelerating <strong>software delivery speed</strong> and time-to-market.</li>
@@ -487,91 +646,36 @@
                             <li><strong>Automated environment provisioning</strong> and <strong>configuration management</strong>, significantly reducing setup time for development and staging environments and minimizing errors.</li>
                             <li><strong>Implemented robust monitoring</strong> and <strong>alerting systems</strong> using <strong>CloudWatch</strong> and integrating with <strong>Prometheus/Grafana</strong> for comprehensive <strong>performance monitoring</strong>, <strong>capacity planning</strong>, and <strong>troubleshooting</strong> production environments.</li>
                         </ul>
+                        </div>
+                    </div>
+                    <!-- Project 4: Serverless Application Deployment & Monitoring Platform -->
+                    <div class="mb-6">
+                        <h3 class="job-title">Serverless Application Deployment & Monitoring Platform</h3>
+                        <div class="description">
+                            <ul>
+                                <li><strong>Designed</strong> and <strong>deployed</strong> a highly scalable serverless application architecture on <strong>AWS</strong> using <strong>Lambda</strong>, <strong>API Gateway</strong>, and <strong>DynamoDB</strong>, demonstrating expertise in modern cloud patterns.</li>
+                                <li><strong>Automated</strong> the deployment process for serverless components using <strong>CloudFormation</strong> templates, ensuring repeatable and efficient rollouts.</li>
+                                <li><strong>Implemented</strong> comprehensive monitoring and logging for the serverless application using <strong>CloudWatch</strong>, enabling real-time performance insights and proactive issue detection.</li>
+                                <li><strong>Optimized</strong> the serverless solution for <strong>cost efficiency</strong> and <strong>operational efficiency</strong>, aligning with Platform Engineering best practices.</li>
+                                <li><strong>Developed L2 support</strong> documentation and procedures for serverless operations.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Project 5: Automated Incident Response & Remediation System (SRE Focus) -->
+                    <div class="mb-6">
+                        <h3 class="job-title">Automated Incident Response & Remediation System</h3>
+                        <div class="description">
+                            <ul>
+                                <li><strong>Developed</strong> and <strong>implemented automated scripts</strong> (Python) for <strong>incident detection</strong> and <strong>self-healing remediation</strong> of common system issues, significantly reducing manual intervention and improving <strong>MTTR (Mean Time To Recovery)</strong>.</li>
+                                <li><strong>Integrated</strong> <strong>CloudWatch Alarms</strong> with custom <strong>AWS Lambda</strong> functions to trigger automated alerts and execute pre-defined remediation actions.</li>
+                                <li><strong>Created</strong> and maintained <strong>Grafana dashboards</strong> for visualizing system health metrics and <strong>alerts</strong>, facilitating rapid <strong>troubleshooting</strong> and <strong>root cause analysis</strong>.</li>
+                                <li><strong>Participated</strong> in <strong>on-call support</strong> rotations and <strong>post-mortems</strong> to continuously refine automated responses and enhance overall system <strong>reliability</strong> and <strong>resilience</strong>.</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                 <!-- Project 3: Cloud Infrastructure Automation & Observability with AWS (Combined with CI/CD for brevity) -->
-                <!-- Original Project 3 content moved into Project 2's description for more impact and brevity -->
-
-                <!-- Project 4: Serverless Application Deployment & Monitoring Platform -->
-                <div class="mb-6">
-                    <h3 class="job-title">Serverless Application Deployment & Monitoring Platform</h3>
-                    <div class="description">
-                        <ul>
-                            <li><strong>Designed</strong> and <strong>deployed</strong> a highly scalable serverless application architecture on <strong>AWS</strong> using <strong>Lambda</strong>, <strong>API Gateway</strong>, and <strong>DynamoDB</strong>, demonstrating expertise in modern cloud patterns.</li>
-                            <li><strong>Automated</strong> the deployment process for serverless components using <strong>CloudFormation</strong> templates, ensuring repeatable and efficient rollouts.</li>
-                            <li><strong>Implemented</strong> comprehensive monitoring and logging for the serverless application using <strong>CloudWatch</strong>, enabling real-time performance insights and proactive issue detection.</li>
-                            <li><strong>Optimized</strong> the serverless solution for <strong>cost efficiency</strong> and <strong>operational efficiency</strong>, aligning with Platform Engineering best practices.</li>
-                            <li><strong>Developed L2 support</strong> documentation and procedures for serverless operations.</li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Project 5: Automated Incident Response & Remediation System (SRE Focus) -->
-                <div class="mb-6">
-                    <h3 class="job-title">Automated Incident Response & Remediation System</h3>
-                    <div class="description">
-                        <ul>
-                            <li><strong>Developed</strong> and <strong>implemented automated scripts</strong> (Python) for <strong>incident detection</strong> and <strong>self-healing remediation</strong> of common system issues, significantly reducing manual intervention and improving <strong>MTTR (Mean Time To Recovery)</strong>.</li>
-                            <li><strong>Integrated</strong> <strong>CloudWatch Alarms</strong> with custom <strong>AWS Lambda</strong> functions to trigger automated alerts and execute pre-defined remediation actions.</li>
-                            <li><strong>Created</strong> and maintained <strong>Grafana dashboards</strong> for visualizing system health metrics and <strong>alerts</strong>, facilitating rapid <strong>troubleshooting</strong> and <strong>root cause analysis</strong>.</li>
-                            <li><strong>Participated</strong> in <strong>on-call support</strong> rotations and <strong>post-mortems</strong> to continuously refine automated responses and enhance overall system <strong>reliability</strong> and <strong>resilience</strong>.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Skills Section -->
-            <div>
-                <h2 class="section-title">Skills</h2>
-                <div class="flex flex-wrap justify-center gap-2">
-                    <span class="skill-item">Cloud Platforms: <strong>AWS</strong> (EC2, S3, VPC, IAM, CloudWatch, CloudTrail, Auto Scaling, RDS, Route 53, <strong>Lambda</strong>, <strong>API Gateway</strong>, <strong>DynamoDB</strong>, Cost Optimization, Fault-Tolerance, Disaster Recovery)</span>
-                    <span class="skill-item">DevOps Tools & IaC: <strong>Terraform</strong>, <strong>Ansible</strong>, <strong>Docker</strong>, <strong>Kubernetes</strong>, <strong>Jenkins</strong>, <strong>GitHub Actions</strong>, <strong>Git</strong>, <strong>CloudFormation</strong>, AWS Systems Manager (SSM) Automation</span>
-                    <span class="skill-item">CI/CD & Automation: <strong>CI/CD Pipelines</strong>, Automated Deployments, Configuration Management, Scripting (<strong>Python</strong>, <strong>Bash</strong>), Webhook Triggers, Release Management, Automated Remediation</span>
-                    <span class="skill-item">Monitoring & Observability: <strong>Prometheus</strong>, <strong>Grafana</strong>, <strong>CloudWatch</strong>, Alerting, Performance Monitoring, Troubleshooting, Post-mortems, Incident Detection</span>
-                    <span class="skill-item">Architecture & Design: <strong>Microservices Architecture</strong>, <strong>System Design</strong>, <strong>Scalability</strong>, Fault Tolerance, Disaster Recovery, <strong>Security Best Practices</strong>, Networking, Distributed Storage, Backend Systems Integration, Serverless Architecture</span>
-                    <span class="skill-item">Programming Languages: <strong>Python</strong> (Flask), <strong>Bash</strong></span>
-                    <span class="skill-item">Methodologies: <strong>Agile</strong>, <strong>Incident Management</strong>, L2 Support, Root Cause Analysis, On-call Support</span>
-                </div>
-            </div>
-
-            <!-- Education Section -->
-            <div>
-                <h2 class="section-title">Education</h2>
-                <div class="mb-6">
-                    <h3 class="degree-title">Bachelor of Engineering</h3>
-                    <p class="university-name">Government College of Engineering, Jalgaon</p>
-                    <p class="duration">2022 | CGPA: 8.010/</p>
-                </div>
-                <div class="mb-6">
-                    <h3 class="degree-title">12th Grade</h3>
-                    <p class="university-name">Maharashtra (English Medium)</p>
-                    <p class="duration">2018 | 75 percent</p>
-                </div>
-                <div class="mb-6">
-                    <h3 class="degree-title">10th Grade</h3>
-                    <p class="university-name">Maharashtra (English Medium)</p>
-                    <p class="duration">2016 | 75 percent</p>
-                </div>
-            </div>
-
-            <!-- Awards & Certifications -->
-            <div>
-                <h2 class="section-title">Awards & Certifications</h2>
-                <ul class="awards-list">
-                    <li>Python for Everybody (Coursera)</li>
-                    <li>AWS Certified Developer - Associate (In Progress)</li>
-                    <li>DevOps Essentials (Udemy)</li>
-                </ul>
-            </div>
-
-            <!-- Languages -->
-            <div>
-                <h2 class="section-title">Languages</h2>
-                <ul class="languages-list">
-                    <li>English: Fluent</li>
-                    <li>Hindi: Conversational</li>
-                </ul>
-            </div>
-        </main>
+            </main>
+        </div>
 
         <!-- Download Section -->
         <section class="download-section">
