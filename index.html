@@ -3,621 +3,331 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume & Career Services - Aasim Raza</title>
+    <title>High Aim Classes - AWS & DevOps Curriculum Download</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts for Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- jsPDF library for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* Light grey background */
-            color: #334155; /* Dark slate text */
-            line-height: 1.6;
+            background-color: #1a202c; /* Dark background */
+            color: #e2e8f0; /* Light text */
         }
-        .header-bg {
-            background-color: #1e3a8a; /* Deep blue for header */
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-        .btn-primary {
-            background-color: #1e3a8a; /* Deep blue button */
-            color: #ffffff;
-            padding: 12px 28px;
-            border-radius: 9999px; /* Fully rounded */
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
+        ::-webkit-scrollbar-track {
+            background: #2d3748; /* Darker track */
+            border-radius: 10px;
         }
-        .btn-primary:hover {
-            background-color: #172b6b; /* Darker blue on hover */
-            box-shadow: 0 6px 20px rgba(30, 58, 138, 0.4);
-            transform: translateY(-2px);
+        ::-webkit-scrollbar-thumb {
+            background: #4a5568; /* Grey thumb */
+            border-radius: 10px;
         }
-        .section-heading {
-            color: #1e3a8a; /* Deep blue for section headings */
-            font-weight: 700;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        .section-heading::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: #3b82f6; /* Accent blue */
-            border-radius: 2px;
-        }
-        .card {
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            padding: 30px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            height: 100%; /* Ensure cards in a grid have equal height */
-            display: flex;
-            flex-direction: column;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-        }
-        .card-icon {
-            color: #3b82f6; /* Accent blue for icons */
-            margin-bottom: 15px;
-        }
-        .feature-list li {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 10px;
-            color: #475569; /* Slate 600 */
-        }
-        .feature-list svg {
-            flex-shrink: 0;
-            margin-right: 10px;
-            color: #1e3a8a; /* Deep blue checkmark */
-        }
-        .footer-bg {
-            background-color: #1e3a8a; /* Deep blue for footer */
-            color: #cbd5e1; /* Light slate text */
-        }
-        .alert-section {
-            background-color: #fee2e2; /* Red-100 */
-            border-left: 5px solid #ef4444; /* Red-500 */
-            color: #dc2626; /* Red-700 */
-            padding: 2rem;
-            border-radius: 8px;
-            margin-top: 3rem;
-            margin-bottom: 3rem;
-        }
-        .alert-section h3 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #b91c1c; /* Red-800 */
-        }
-        .alert-section ul {
-            list-style: disc;
-            margin-left: 20px;
-            margin-top: 10px;
-        }
-        .alert-section ul li {
-            margin-bottom: 8px;
-        }
-
-        /* Smooth scrolling for navigation */
-        html {
-            scroll-behavior: smooth;
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6a7a90; /* Lighter grey on hover */
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="flex flex-col items-center justify-center min-h-screen p-4">
 
-    <!-- Navigation Bar -->
-    <nav class="header-bg p-4 shadow-lg fixed w-full z-10">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="#hero" class="text-white text-2xl font-bold rounded-md px-3 py-2 transition duration-300 hover:bg-blue-700">Aasim's Career Services</a>
-            <div class="space-x-4">
-                <a href="#services" class="text-white hover:text-blue-300 px-3 py-2 rounded-md transition duration-300 hover:bg-blue-700">Services</a>
-                <a href="#why-choose-us" class="text-white hover:text-blue-300 px-3 py-2 rounded-md transition duration-300 hover:bg-blue-700">Why Choose Us?</a>
-                <a href="#about" class="text-white hover:text-blue-300 px-3 py-2 rounded-md transition duration-300 hover:bg-blue-700">About</a>
-                <a href="#testimonials" class="text-white hover:text-blue-300 px-3 py-2 rounded-md transition duration-300 hover:bg-blue-700">Testimonials</a>
-                <a href="#pap-scams" class="text-white hover:text-blue-300 px-3 py-2 rounded-md transition duration-300 hover:bg-blue-700">Scam Alert</a>
-                <a href="#contact" class="text-white hover:text-blue-300 px-3 py-2 rounded-md transition duration-300 hover:bg-blue-700">Contact</a>
-            </div>
+    <div class="bg-gray-800 rounded-xl shadow-2xl p-8 md:p-12 lg:p-16 max-w-4xl w-full text-center border border-orange-500">
+        <h1 class="text-3xl md:text-4xl font-extrabold text-orange-400 mb-4">
+            High Aim Classes
+        </h1>
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-100 mb-6">
+            AWS & DevOps Curriculum
+        </h2>
+        <p class="text-lg text-gray-300 mb-8 leading-relaxed">
+            Click the button below to download the complete curriculum for our Advanced Certification Program in AWS & DevOps as a PDF document.
+        </p>
+
+        <button id="downloadPdfBtn"
+                class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-orange-500 focus:ring-opacity-50">
+            Download Curriculum PDF
+        </button>
+
+        <div id="messageBox" class="mt-8 p-4 bg-blue-700 text-white rounded-lg hidden"></div>
+
+        <!-- Hidden div to hold the content for PDF generation -->
+        <div id="pdfContent" class="hidden">
+            <!-- Curriculum content will be injected here by JavaScript -->
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="hero" class="header-bg text-white py-32 text-center relative overflow-hidden">
-        <div class="container mx-auto px-4 relative z-10">
-            <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6">
-                Unlock Your Career Potential
-            </h1>
-            <p class="text-xl md:text-2xl mb-8 opacity-90 max-w-3xl mx-auto">
-                Crafting powerful Resumes, mastering ATS, and optimizing your Naukri profile for success.
-            </p>
-            <a href="#services" class="btn-primary inline-block">Explore Our Services</a>
-        </div>
-        <!-- Background decorative elements -->
-        <div class="absolute top-0 left-0 w-full h-full opacity-10">
-            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
-                <defs>
-                    <radialGradient id="grad1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-                        <stop offset="0%" stop-color="rgba(255,255,255,0.2)" />
-                        <stop offset="100%" stop-color="rgba(255,255,255,0)" />
-                    </radialGradient>
-                </defs>
-                <circle cx="20" cy="20" r="15" fill="url(#grad1)" />
-                <circle cx="80" cy="70" r="20" fill="url(#grad1)" />
-                <rect x="10" y="50" width="10" height="10" fill="url(#grad1)" transform="rotate(45 15 55)" />
-            </svg>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <h2 class="section-heading">Our Expert Services</h2>
-            <p class="text-lg text-gray-700 max-w-4xl mx-auto mb-12 text-center">
-                Leverage our specialized knowledge to enhance your job application materials and navigate the competitive job market with confidence.
-            </p>
-            <div class="grid md:grid-cols-4 gap-8 mt-12">
-                <!-- Service 1: Resume Building -->
-                <div class="card">
-                    <div class="card-icon text-5xl mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Professional Resume Building</h3>
-                    <p class="text-gray-600 mb-6 flex-grow">
-                        Craft a compelling resume that highlights your strengths and achievements. We focus on clear, concise, and impactful content.
-                    </p>
-                    <ul class="feature-list text-left text-lg">
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            Customized Content & Design
-                        </li>
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            Achievement-Oriented Bullet Points
-                        </li>
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            Industry-Specific Keywords
-                        </li>
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            Formatting & Readability Checks
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Service 2: ATS Optimization -->
-                <div class="card">
-                    <div class="card-icon text-5xl mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">ATS Optimization</h3>
-                    <p class="text-gray-600 mb-6 flex-grow">
-                        Ensure your resume passes Applicant Tracking Systems (ATS) and reaches the hiring manager's desk.
-                    </p>
-                    <ul class="feature-list text-left text-lg">
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            Keyword Integration Strategy
-                        </li>
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            ATS-Friendly Formatting
-                        </li>
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            Parseability Testing
-                        </li>
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            Common ATS Pitfalls Avoidance
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Service 3: Naukri Profile Preparation -->
-                <div class="card">
-                    <div class="card-icon text-5xl mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Naukri Profile Optimization</h3>
-                    <p class="text-gray-600 mb-6 flex-grow">
-                        Maximize your visibility on Naukri.com and attract recruiters with a fully optimized profile.
-                    </p>
-                    <ul class="feature-list text-left text-lg">
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            Keyword-Rich Headline & Summary
-                        </li>
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            Detailed Experience & Skills Section
-                        </li>
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            Portfolio/Project Integration
-                        </li>
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            Recruiter Search Optimization
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Service 4: Career Guidance -->
-                <div class="card">
-                    <div class="card-icon text-5xl mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-compass"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Career Guidance & Market Insights</h3>
-                    <p class="text-gray-600 mb-6 flex-grow">
-                        Navigate the dynamic job market with expert guidance. Understand trends, identify growth areas, and align your skills.
-                    </p>
-                    <ul class="feature-list text-left text-lg">
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            Personalized Career Pathing
-                        </li>
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            Industry Trend Analysis
-                        </li>
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            Skill Gap Identification
-                        </li>
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            Salary Expectation Guidance
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-white">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="section-heading">About Aasim Raza</h2>
-            <img src="https://placehold.co/150x150/1e3a8a/ffffff?text=Aasim" alt="Aasim Raza Profile" class="w-36 h-36 rounded-full mx-auto mb-8 shadow-lg object-cover">
-            <p class="text-lg text-gray-700 max-w-4xl mx-auto mt-8">
-                As a passionate DevOps & AWS enthusiast with hands-on experience as a CloudOps Engineer, I understand the intricacies of the modern job market. My journey in optimizing cloud infrastructure and streamlining development workflows has given me unique insights into what recruiters look for. I'm here to translate that knowledge into actionable strategies for your job search, helping you present your best self to potential employers.
-            </p>
-            <p class="text-lg text-gray-700 max-w-4xl mx-auto mt-4">
-                My goal is to empower job seekers with the tools and confidence needed to stand out in a competitive landscape, ensuring your skills and experiences are accurately and effectively showcased.
-            </p>
-        </div>
-    </section>
-
-    <!-- Why Choose Us Section -->
-    <section id="why-choose-us" class="py-20 bg-gray-100">
-        <div class="container mx-auto px-4">
-            <h2 class="section-heading">Why Choose Aasim's Career Services?</h2>
-            <p class="text-lg text-gray-700 max-w-4xl mx-auto mb-12 text-center">
-                Our unique blend of technical expertise and career guidance ensures you receive unparalleled support in your job search.
-            </p>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
-                <!-- Reason 1: Technical Expertise -->
-                <div class="card text-center">
-                    <div class="card-icon text-5xl mb-4 mx-auto">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Deep Technical Expertise</h3>
-                    <p class="text-gray-600 flex-grow">
-                        Leverage Aasim's hands-on experience as a DevOps & AWS Engineer for resumes that truly speak the language of tech recruiters.
-                    </p>
-                </div>
-                <!-- Reason 2: Personalized Approach -->
-                <div class="card text-center">
-                    <div class="card-icon text-5xl mb-4 mx-auto">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-check"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Personalized Strategies</h3>
-                    <p class="text-gray-600 flex-grow">
-                        We don't believe in one-size-fits-all. Every service is tailored to your unique skills, experience, and career goals.
-                    </p>
-                </div>
-                <!-- Reason 3: Results-Oriented -->
-                <div class="card text-center">
-                    <div class="card-icon text-5xl mb-4 mx-auto">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trending-up"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Proven Results</h3>
-                    <p class="text-gray-600 flex-grow">
-                        Our strategies are designed to get your profile noticed, leading to more interviews and better job opportunities.
-                    </p>
-                </div>
-                <!-- Reason 4: Ethical & Transparent -->
-                <div class="card text-center">
-                    <div class="card-icon text-5xl mb-4 mx-auto">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shield"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Ethical & Transparent</h3>
-                    <p class="text-gray-600 flex-grow">
-                        We prioritize your safety and success, providing honest guidance and warning you against common job market scams.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section (Mock Data) -->
-    <section id="testimonials" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <h2 class="section-heading">What Our Clients Say</h2>
-            <div class="grid md:grid-cols-2 gap-8 mt-12">
-                <!-- Testimonial 1 -->
-                <div class="card">
-                    <p class="text-gray-700 text-lg italic mb-6 flex-grow">
-                        "Aasim's expertise transformed my resume! I started getting interview calls within a week. The ATS optimization was a game-changer. Highly recommend!"
-                    </p>
-                    <div class="flex items-center">
-                        <img src="https://placehold.co/60x60/a0aec0/ffffff?text=JD" alt="Client Avatar" class="w-12 h-12 rounded-full mr-4">
-                        <div>
-                            <p class="font-semibold text-gray-800">Jane Doe</p>
-                            <p class="text-sm text-gray-500">Software Engineer</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Testimonial 2 -->
-                <div class="card">
-                    <p class="text-gray-700 text-lg italic mb-6 flex-grow">
-                        "The Naukri profile optimization service was incredibly thorough. I noticed a significant increase in recruiter views and direct messages. Aasim truly knows his stuff!"
-                    </p>
-                    <div class="flex items-center">
-                        <img src="https://placehold.co/60x60/a0aec0/ffffff?text=AS" alt="Client Avatar" class="w-12 h-12 rounded-full mr-4">
-                        <div>
-                            <p class="font-semibold text-gray-800">Amit Sharma</p>
-                            <p class="text-sm text-gray-500">DevOps Specialist</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section (Mock Data) -->
-    <section id="pricing" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="section-heading">Our Packages</h2>
-            <div class="grid md:grid-cols-3 gap-8 mt-12">
-                <!-- Package 1: Basic -->
-                <div class="card text-center">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Basic Resume</h3>
-                    <p class="text-gray-600 text-4xl font-extrabold mb-6">₹1,999</p>
-                    <ul class="text-left text-lg mb-8 flex-grow">
-                        <li class="flex items-center mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle text-green-500 mr-2"><path d="M22 11.08V12a10 10 0 1 1-5.93-8.5"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>1x Professional Resume</li>
-                        <li class="flex items-center mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle text-green-500 mr-2"><path d="M22 11.08V12a10 10 0 1 1-5.93-8.5"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>Basic ATS Optimization</li>
-                        <li class="flex items-center text-gray-400 mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle text-red-500 mr-2"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>Naukri Profile Optimization</li>
-                        <li class="flex items-center text-gray-400 mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle text-red-500 mr-2"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>Career Guidance Session</li>
-                    </ul>
-                    <a href="#contact" class="btn-primary inline-block">Choose Basic</a>
-                </div>
-
-                <!-- Package 2: Standard -->
-                <div class="card text-center border-2 border-blue-500">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Standard Package</h3>
-                    <p class="text-gray-600 text-4xl font-extrabold mb-6">₹3,499</p>
-                    <ul class="text-left text-lg mb-8 flex-grow">
-                        <li class="flex items-center mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle text-green-500 mr-2"><path d="M22 11.08V12a10 10 0 1 1-5.93-8.5"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>1x Professional Resume</li>
-                        <li class="flex items-center mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle text-green-500 mr-2"><path d="M22 11.08V12a10 10 0 1 1-5.93-8.5"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>Advanced ATS Optimization</li>
-                        <li class="flex items-center mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle text-green-500 mr-2"><path d="M22 11.08V12a10 10 0 1 1-5.93-8.5"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>Naukri Profile Optimization</li>
-                        <li class="flex items-center text-gray-400 mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle text-red-500 mr-2"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>Career Guidance Session</li>
-                    </ul>
-                    <a href="#contact" class="btn-primary inline-block">Choose Standard</a>
-                </div>
-
-                <!-- Package 3: Premium -->
-                <div class="card text-center">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Premium Career Boost</h3>
-                    <p class="text-gray-600 text-4xl font-extrabold mb-6">₹4,999</p>
-                    <ul class="text-left text-lg mb-8 flex-grow">
-                        <li class="flex items-center mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle text-green-500 mr-2"><path d="M22 11.08V12a10 10 0 1 1-5.93-8.5"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>1x Professional Resume</li>
-                        <li class="flex items-center mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle text-green-500 mr-2"><path d="M22 11.08V12a10 10 0 1 1-5.93-8.5"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>Advanced ATS Optimization</li>
-                        <li class="flex items-center mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle text-green-500 mr-2"><path d="M22 11.08V12a10 10 0 1 1-5.93-8.5"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>Naukri Profile Optimization</li>
-                        <li class="flex items-center mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle text-green-500 mr-2"><path d="M22 11.08V12a10 10 0 1 1-5.93-8.5"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>1x Cover Letter Review</li>
-                        <li class="flex items-center mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle text-green-500 mr-2"><path d="M22 11.08V12a10 10 0 1 1-5.93-8.5"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>1x LinkedIn Profile Review</li>
-                        <li class="flex items-center mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle text-green-500 mr-2"><path d="M22 11.08V12a10 10 0 1 1-5.93-8.5"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>1x Career Guidance Session</li>
-                    </ul>
-                    <a href="#contact" class="btn-primary inline-block">Choose Premium</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Important Alert: Beware of Pay After Placement Scams -->
-    <section id="pap-scams" class="py-10 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="alert-section">
-                <h3 class="flex items-center mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-triangle mr-3"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                    Important Alert: Beware of "Pay After Placement" Scams!
-                </h3>
-                <p class="mb-4 text-gray-800">
-                    In the current job market, many individuals fall prey to fraudulent schemes promising jobs under "Pay After Placement" (PAP) models. While some legitimate models exist, a vast majority are scams designed to extract money from desperate job seekers.
-                </p>
-                <h4 class="font-semibold text-red-800 mb-2">How to Identify and Avoid PAP Scams:</h4>
-                <ul class="list-disc ml-6 text-gray-800">
-                    <li>**Upfront Fees:** Legitimate companies or training institutes typically do NOT demand large upfront fees for placements or job guarantees. If they ask for significant money before you even start the job, be extremely cautious.</li>
-                    <li>**Unrealistic Promises:** Be wary of promises of exceptionally high salaries for entry-level roles, or guarantees of placement in top-tier companies without a rigorous interview process.</li>
-                    <li>**Lack of Transparency:** Scammers often avoid clear communication about the companies they partner with, the job roles, or the terms of the PAP agreement. Always ask for detailed written agreements.</li>
-                    <li>**Pressure Tactics:** If you're being pressured to make a quick decision or pay immediately to "secure your spot," it's a red flag.</li>
-                    <li>**Verify the Company:** Always research the company or institute thoroughly. Look for reviews (on multiple platforms), check their official website, and verify their registration details.</li>
-                    <li>**No Interview Process:** A legitimate job offer always involves a proper interview process. If they offer you a job without assessing your skills, it's highly suspicious.</li>
-                    <li>**Training Scams:** Some PAP scams are disguised as "training programs" where the training fees are exorbitant, and the placement never materializes.</li>
-                </ul>
-                <p class="mt-4 text-gray-800">
-                    **Stay vigilant!** Your career is too important to be jeopardized by fraudulent schemes. Always prioritize thorough research and rely on transparent, ethical service providers.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gray-100">
-        <div class="container mx-auto px-4">
-            <h2 class="section-heading">Get in Touch</h2>
-            <div class="max-w-2xl mx-auto mt-12 bg-white p-8 rounded-xl shadow-lg">
-                <p class="text-center text-lg text-gray-700 mb-6">
-                    Have questions or ready to boost your career? Reach out to us!
-                </p>
-                <div class="flex flex-col md:flex-row justify-center items-center gap-6 mb-8">
-                    <div class="flex items-center text-gray-700 text-lg">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail mr-2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                        <a href="mailto:aasimdevops@gmail.com" class="hover:underline">aasimdevops@gmail.com</a>
-                    </div>
-                    <div class="flex items-center text-gray-700 text-lg">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone mr-2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-3.67-3.67A19.79 19.79 0 0 1 2 6.18 2 2 0 0 1 4.11 4h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                        <a href="tel:+919766613006" class="hover:underline">+91 9766613006</a>
-                    </div>
-                </div>
-                <form id="contactForm" class="space-y-6">
-                    <div>
-                        <label for="name" class="block text-lg font-medium text-gray-700 mb-2">Your Name</label>
-                        <input type="text" id="name" name="name" required
-                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
-                    </div>
-                    <div>
-                        <label for="email" class="block text-lg font-medium text-gray-700 mb-2">Your Email</label>
-                        <input type="email" id="email" name="email" required
-                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
-                    </div>
-                    <div>
-                        <label for="service" class="block text-lg font-medium text-gray-700 mb-2">Interested Service</label>
-                        <select id="service" name="service"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
-                            <option value="">Select a Service</option>
-                            <option value="resume-building">Professional Resume Building</option>
-                            <option value="ats-optimization">ATS Optimization</option>
-                            <option value="naukri-profile">Naukri Profile Optimization</option>
-                            <option value="career-guidance">Career Guidance & Market Insights</option>
-                            <option value="premium-package">Premium Career Boost</option>
-                            <option value="other">Other Inquiry</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="message" class="block text-lg font-medium text-gray-700 mb-2">Your Message</label>
-                        <textarea id="message" name="message" rows="5" required
-                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"></textarea>
-                    </div>
-                    <button type="submit" class="btn-primary w-full">Send Message</button>
-                </form>
-                <div id="formMessage" class="mt-6 text-center text-lg hidden"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer-bg py-10 text-center">
-        <div class="container mx-auto px-4">
-            <p class="text-sm">&copy; 2024 Aasim's Career Services. All rights reserved.</p>
-            <div class="flex justify-center space-x-6 mt-4">
-                <a href="mailto:aasimdevops@gmail.com" class="text-blue-300 hover:text-white transition duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                </a>
-                <a href="tel:+919766613006" class="text-blue-300 hover:text-white transition duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-3.67-3.67A19.79 19.79 0 0 1 2 6.18 2 2 0 0 1 4.11 4h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                </a>
-                <a href="https://linkedin.com/in/your-profile" target="_blank" class="text-blue-300 hover:text-white transition duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                </a>
-            </div>
-        </div>
-    </footer>
+    </div>
 
     <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+        // Function to show messages in a custom message box
+        function showMessage(message, type = 'info') {
+            const messageBox = document.getElementById('messageBox');
+            messageBox.textContent = message;
+            messageBox.className = `mt-8 p-4 rounded-lg ${type === 'error' ? 'bg-red-700' : 'bg-blue-700'} text-white`;
+            messageBox.style.display = 'block';
+            setTimeout(() => {
+                messageBox.style.display = 'none';
+            }, 5000); // Hide after 5 seconds
+        }
+
+        document.getElementById('downloadPdfBtn').addEventListener('click', async () => {
+            showMessage('Generating PDF, please wait...');
+
+            // Curriculum content from the previous immersive
+            const curriculumContent = `
+# AWS & DevOps Curriculum - High Aim Classes
+
+## Course Overview
+
+This program is designed to provide a strong foundation in both Amazon Web Services (AWS) cloud computing and modern DevOps principles. Participants will gain practical skills in deploying, managing, and automating applications and infrastructure on AWS, along with mastering the tools and practices essential for a streamlined software delivery pipeline.
+
+## Module 1: Introduction to Cloud Computing & AWS Fundamentals
+
+* **1.1 Cloud Computing Concepts**
+    * What is Cloud Computing? (NIST Definition, Benefits, Challenges)
+    * Service Models: IaaS, PaaS, SaaS
+    * Deployment Models: Public, Private, Hybrid Cloud
+    * Introduction to AWS as a leading Cloud Provider
+* **1.2 AWS Global Infrastructure**
+    * Regions, Availability Zones, Edge Locations
+    * AWS Shared Responsibility Model
+* **1.3 AWS Account & IAM (Identity and Access Management)**
+    * Setting up an AWS Account
+    * IAM Users, Groups, Roles, Policies
+    * MFA (Multi-Factor Authentication)
+    * Best Practices for IAM Security
+* **1.4 Core AWS Compute Services**
+    * **Amazon EC2 (Elastic Compute Cloud):** Instances, AMIs, Instance Types, Security Groups, Key Pairs, EBS Volumes, Snapshots, Lifecycle
+    * **AWS Lambda:** Serverless Computing, Event-Driven Architecture, Triggers, Use Cases
+* **1.5 Core AWS Storage Services**
+    * **Amazon S3 (Simple Storage Service):** Buckets, Objects, Storage Classes, Lifecycle Policies, Versioning, Static Website Hosting
+    * **Amazon EBS (Elastic Block Store):** Volume Types, Attaching/Detaching, Snapshots
+    * **Amazon EFS (Elastic File System):** Shared File Storage
+* **1.6 Core AWS Networking Services**
+    * **Amazon VPC (Virtual Private Cloud):** Subnets (Public/Private), Route Tables, Internet Gateway, NAT Gateway, Network ACLs, Security Groups
+    * **Amazon Route 53:** DNS Concepts, Domain Registration, Routing Policies
+    * **AWS Direct Connect & VPN (Overview)**
+
+**Labs:**
+* Setting up an AWS account and configuring IAM users/groups.
+* Launching and connecting to EC2 instances.
+* Hosting a static website on S3.
+* Creating a custom VPC with public and private subnets.
+
+## Module 2: DevOps Principles & Version Control with Git
+
+* **2.1 Introduction to DevOps**
+    * What is DevOps? Culture, Automation, Lean, Measurement, Sharing (CALMS)
+    * Benefits of DevOps: Faster Delivery, Higher Quality, Improved Collaboration
+    * DevOps Lifecycle: Plan, Code, Build, Test, Release, Deploy, Operate, Monitor
+* **2.2 Version Control Systems (VCS)**
+    * Centralized vs. Distributed VCS
+    * Introduction to Git
+* **2.3 Git Fundamentals**
+    * Installing Git
+    * Basic Git Commands: \`init\`, \`clone\`, \`add\`, \`commit\`, \`status\`, \`log\`
+    * Understanding the Staging Area
+* **2.4 Git Branching & Merging**
+    * Creating and Switching Branches
+    * Merging Strategies: Fast-forward, Three-way Merge
+    * Resolving Merge Conflicts
+    * Rebasing vs. Merging
+* **2.5 Working with Remote Repositories (GitHub/GitLab/AWS CodeCommit)**
+    * \`push\`, \`pull\`, \`fetch\`, \`remote\` commands
+    * Forking and Cloning
+    * Pull Requests / Merge Requests for Code Review
+    * Collaborative Workflows
+
+**Labs:**
+* Initializing Git repositories and performing basic operations.
+* Practicing branching, merging, and conflict resolution.
+* Setting up a remote repository on GitHub/GitLab and pushing/pulling code.
+
+## Module 3: Infrastructure as Code (IaC)
+
+* **3.1 Introduction to IaC**
+    * Why IaC? Benefits, Idempotency, Desired State Configuration
+    * Tools Overview: CloudFormation, Terraform, Ansible
+* **3.2 AWS CloudFormation**
+    * CloudFormation Template Structure (YAML/JSON)
+    * Resources, Parameters, Mappings, Outputs, Conditions
+    * Creating and Managing Stacks
+    * StackSets for Multi-Account/Multi-Region Deployments
+    * Change Sets for Previewing Changes
+* **3.3 Terraform (HashiCorp)**
+    * Introduction to Terraform: Providers, Resources, Data Sources
+    * Terraform Configuration Language (HCL)
+    * Variables, Outputs, Locals
+    * Terraform State Management (\`terraform.tfstate\`)
+    * \`terraform init\`, \`plan\`, \`apply\`, \`destroy\` commands
+    * Modules for Reusability
+    * Integrating Terraform with AWS
+
+**Labs:**
+* Writing CloudFormation templates to deploy EC2 instances and S3 buckets.
+* Deploying a simple web application infrastructure using CloudFormation.
+* Writing Terraform configurations to provision AWS resources (VPC, EC2).
+* Managing Terraform state.
+
+## Module 4: CI/CD Pipelines
+
+* **4.1 Introduction to CI/CD**
+    * Continuous Integration (CI)
+    * Continuous Delivery (CD) vs. Continuous Deployment (CD)
+    * Benefits and Best Practices
+* **4.2 AWS Developer Tools for CI/CD**
+    * **AWS CodeCommit:** Managed Git Repository Service
+    * **AWS CodeBuild:** Managed Build Service (Compiling, Testing, Packaging)
+    * **AWS CodeDeploy:** Automated Code Deployment Service (EC2, Lambda, ECS)
+    * **AWS CodePipeline:** Orchestration for CI/CD Workflows
+* **4.3 Jenkins**
+    * Introduction to Jenkins: Architecture, Plugins
+    * Installing and Configuring Jenkins on EC2
+    * Creating Freestyle Projects and Pipeline Jobs
+    * Jenkinsfile (Pipeline as Code)
+    * Integrating Jenkins with Git, Maven/Gradle, Docker, and AWS
+* **4.4 Build Automation & Artifact Management**
+    * Introduction to Build Tools (e.g., Maven, npm, Gradle)
+    * Artifact Repositories (e.g., AWS CodeArtifact, Nexus, Artifactory)
+
+**Labs:**
+* Building a basic CI/CD pipeline using AWS CodePipeline to deploy a simple web application.
+* Setting up Jenkins on an EC2 instance and configuring a CI pipeline.
+* Creating a Jenkinsfile to automate build and deployment.
+
+## Module 5: Containerization with Docker & Orchestration
+
+* **5.1 Introduction to Containerization**
+    * Virtual Machines vs. Containers
+    * Benefits of Containerization
+* **5.2 Docker Fundamentals**
+    * Docker Architecture: Daemon, Client, Images, Containers, Registries
+    * Installing Docker
+    * Basic Docker Commands: \`pull\`, \`run\`, \`ps\`, \`stop\`, \`rm\`, \`exec\`
+    * Building Docker Images with Dockerfile (Instructions: \`FROM\`, \`RUN\`, \`COPY\`, \`CMD\`, \`ENTRYPOINT\`)
+    * Docker Volumes for Persistent Data
+    * Docker Networking Basics
+* **5.3 Docker Compose**
+    * Orchestrating Multi-Container Applications
+    * \`docker-compose.yml\`
+* **5.4 Container Orchestration Overview**
+    * Why Orchestration? Scaling, High Availability, Load Balancing
+    * Introduction to Kubernetes (Concepts: Pods, Deployments, Services, Ingress)
+* **5.5 AWS Container Services**
+    * **Amazon ECR (Elastic Container Registry):** Managed Docker Image Repository
+    * **Amazon ECS (Elastic Container Service):** Clusters, Task Definitions, Services, Tasks, Fargate vs. EC2 Launch Types
+    * **Amazon EKS (Elastic Kubernetes Service):** Managed Kubernetes Service (Overview)
+
+**Labs:**
+* Containerizing a simple application using Docker.
+* Building and pushing Docker images to ECR.
+* Deploying a containerized application on AWS ECS using Fargate.
+* Using Docker Compose for a multi-container local setup.
+
+## Module 6: Monitoring, Logging & Security in DevOps
+
+* **6.1 Monitoring & Alerting**
+    * Importance of Monitoring in DevOps
+    * **Amazon CloudWatch:** Metrics, Logs, Alarms, Dashboards, Events
+    * Monitoring EC2, RDS, Lambda, etc.
+    * Setting up custom metrics and alarms
+* **6.2 Centralized Logging**
+    * **AWS CloudTrail:** API Activity Logging, Auditing, Security Analysis
+    * Sending application logs to CloudWatch Logs
+    * Log Analysis and Troubleshooting
+* **6.3 Security Best Practices in DevOps**
+    * Security in the CI/CD Pipeline (Static/Dynamic Analysis)
+    * Secrets Management (AWS Secrets Manager, AWS Parameter Store)
+    * Network Security (VPC, Security Groups, Network ACLs revisited)
+    * Data Encryption (at rest and in transit)
+    * Compliance and Governance (Overview)
+* **6.4 Incident Response (Overview)**
+    * Basic concepts of incident detection and response
+
+**Labs:**
+* Configuring CloudWatch alarms for resource utilization.
+* Analyzing CloudTrail logs for security events.
+* Storing and retrieving secrets using AWS Secrets Manager.
+
+## Module 7: Advanced Topics & Project Work
+
+* **7.1 Serverless DevOps**
+    * CI/CD for Serverless Applications (e.g., Serverless Framework, AWS SAM)
+    * Monitoring and Troubleshooting Serverless
+* **7.2 Configuration Management (Overview)**
+    * Brief introduction to Ansible, Chef, Puppet (focus on their role in automation)
+* **7.3 Cost Optimization on AWS**
+    * Strategies for reducing AWS costs (Right-sizing, Reserved Instances, Spot Instances, Cost Explorer)
+* **7.4 Troubleshooting Common DevOps Issues**
+    * Debugging pipeline failures, deployment issues, application errors
+* **7.5 Capstone Project**
+    * Students will design, implement, and deploy a multi-tier application on AWS using DevOps practices learned throughout the course. This will include:
+        * Infrastructure as Code (CloudFormation/Terraform)
+        * CI/CD Pipeline (AWS Developer Tools or Jenkins)
+        * Containerization (Docker, ECS)
+        * Monitoring and Logging (CloudWatch)
+        * Security considerations
+
+## Prerequisites
+
+* Basic understanding of Linux command line.
+* Familiarity with fundamental networking concepts.
+* Basic programming/scripting knowledge (e.g., Python, Node.js) is beneficial but not strictly required.
+            `;
+
+            // Inject content into the hidden div
+            document.getElementById('pdfContent').innerHTML = marked.parse(curriculumContent);
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const element = document.getElementById('pdfContent');
+
+            // Use html2canvas to render the HTML content to a canvas, then add to PDF
+            html2canvas(element, {
+                scale: 2, // Increase scale for better resolution
+                useCORS: true // Enable cross-origin images if any
+            }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const imgWidth = 210; // A4 width in mm
+                const pageHeight = 297; // A4 height in mm
+                const imgHeight = canvas.height * imgWidth / canvas.width;
+                let heightLeft = imgHeight;
+                let position = 0;
+
+                doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+
+                while (heightLeft >= 0) {
+                    position = heightLeft - imgHeight;
+                    doc.addPage();
+                    doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+
+                doc.save('HighAimClasses_AWS_DevOps_Curriculum.pdf');
+                showMessage('PDF downloaded successfully!', 'success');
+            }).catch(error => {
+                console.error("Error generating PDF:", error);
+                showMessage('Failed to generate PDF. Please try again.', 'error');
             });
         });
 
-        // Basic form submission handling (client-side only)
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formMessage = document.getElementById('formMessage');
-            formMessage.classList.remove('hidden', 'text-red-500', 'text-green-500');
-            formMessage.textContent = 'Sending your message...';
-            formMessage.classList.add('text-gray-600');
-
-            // Collect form data
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                service: document.getElementById('service').value,
-                message: document.getElementById('message').value
-            };
-
-            if (formData.name && formData.email && formData.message) {
-                // --- START: Placeholder for Server-Side Logic ---
-                // In a real application, you would send this formData to your backend server.
-                // The backend server would then:
-                // 1. Send an email to your address (aasimdevops@gmail.com) with the form data.
-                // 2. Use a WhatsApp API (e.g., Twilio, MessageBird, or WhatsApp Business API)
-                //    to send a notification to your WhatsApp number (+91 9766613006).
-                //
-                // Example of what a fetch request to your backend might look like:
-                /*
-                fetch('/api/contact', { // Replace with your actual backend endpoint
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData),
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        formMessage.textContent = 'Thank you for your message! We will get back to you soon.';
-                        formMessage.classList.remove('text-gray-600');
-                        formMessage.classList.add('text-green-500');
-                        document.getElementById('contactForm').reset(); // Clear form on success
-                    } else {
-                        formMessage.textContent = 'There was an error sending your message. Please try again later.';
-                        formMessage.classList.remove('text-gray-600');
-                        formMessage.classList.add('text-red-500');
-                    }
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                    formMessage.textContent = 'Network error. Please try again.';
-                    formMessage.classList.remove('text-gray-600');
-                    formMessage.classList.add('text-red-500');
-                });
-                */
-                // --- END: Placeholder for Server-Side Logic ---
-
-                // Simulate success message for demonstration purposes (remove in real implementation)
-                setTimeout(() => {
-                    formMessage.textContent = 'Thank you for your message! We will get back to you soon. (Email & WhatsApp notification simulated)';
-                    formMessage.classList.remove('text-gray-600');
-                    formMessage.classList.add('text-green-500');
-                    document.getElementById('contactForm').reset(); // Clear form
-                }, 1500); // Simulate network delay
-
+        // Load marked.js for Markdown parsing
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/marked/marked.min.js';
+        script.onload = () => {
+            // Ensure marked is loaded before attempting to use it
+            if (window.marked) {
+                console.log('Marked.js loaded successfully');
             } else {
-                formMessage.textContent = 'Please fill in all required fields.';
-                formMessage.classList.remove('text-gray-600');
-                formMessage.classList.add('text-red-500');
+                console.error('Marked.js failed to load');
             }
-            formMessage.classList.remove('hidden');
-        });
+        };
+        document.head.appendChild(script);
     </script>
+
 </body>
 </html>
