@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>High Aim Classes - AWS & DevOps Curriculum Download</title>
+    <title>High Aim Classes - AWS & DevOps Curriculum</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Inter Font -->
@@ -11,15 +11,17 @@
     <!-- jsPDF library for PDF generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <!-- marked.js for Markdown parsing - Moved here to ensure it loads before use -->
+    <!-- marked.js for Markdown parsing -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
     <style>
+        /* Apply Inter font and dark background to the body */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #1a202c; /* Dark background */
             color: #e2e8f0; /* Light text */
         }
+
         /* Custom scrollbar for better aesthetics */
         ::-webkit-scrollbar {
             width: 8px;
@@ -35,11 +37,69 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #6a7a90; /* Lighter grey on hover */
         }
+
+        /* Styling for Markdown elements rendered into #curriculumDisplay */
+        #curriculumDisplay h1 {
+            font-size: 2.5rem; /* text-4xl */
+            font-weight: 800; /* font-extrabold */
+            color: #fbbf24; /* text-amber-400 (similar to orange-400) */
+            margin-bottom: 1.5rem; /* mb-6 */
+            text-align: center;
+            border-bottom: 2px solid #fbbf24;
+            padding-bottom: 0.5rem;
+        }
+        #curriculumDisplay h2 {
+            font-size: 2rem; /* text-3xl */
+            font-weight: 700; /* font-bold */
+            color: #fdba74; /* text-orange-300 */
+            margin-top: 2.5rem; /* mt-10 */
+            margin-bottom: 1rem; /* mb-4 */
+            border-bottom: 1px solid #718096; /* gray-500 */
+            padding-bottom: 0.25rem;
+        }
+        #curriculumDisplay h3 {
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 600; /* font-semibold */
+            color: #a0aec0; /* text-gray-300 */
+            margin-top: 1.5rem; /* mt-6 */
+            margin-bottom: 0.75rem; /* mb-3 */
+        }
+        #curriculumDisplay p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        #curriculumDisplay ul {
+            list-style: disc;
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        #curriculumDisplay ul li {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+        #curriculumDisplay strong {
+            color: #fff;
+        }
+        #curriculumDisplay pre {
+            background-color: #2d3748; /* gray-700 */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+        }
+        #curriculumDisplay code {
+            font-family: monospace;
+            background-color: #4a5568; /* gray-600 */
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            color: #fff;
+        }
     </style>
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen p-4">
+<body class="flex flex-col items-center p-4 min-h-screen">
 
-    <div class="bg-gray-800 rounded-xl shadow-2xl p-8 md:p-12 lg:p-16 max-w-4xl w-full text-center border border-orange-500">
+    <!-- Header Section -->
+    <header class="bg-gray-800 rounded-xl shadow-2xl p-8 md:p-12 lg:p-16 max-w-5xl w-full text-center border border-orange-500 mb-8">
         <h1 class="text-3xl md:text-4xl font-extrabold text-orange-400 mb-4">
             High Aim Classes
         </h1>
@@ -47,39 +107,41 @@
             AWS & DevOps Curriculum
         </h2>
         <p class="text-lg text-gray-300 mb-8 leading-relaxed">
-            Click the button below to download the complete curriculum for our Advanced Certification Program in AWS & DevOps as a PDF document.
+            Explore our comprehensive curriculum below, and feel free to download it as a PDF for your convenience.
         </p>
 
+        <!-- Download Button -->
         <button id="downloadPdfBtn"
                 class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-orange-500 focus:ring-opacity-50">
             Download Curriculum PDF
         </button>
 
+        <!-- Message Box for user feedback -->
         <div id="messageBox" class="mt-8 p-4 bg-blue-700 text-white rounded-lg hidden"></div>
+    </header>
 
-        <!-- Hidden div to hold the content for PDF generation -->
-        <div id="pdfContent" class="hidden">
-            <!-- Curriculum content will be injected here by JavaScript -->
-        </div>
-    </div>
+    <!-- Curriculum Display Section -->
+    <main id="curriculumDisplay" class="bg-gray-800 rounded-xl shadow-2xl p-8 md:p-12 lg:p-16 max-w-5xl w-full text-gray-200 leading-relaxed mb-8">
+        <!-- Curriculum content will be rendered here by JavaScript -->
+    </main>
 
+    <!-- JavaScript for functionality -->
     <script>
         // Function to show messages in a custom message box
         function showMessage(message, type = 'info') {
             const messageBox = document.getElementById('messageBox');
             messageBox.textContent = message;
+            // Set class based on message type for styling (e.g., red for error, blue for info/success)
             messageBox.className = `mt-8 p-4 rounded-lg ${type === 'error' ? 'bg-red-700' : 'bg-blue-700'} text-white`;
-            messageBox.style.display = 'block';
+            messageBox.style.display = 'block'; // Make the message box visible
+            // Hide the message after 5 seconds
             setTimeout(() => {
                 messageBox.style.display = 'none';
-            }, 5000); // Hide after 5 seconds
+            }, 5000);
         }
 
-        document.getElementById('downloadPdfBtn').addEventListener('click', async () => {
-            showMessage('Generating PDF, please wait...');
-
-            // Curriculum content from the previous immersive
-            const curriculumContent = `
+        // Define the curriculum content in Markdown format
+        const curriculumContent = `
 # AWS & DevOps Curriculum - High Aim Classes
 
 ## Course Overview
@@ -263,7 +325,7 @@ This program is designed to provide a strong foundation in both Amazon Web Servi
     * Brief introduction to Ansible, Chef, Puppet (focus on their role in automation)
 * **7.3 Cost Optimization on AWS**
     * Strategies for reducing AWS costs (Right-sizing, Reserved Instances, Spot Instances, Cost Explorer)
-* **7.4 Troubleshooting Common DevOps Issues**
+    * **7.4 Troubleshooting Common DevOps Issues**
     * Debugging pipeline failures, deployment issues, application errors
 * **7.5 Capstone Project**
     * Students will design, implement, and deploy a multi-tier application on AWS using DevOps practices learned throughout the course. This will include:
@@ -278,42 +340,60 @@ This program is designed to provide a strong foundation in both Amazon Web Servi
 * Basic understanding of Linux command line.
 * Familiarity with fundamental networking concepts.
 * Basic programming/scripting knowledge (e.g., Python, Node.js) is beneficial but not strictly required.
-            `;
+        `;
 
-            // Inject content into the hidden div
-            document.getElementById('pdfContent').innerHTML = marked.parse(curriculumContent);
+        // Render curriculum content when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            const curriculumDisplay = document.getElementById('curriculumDisplay');
+            // Use marked.parse to convert Markdown to HTML
+            curriculumDisplay.innerHTML = marked.parse(curriculumContent);
+        });
 
+        // Event listener for the download button
+        document.getElementById('downloadPdfBtn').addEventListener('click', async () => {
+            showMessage('Generating PDF, please wait...');
+
+            // Initialize jsPDF
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-            const element = document.getElementById('pdfContent');
+            // Target the displayed curriculum content for PDF conversion
+            const element = document.getElementById('curriculumDisplay');
 
             // Use html2canvas to render the HTML content to a canvas, then add to PDF
             html2canvas(element, {
-                scale: 2, // Increase scale for better resolution
-                useCORS: true // Enable cross-origin images if any
+                scale: 2, // Increase scale for better resolution in PDF
+                useCORS: true, // Enable cross-origin images if any (though none here)
+                logging: false, // Disable html2canvas logging for cleaner console
+                // Adjust window width to capture content properly, especially for wide tables/code blocks
+                windowWidth: element.scrollWidth,
+                windowHeight: element.scrollHeight
             }).then(canvas => {
-                const imgData = canvas.toDataURL('image/png');
+                const imgData = canvas.toDataURL('image/png'); // Get image data from canvas
                 const imgWidth = 210; // A4 width in mm
                 const pageHeight = 297; // A4 height in mm
-                const imgHeight = canvas.height * imgWidth / canvas.width;
-                let heightLeft = imgHeight;
-                let position = 0;
+                const imgHeight = canvas.height * imgWidth / canvas.width; // Calculate image height to maintain aspect ratio
+                let heightLeft = imgHeight; // Remaining height to be added to PDF
+                let position = 0; // Current Y position on the PDF page
 
+                // Add the first page
                 doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
                 heightLeft -= pageHeight;
 
+                // Add subsequent pages if content overflows a single page
                 while (heightLeft >= 0) {
-                    position = heightLeft - imgHeight;
-                    doc.addPage();
-                    doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-                    heightLeft -= pageHeight;
+                    position = heightLeft - imgHeight; // Calculate position for the next part of the image
+                    doc.addPage(); // Add a new page
+                    doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight); // Add image to the new page
+                    heightLeft -= pageHeight; // Decrease remaining height
                 }
 
+                // Save the PDF with a specific filename
                 doc.save('HighAimClasses_AWS_DevOps_Curriculum.pdf');
                 showMessage('PDF downloaded successfully!', 'success');
             }).catch(error => {
+                // Log and display error if PDF generation fails
                 console.error("Error generating PDF:", error);
-                showMessage('Failed to generate PDF. Please try again.', 'error');
+                showMessage('Failed to generate PDF. Check console for details.', 'error');
             });
         });
     </script>
