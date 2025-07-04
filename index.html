@@ -759,7 +759,7 @@
                         <li style="opacity: 0.5;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #ef4444;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>LinkedIn Optimization</li>
                         <li style="opacity: 0.5;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #ef4444;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>Career Counseling</li>
                     </ul>
-                    <a href="#contact" class="buy-button">Buy Now</a>
+                    <a href="javascript:void(0);" onclick="initiatePayment(1999, 'Starter Plan')" class="buy-button">Buy Now</a>
                 </div>
 
                 <!-- Professional Plan (Featured) -->
@@ -773,7 +773,7 @@
                         <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>LinkedIn Optimization</li>
                         <li style="opacity: 0.5;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #ef4444;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>Career Counseling</li>
                     </ul>
-                    <a href="#contact" class="buy-button">Buy Now</a>
+                    <a href="javascript:void(0);" onclick="initiatePayment(3499, 'Professional Plan')" class="buy-button">Buy Now</a>
                 </div>
 
                 <!-- Premium Plan -->
@@ -788,7 +788,7 @@
                         <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>1-on-1 Career Counseling</li>
                         <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>1x Mock Interview</li>
                     </ul>
-                    <a href="#contact" class="buy-button">Buy Now</a>
+                    <a href="javascript:void(0);" onclick="initiatePayment(4999, 'Premium Plan')" class="buy-button">Buy Now</a>
                 </div>
             </div>
         </div>
@@ -822,7 +822,7 @@
                 <div class="testimonial-card">
                     <p>"Their LinkedIn optimization service made a huge difference. Recruiters started reaching out to me directly. Fantastic results!"</p>
                     <div class="testimonial-author">
-                        <img src="https://placehold.co/50x50/a0aec0/ffffff?text=RK" alt="Client Avatar">
+                        <img src="https://placehold.co/50x50/a0aec0/ffffff?text=RK" alt="Client-Avatar">
                         <div class="author-info">
                             <h4>Ravi Kumar</h4>
                             <span>DevOps Specialist</span>
@@ -931,6 +931,22 @@
                 });
             });
         });
+
+        // Function to initiate UPI payment
+        function initiatePayment(amount, packageName) {
+            const upiId = '9766613006@ybl'; // Your UPI ID
+            const payeeName = 'Aasim Raza'; // Your name or business name
+            const transactionNote = `Payment for ${packageName} from DevResumePro.com`;
+
+            // Construct the UPI deep link
+            const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount.toFixed(2)}&cu=INR&tn=${encodeURIComponent(transactionNote)}`;
+
+            // Attempt to open the UPI app
+            window.location.href = upiUrl;
+
+            // Provide user feedback (optional, as the app might open)
+            alert(`Attempting to open UPI app for payment of ₹${amount} for ${packageName}. Please complete the transaction in your UPI app.`);
+        }
 
         // Basic form submission handling (client-side only for this example)
         document.getElementById('contactForm').addEventListener('submit', function(e) {
