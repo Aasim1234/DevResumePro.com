@@ -30,9 +30,10 @@
         /* Header Section */
         .header {
             background-color: #1e3a8a; /* Deep blue for the header */
+            background-image: linear-gradient(to right, #1e3a8a, #254b9d); /* Subtle gradient */
             color: #ffffff;
             padding: 15px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Deeper shadow */
             position: sticky; /* Makes header stick to the top */
             top: 0;
             z-index: 1000; /* Ensures header is above other content */
@@ -49,6 +50,10 @@
             font-weight: 800;
             color: #ffffff;
             text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        .logo:hover {
+            transform: scale(1.05);
         }
 
         .nav-menu ul {
@@ -65,29 +70,59 @@
             font-weight: 500;
             padding: 8px 12px;
             border-radius: 6px;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
         }
 
         .nav-menu ul li a:hover {
             background-color: #3b82f6; /* Lighter blue on hover */
+            transform: translateY(-2px);
         }
 
         /* Hero Section */
         .hero-section {
             background-color: #e0f2fe; /* Very light blue background */
+            position: relative;
+            overflow: hidden;
             padding: 80px 0;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 70vh; /* Minimum height for hero section */
+            min-height: 70vh;
+        }
+
+        /* Canvas for particles */
+        #heroCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0; /* Behind other hero content */
+        }
+
+        /* Animated background for hero section */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(30, 58, 138, 0.1) 0%, transparent 50%);
+            background-size: 200% 200%;
+            animation: moveGradient 15s ease infinite alternate;
+            z-index: 1;
         }
 
         .hero-content {
             max-width: 900px;
             margin: 0 auto;
             padding: 0 20px;
+            position: relative;
+            z-index: 10;
         }
 
         .hero-heading {
@@ -96,6 +131,7 @@
             color: #1a202c; /* Dark text for impact */
             margin-bottom: 20px;
             line-height: 1.2;
+            animation: fadeInScale 1s ease-out forwards; /* Initial animation */
         }
 
         .hero-heading .highlight {
@@ -109,6 +145,7 @@
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+            animation: fadeInUp 1s ease-out forwards 0.2s; /* Staggered animation */
         }
 
         .cta-button {
@@ -120,32 +157,70 @@
             font-weight: 700;
             text-decoration: none;
             transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(30, 58, 138, 0.35);
+            box-shadow: 0 8px 25px rgba(30, 58, 138, 0.45); /* Deeper shadow */
+            animation: fadeInUp 1s ease-out forwards 0.4s; /* Staggered animation */
         }
 
         .cta-button:hover {
             background-color: #172b6b; /* Darker blue on hover */
-            box-shadow: 0 8px 25px rgba(30, 58, 138, 0.45);
-            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(30, 58, 138, 0.55); /* Enhanced shadow on hover */
+            transform: translateY(-3px) scale(1.02); /* More pronounced lift and slight scale */
+        }
+        .cta-button:active {
+            transform: translateY(0px) scale(0.98); /* Press down effect */
+            box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
         }
 
-        .hero-image {
+        .hero-image-svg {
             max-width: 100%;
             height: auto;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             margin-top: 50px;
+            animation: fadeInUp 1s ease-out forwards 0.6s; /* Staggered animation */
+            filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.15)); /* Apply shadow to SVG */
         }
 
         /* Section General Styling */
         .section {
             padding: 80px 0;
             background-color: #ffffff;
+            opacity: 0; /* Default invisible for scroll animation */
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            position: relative; /* For background patterns */
+            overflow: hidden; /* Hide overflow from patterns */
+        }
+
+        .section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .section:nth-of-type(even) {
             background-color: #f0f4f8; /* Light grey for alternating sections */
+            position: relative; /* Ensure ::before is relative to this */
         }
+        .section:nth-of-type(even)::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* More complex animated pattern using multiple backgrounds */
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 30%),
+                radial-gradient(circle at 90% 80%, rgba(30, 58, 138, 0.05) 0%, transparent 30%),
+                url('data:image/svg+xml,%3Csvg width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%239C92AC" fill-opacity="0.08" fill-rule="evenodd"%3E%3Cpath d="M0 0h1v1H0zm2 0h1v1H2zm4 0h1v1H4zm2 0h1v1H6zm0 2h1v1H6zm2 2h1v1H8zm0 2h1v1H8zm-2 2h1v1H4zm-2 0h1v1H2zm0-2h1v1H2zm0-4h1v1H2zM0 6h1v1H0zm0-2h1v1H0zm0-2h1v1H0z"/%3E%3C/g%3E%3C/svg%3E');
+            background-size: 200% 200%, 200% 200%, 10px 10px; /* Adjust sizes for each background */
+            background-position: 0% 0%, 100% 100%, 0% 0%;
+            animation: moveGradient 20s ease infinite alternate, panPattern 30s linear infinite; /* Multiple animations */
+            z-index: 1;
+        }
+        .section > .container {
+            position: relative; /* Ensure content is above pattern */
+            z-index: 2;
+        }
+
 
         .section-title {
             font-size: 2.8rem;
@@ -155,6 +230,13 @@
             margin-bottom: 60px;
             position: relative;
             padding-bottom: 15px;
+            opacity: 0; /* Hidden by default for animation */
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .section.is-visible .section-title {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .section-title::after {
@@ -180,18 +262,19 @@
         .service-card {
             background-color: #ffffff;
             border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Deeper shadow */
             padding: 30px;
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
+            perspective: 1000px; /* For 3D effect */
         }
 
         .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transform: translateY(-10px) scale(1.02) rotateX(2deg) rotateY(2deg); /* More pronounced lift, scale, and subtle 3D tilt */
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25); /* Even deeper shadow on hover */
         }
 
         .service-icon {
@@ -200,6 +283,10 @@
             margin-bottom: 20px;
             width: 60px; /* Fixed width for SVG icons */
             height: 60px; /* Fixed height for SVG icons */
+            transition: transform 0.3s ease;
+        }
+        .service-card:hover .service-icon {
+            transform: rotateY(15deg) scale(1.1); /* Subtle icon animation on hover */
         }
 
         .service-card h3 {
@@ -225,19 +312,28 @@
         .pricing-card {
             background-color: #ffffff;
             border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Deeper shadow */
             padding: 40px;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            perspective: 1000px; /* For 3D effect */
         }
 
         .pricing-card.featured {
             border: 3px solid #3b82f6; /* Highlight for featured plan */
-            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.25);
-            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.35); /* Deeper featured shadow */
+            transform: translateY(-8px);
+        }
+        .pricing-card.featured:hover {
+            transform: translateY(-12px) scale(1.03) rotateX(3deg) rotateY(3deg); /* More pronounced lift and scale for featured, with tilt */
+            box-shadow: 0 20px 45px rgba(59, 130, 246, 0.5); /* Even deeper shadow on hover */
+        }
+        .pricing-card:hover:not(.featured) {
+             transform: translateY(-10px) scale(1.02) rotateX(2deg) rotateY(2deg); /* Consistent hover for non-featured */
+             box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
         }
 
         .pricing-card h3 {
@@ -290,81 +386,34 @@
             border-radius: 9999px;
             font-weight: 600;
             text-decoration: none;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 15px rgba(59, 130, 246, 0.3); /* Deeper shadow */
         }
 
         .pricing-card .buy-button:hover {
             background-color: #2563eb; /* Darker accent blue */
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4); /* Enhanced shadow on hover */
+        }
+        .pricing-card .buy-button:active {
+            transform: translateY(0px) scale(0.98); /* Press down effect */
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.2);
         }
 
-        /* Testimonials Section Specific */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .testimonial-card {
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 220px; /* Ensure consistent height */
-        }
-
-        .testimonial-card p {
-            font-size: 1.05rem;
-            color: #475569;
-            font-style: italic;
-            margin-bottom: 20px;
-            flex-grow: 1;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-top: auto; /* Pushes author to the bottom */
-        }
-
-        .testimonial-author img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #3b82f6;
-        }
-
-        .author-info h4 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #1e3a8a;
-        }
-
-        .author-info span {
-            font-size: 0.9rem;
-            color: #64748b;
-        }
-
-        /* Experience Level Section */
+        /* Experience Level Section - Now integrated within Contact */
         .experience-level-content {
+            /* These styles will now apply to the content moved inside contact-content */
             display: flex;
             flex-direction: column;
             align-items: center;
-            max-width: 700px;
-            margin: 0 auto;
-            background-color: #ffffff;
+            max-width: 700px; /* Keep max-width for internal content alignment */
+            margin: 0 auto 30px auto; /* Center and add bottom margin */
+            background-color: #ffffff; /* Keep background for the internal block */
             border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            padding: 40px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05); /* Lighter shadow for nested block */
+            padding: 30px; /* Adjusted padding */
             text-align: center;
+            border: 1px solid #e2e8f0; /* Subtle border */
         }
 
         .experience-level-content p {
@@ -372,6 +421,14 @@
             color: #475569;
             margin-bottom: 30px;
         }
+        .experience-level-content .section-title {
+            margin-bottom: 30px; /* Adjust title margin within this block */
+            font-size: 2rem; /* Smaller title for sub-section */
+            color: #1e3a8a;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 10px;
+        }
+
 
         .experience-level-options {
             display: flex;
@@ -399,6 +456,7 @@
         .experience-level-options label:hover {
             background-color: #e2e8f0;
             border-color: #a0aec0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
         }
 
         .experience-level-options input[type="radio"] {
@@ -444,7 +502,7 @@
             margin: 0 auto;
             background-color: #ffffff;
             border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Deeper shadow */
             padding: 40px;
         }
 
@@ -532,7 +590,7 @@
             font-weight: 600;
             border: none;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
         }
 
@@ -541,6 +599,11 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 16px rgba(30, 58, 138, 0.4);
         }
+        .contact-form button:active {
+            transform: translateY(0px) scale(0.98); /* Press down effect */
+            box-shadow: 0 2px 8px rgba(30, 58, 138, 0.2);
+        }
+
 
         .form-message {
             margin-top: 20px;
@@ -561,6 +624,24 @@
             color: #cbd5e1; /* Light grey text */
             padding: 40px 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M0 50C25 25 75 25 100 50L100 100H0L0 50Z" fill="%232d3748" fill-opacity="0.2"/%3E%3C/svg%3E'); /* Abstract wave pattern */
+            background-size: 100px 100px;
+            animation: panPattern 40s linear infinite;
+            z-index: 0;
+        }
+        .footer > .container {
+            position: relative;
+            z-index: 1;
         }
 
         .footer-links ul {
@@ -613,6 +694,54 @@
             color: #94a3b8;
         }
 
+        /* Keyframe Animations */
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes moveGradient {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+
+        @keyframes panPattern {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 5px #3b82f6) drop-shadow(0 0 10px #3b82f6); }
+            50% { filter: drop-shadow(0 0 10px #3b82f6) drop-shadow(0 0 20px #3b82f6); }
+        }
+        @keyframes fadeOutUp {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+        }
+
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .header .container {
@@ -635,11 +764,10 @@
                 margin-bottom: 40px;
             }
             .services-grid,
-            .pricing-grid,
-            .testimonials-grid {
+            .pricing-grid {
                 grid-template-columns: 1fr; /* Single column layout */
             }
-            .pricing-card, .service-card, .testimonial-card, .contact-content, .experience-level-content {
+            .pricing-card, .service-card, .contact-content, .market-guidance-content {
                 padding: 30px 20px;
             }
             .contact-details div {
@@ -652,6 +780,15 @@
             .footer-links ul {
                 flex-direction: column;
                 gap: 10px;
+            }
+            /* Adjust experience level content for smaller screens when nested */
+            .contact-content .experience-level-content {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+            .contact-content .experience-level-content .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
             }
         }
 
@@ -676,6 +813,56 @@
                 font-size: 1.5rem;
             }
         }
+
+        /* Market Scenario Guidance Section specific styles */
+        .market-guidance-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Deeper shadow */
+            padding: 40px;
+            text-align: center;
+        }
+
+        .market-guidance-content p {
+            font-size: 1.1rem;
+            color: #475569;
+            margin-bottom: 25px;
+        }
+
+        .market-guidance-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+            width: 100%;
+            max-width: 600px; /* Constrain list width */
+        }
+
+        .market-guidance-content ul li {
+            font-size: 1rem;
+            color: #334155;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .market-guidance-content ul li strong {
+            color: #1e3a8a;
+        }
+
+        .market-guidance-content ul li svg {
+            flex-shrink: 0;
+            color: #10b981; /* Green checkmark */
+            width: 20px;
+            height: 20px;
+            margin-top: 4px; /* Align icon with text */
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -689,8 +876,7 @@
                     <li><a href="#hero">Home</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#pricing">Pricing</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
-                    <li><a href="#experience-level">Experience Level</a></li> <!-- New menu item -->
+                    <li><a href="#market-scenario-guidance">Market Guidance</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -699,6 +885,9 @@
 
     <!-- Hero Section -->
     <section id="hero" class="hero-section">
+        <!-- Canvas for interactive particles -->
+        <canvas id="heroCanvas"></canvas>
+
         <div class="hero-content">
             <h1 class="hero-heading">
                 No Luck with <span class="highlight">Interviews</span>? Your <span class="highlight">Resume</span> Might Need Some Magic!
@@ -707,10 +896,63 @@
                 Get expert-crafted resumes and personalized career guidance for the IT industry.
             </p>
             <a href="#contact" class="cta-button">Take the First Step</a>
-            <!-- Updated placeholder image to represent success/opportunity -->
-            <img src="https://placehold.co/800x450/e0f2fe/1e3a8a?text=Your+Career+Success+Starts+Here"
-                 alt="Professional person confidently looking at a successful career path."
-                 class="hero-image">
+            <!-- Advanced Hero SVG for tech success/growth with fading/glowing text -->
+            <svg class="hero-image-svg" viewBox="0 0 800 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="800" height="450" fill="url(#heroGradient)"/>
+
+                <!-- Abstract tech background elements -->
+                <circle cx="100" cy="100" r="40" fill="rgba(59, 130, 246, 0.1)"/>
+                <circle cx="700" cy="350" r="60" fill="rgba(30, 58, 138, 0.1)"/>
+                <path d="M50 200 C 200 50, 600 50, 750 200" stroke="rgba(59, 130, 246, 0.3)" stroke-width="2" stroke-dasharray="5 5">
+                    <animate attributeName="stroke-dashoffset" from="0" to="1000" dur="20s" repeatCount="indefinite"/>
+                </path>
+                <path d="M750 250 C 600 400, 200 400, 50 250" stroke="rgba(30, 58, 138, 0.3)" stroke-width="2" stroke-dasharray="5 5">
+                    <animate attributeName="stroke-dashoffset" from="1000" to="0" dur="20s" repeatCount="indefinite"/>
+                </path>
+                <!-- Code Snippet Icon -->
+                <rect x="50" y="300" width="80" height="50" rx="5" ry="5" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+                <line x1="60" y1="310" x2="120" y2="310" stroke="#3b82f6" stroke-width="4" stroke-linecap="round"/>
+                <line x1="60" y1="320" x2="110" y2="320" stroke="#64748b" stroke-width="2" stroke-linecap="round"/>
+                <line x1="60" y1="330" x2="100" y2="330" stroke="#64748b" stroke-width="2" stroke-linecap="round"/>
+
+                <!-- LinkedIn Icon (simplified) -->
+                <rect x="650" y="50" width="50" height="50" rx="5" ry="5" fill="#0077B5"/>
+                <circle cx="675" cy="65" r="8" fill="#ffffff"/>
+                <rect x="668" y="78" width="14" height="18" fill="#ffffff"/>
+
+                <!-- Person looking upward -->
+                <path d="M400 200 C 380 150, 420 150, 400 200 Z" fill="#475569"/> <!-- Head -->
+                <path d="M400 200 L 380 300 L 420 300 Z" fill="#475569"/> <!-- Body -->
+                <path d="M380 250 L 360 280 M420 250 L 440 280" stroke="#475569" stroke-width="5" stroke-linecap="round"/> <!-- Arms -->
+
+                <!-- REJECTED text fading behind -->
+                <text id="rejectedText" x="400" y="270" font-family="Inter" font-size="60" fill="#ef4444" font-weight="bold" text-anchor="middle" opacity="1">
+                    REJECTED
+                    <animate attributeName="opacity" from="1" to="0" dur="4s" begin="0s" fill="freeze"/>
+                    <animate attributeName="transform" type="translate" from="0 0" to="0 -50" dur="4s" begin="0s" fill="freeze"/>
+                </text>
+
+                <!-- HIRED text glowing in front -->
+                <text id="hiredText" x="400" y="270" font-family="Inter" font-size="60" fill="#10b981" font-weight="bold" text-anchor="middle" opacity="0">
+                    HIRED
+                    <animate attributeName="opacity" from="0" to="1" dur="4s" begin="2s" fill="freeze"/>
+                    <animate attributeName="filter" values="none;url(#glowFilter)" dur="4s" begin="2s" fill="freeze"/>
+                </text>
+
+                <defs>
+                    <linearGradient id="heroGradient" x1="400" y1="0" x2="400" y2="450" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#e0f2fe"/>
+                        <stop offset="1" stop-color="#d1ecff"/>
+                    </linearGradient>
+                    <filter id="glowFilter">
+                        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+            </svg>
         </div>
     </section>
 
@@ -720,22 +962,62 @@
             <h2 class="section-title">Our Services</h2>
             <div class="services-grid">
                 <div class="service-card">
-                    <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    <!-- Resume Writing Icon -->
+                    <svg class="service-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="16" y="10" width="32" height="44" rx="4" fill="#ffffff" stroke="#3b82f6" stroke-width="3"/>
+                        <line x1="22" y1="20" x2="42" y2="20" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="22" y1="28" x2="42" y2="28" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="22" y1="36" x2="35" y2="36" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M48 15 L 54 9 L 58 13 L 52 19 Z" fill="#ffc107"/>
+                        <path d="M50 17 L 56 11 L 60 15 L 54 21 Z" fill="#ffc107" stroke="#e6b800" stroke-width="1"/>
+                    </svg>
                     <h3>Resume Writing for IT Roles</h3>
                     <p>Craft a powerful, ATS-friendly resume tailored for the tech industry, highlighting your skills and achievements.</p>
                 </div>
                 <div class="service-card">
-                    <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    <!-- Career Counseling Icon -->
+                    <svg class="service-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="15" width="44" height="34" rx="4" fill="#ffffff" stroke="#3b82f6" stroke-width="3"/>
+                        <path d="M10 18 L 32 30 L 54 18" stroke="#3b82f6" stroke-width="2"/>
+                        <circle cx="32" cy="25" r="8" fill="#a0aec0"/>
+                        <path d="M32 33 L 32 40 M28 37 L 36 37" stroke="#475569" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M32 40 C 28 45, 36 45, 32 40 Z" fill="#475569"/>
+                    </svg>
                     <h3>Career Counseling / 1-on-1 Mentorship</h3>
                     <p>Personalized guidance to navigate your IT career path, identify growth opportunities, and set strategic goals.</p>
                 </div>
                 <div class="service-card">
-                    <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                    <!-- LinkedIn Optimization Icon -->
+                    <svg class="service-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="10" width="44" height="44" rx="6" fill="#0077B5"/>
+                        <circle cx="22" cy="22" r="6" fill="#ffffff"/>
+                        <rect x="16" y="32" width="12" height="18" fill="#ffffff"/>
+                        <rect x="34" y="32" width="12" height="18" fill="#ffffff"/>
+                        <line x1="34" y1="32" x2="34" y2="50" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="46" y1="32" x2="46" y2="50" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+                        <!-- Sparkles -->
+                        <path d="M50 8 L52 12 L56 10 L54 6 L50 8 Z" fill="#ffc107"/>
+                        <path d="M45 15 L47 19 L51 17 L49 13 L45 15 Z" fill="#ffc107"/>
+                        <path d="M58 20 L60 24 L64 22 L62 18 L58 20 Z" fill="#ffc107"/>
+                    </svg>
                     <h3>LinkedIn Profile Optimization</h3>
                     <p>Enhance your professional visibility and attract recruiters with a fully optimized LinkedIn profile.</p>
                 </div>
                 <div class="service-card">
-                    <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="21" y1="1" x2="14.5" y2="7.5"></line><line x1="14.5" y1="1" x2="21" y2="7.5"></line></svg>
+                    <!-- Mock Interview Icon -->
+                    <svg class="service-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="32" cy="22" r="10" fill="#a0aec0"/>
+                        <path d="M22 32 C 18 38, 46 38, 42 32 Z" fill="#a0aec0"/>
+                        <rect x="24" y="10" width="16" height="4" rx="2" fill="#475569"/> <!-- Headset band -->
+                        <circle cx="24" cy="18" r="4" fill="#475569"/> <!-- Headset earpiece -->
+                        <circle cx="40" cy="18" r="4" fill="#475569"/> <!-- Headset earpiece -->
+                        <line x1="24" y1="22" x2="20" y2="28" stroke="#475569" stroke-width="2" stroke-linecap="round"/> <!-- Headset mic -->
+                        <!-- Chat bubbles -->
+                        <rect x="10" y="40" width="18" height="12" rx="4" fill="#3b82f6"/>
+                        <circle cx="28" cy="52" r="3" fill="#3b82f6"/>
+                        <rect x="36" y="45" width="18" height="12" rx="4" fill="#64748b"/>
+                        <circle cx="36" cy="57" r="3" fill="#64748b"/>
+                    </svg>
                     <h3>Mock Interviews & Feedback</h3>
                     <p>Practice your interview skills with realistic mock sessions and receive constructive feedback to ace your next interview.</p>
                 </div>
@@ -794,63 +1076,34 @@
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="section">
+    <!-- Market Scenario Guidance Section -->
+    <section id="market-scenario-guidance" class="section">
         <div class="container">
-            <h2 class="section-title">What Our Clients Say</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <p>"DevResumePro transformed my job search! Their resume service helped me land interviews for top IT companies. Highly recommended!"</p>
-                    <div class="testimonial-author">
-                        <img src="https://placehold.co/50x50/a0aec0/ffffff?text=JD" alt="Client Avatar">
-                        <div class="author-info">
-                            <h4>Jane Doe</h4>
-                            <span>Software Engineer</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <p>"The career counseling was invaluable. I gained clarity on my path and confidence in my skills. Got placed as a Python Developer within 2 weeks!"</p>
-                    <div class="testimonial-author">
-                        <img src="https://placehold.co/50x50/a0aec0/ffffff?text=AS" alt="Client Avatar">
-                        <div class="author-info">
-                            <h4>Amit Sharma</h4>
-                            <span>Python Developer</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <p>"Their LinkedIn optimization service made a huge difference. Recruiters started reaching out to me directly. Fantastic results!"</p>
-                    <div class="testimonial-author">
-                        <img src="https://placehold.co/50x50/a0aec0/ffffff?text=RK" alt="Client-Avatar">
-                        <div class="author-info">
-                            <h4>Ravi Kumar</h4>
-                            <span>DevOps Specialist</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Level Section -->
-    <section id="experience-level" class="section">
-        <div class="container">
-            <h2 class="section-title">Are you a Fresher or Experienced?</h2>
-            <div class="experience-level-content">
-                <p>Tell us about your professional background so we can tailor our guidance to your needs.</p>
-                <div class="experience-level-options">
-                    <label for="fresher">
-                        <input type="radio" id="fresher" name="experience" value="fresher">
-                        Fresher (Less than 1 year experience)
-                    </label>
-                    <label for="experienced">
-                        <input type="radio" id="experienced" name="experience" value="experienced">
-                        Experienced (1+ years experience)
-                    </label>
-                </div>
+            <h2 class="section-title">Market Scenario Guidance</h2>
+            <div class="market-guidance-content">
                 <p>
-                    This helps us understand how best to assist you with resume building, career counseling, and job search strategies.
+                    Navigating today's dynamic IT job market requires more than just a strong resume; it demands strategic understanding and continuous adaptation. We provide insights to help you stay ahead.
+                </p>
+                <ul>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <strong>In-Demand Skills:</strong> We identify the most sought-after technical and soft skills in the current IT landscape.
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <strong>Industry Trends:</strong> Get insights into emerging technologies and growth sectors within the IT industry.
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <strong>Interview Strategies:</strong> Learn how to effectively showcase your abilities and experience in virtual and in-person interviews.
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <strong>Personal Branding:</strong> Understand the importance of a strong online presence beyond your resume.
+                    </li>
+                </ul>
+                <p>
+                    Our goal is to equip you with the knowledge and tools to confidently approach the job market and achieve your career aspirations.
                 </p>
             </div>
         </div>
@@ -872,6 +1125,27 @@
                         <a href="tel:+919766613006">+91 9766613006</a>
                     </div>
                 </div>
+
+                <!-- Experience Level Section - Now inside Contact -->
+                <div class="experience-level-content">
+                    <h2 class="section-title">Are you a Fresher or Experienced?</h2>
+                    <p>Tell us about your professional background so we can tailor our guidance to your needs.</p>
+                    <div class="experience-level-options">
+                        <label for="fresher">
+                            <input type="radio" id="fresher" name="experience" value="fresher">
+                            Fresher (Less than 1 year experience)
+                        </label>
+                        <label for="experienced">
+                            <input type="radio" id="experienced" name="experience" value="experienced">
+                            Experienced (1+ years experience)
+                        </label>
+                    </div>
+                    <p>
+                        This helps us understand how best to assist you with resume building, career counseling, and job search strategies.
+                    </p>
+                </div>
+
+
                 <form class="contact-form" id="contactForm">
                     <div>
                         <label for="name">Name</label>
@@ -900,7 +1174,6 @@
                     <li><a href="#hero">Home</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#pricing">Pricing</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
@@ -948,6 +1221,35 @@
             alert(`Attempting to open UPI app for payment of ₹${amount} for ${packageName}. Please complete the transaction in your UPI app.`);
         }
 
+        // Intersection Observer for section animations
+        const sections = document.querySelectorAll('.section');
+        const sectionTitles = document.querySelectorAll('.section-title');
+
+        const observerOptions = {
+            root: null, /* viewport */
+            rootMargin: '0px',
+            threshold: 0.1 /* 10% of the section must be visible */
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    // Also animate the title if it's within the observed section
+                    const title = entry.target.querySelector('.section-title');
+                    if (title) {
+                        title.classList.add('is-visible');
+                    }
+                    observer.unobserve(entry.target); /* Stop observing once animated */
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+
         // Basic form submission handling (client-side only for this example)
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -983,6 +1285,114 @@
                 formMessage.textContent = 'Please fill in all fields.';
                 formMessage.classList.add('error');
             }
+        });
+
+        // Particle background for Hero section
+        window.addEventListener('load', function() {
+            const canvas = document.getElementById('heroCanvas');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let mouse = { x: null, y: null, radius: 100 }; // Mouse interaction radius
+
+            function resizeCanvas() {
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
+                initParticles(); // Re-initialize particles on resize
+            }
+
+            // Particle constructor
+            function Particle(x, y, directionX, directionY, radius, color) {
+                this.x = x;
+                this.y = y;
+                this.directionX = directionX;
+                this.directionY = directionY;
+                this.radius = radius;
+                this.color = color;
+                this.baseSpeed = 0.5; // Base speed
+            }
+
+            // Draw particle
+            Particle.prototype.draw = function() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            };
+
+            // Update particle position and interaction
+            Particle.prototype.update = function() {
+                // Check if particle is out of bounds
+                if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
+                    this.directionX = -this.directionX;
+                }
+                if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
+                    this.directionY = -this.directionY;
+                }
+
+                // Mouse interaction - repel
+                if (mouse.x && mouse.y) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < mouse.radius + this.radius) {
+                        let forceDirectionX = dx / distance;
+                        let forceDirectionY = dy / distance;
+                        let maxForce = 10;
+                        let force = (mouse.radius - distance) / mouse.radius;
+                        let directionX = forceDirectionX * force * this.baseSpeed * maxForce;
+                        let directionY = forceDirectionY * force * this.baseSpeed * maxForce;
+
+                        this.x -= directionX;
+                        this.y -= directionY;
+                    }
+                }
+
+                this.x += this.directionX * this.baseSpeed;
+                this.y += this.directionY * this.baseSpeed;
+                this.draw();
+            };
+
+            // Initialize particles
+            function initParticles() {
+                particles = [];
+                let numberOfParticles = (canvas.width * canvas.height) / 9000; // Adjust density
+                for (let i = 0; i < numberOfParticles; i++) {
+                    let radius = Math.random() * 2 + 1; // Small particles
+                    let x = Math.random() * (canvas.width - radius * 2) + radius;
+                    let y = Math.random() * (canvas.height - radius * 2) + radius;
+                    let directionX = (Math.random() * 0.5) - 0.25; // Small random movement
+                    let directionY = (Math.random() * 0.5) - 0.25;
+                    let color = 'rgba(59, 130, 246, 0.6)'; // Blue with transparency
+                    particles.push(new Particle(x, y, directionX, directionY, radius, color));
+                }
+            }
+
+            // Animation loop
+            function animateParticles() {
+                requestAnimationFrame(animateParticles);
+                ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                }
+            }
+
+            // Event Listeners
+            window.addEventListener('resize', resizeCanvas);
+            canvas.addEventListener('mousemove', function(e) {
+                const rect = canvas.getBoundingClientRect();
+                mouse.x = e.clientX - rect.left;
+                mouse.y = e.clientY - rect.top;
+            });
+            canvas.addEventListener('mouseleave', function() {
+                mouse.x = null;
+                mouse.y = null;
+            });
+
+            // Initial setup
+            resizeCanvas(); // Set initial size and create particles
+            animateParticles(); // Start animation
         });
     </script>
 </body>
